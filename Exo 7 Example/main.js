@@ -6,6 +6,6 @@ names.push("Vincent", "Paul", "Arthur");
 
 // "fonction fléchée" / "arrow" function expression is shorter
 names.forEach((name) => {
-  name = name + " va à la pêche";
+  name += " va à la pêche"; // equals to "name = name + ..."
   console.log(name);
 });
