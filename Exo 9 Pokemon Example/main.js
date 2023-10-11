@@ -29,8 +29,16 @@ class Pokemon {
       console.log(`${this.name} missed!`);
     }
 
+    if (this.hp < 0) {
+      this.hp = 0;
+    }
+
+    if (target.hp < 0) {
+      target.hp = 0;
+    }
+
     console.log(
-      `${this.name} : ${this.hp} HP left || ${target.name} : ${target.hp} HP left`
+      `\t${this.name} : ${this.hp} HP left || ${target.name} : ${target.hp} HP left`
     );
   }
 }
@@ -42,12 +50,12 @@ let charmander = new Pokemon("Charmander", 12, 6, 30, 60);
 while (pikachu.hp > 0 && charmander.hp > 0) {
   pikachu.attackPokemon(charmander);
   if (charmander.hp <= 0) {
-    console.log("Pikachu won!")
+    console.log("Pikachu won!");
     break;
   }
   charmander.attackPokemon(pikachu);
   if (pikachu.hp <= 0) {
-    console.log("Charmander won!")
+    console.log("Charmander won!");
     break;
   }
 }
