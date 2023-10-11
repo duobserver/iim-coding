@@ -25,16 +25,17 @@ if (counter % 2 == 0) {
 }
 
 // Complex
-// You can use an 'accumulator' to add
+// You can use an 'accumulator' to count all the characters
 
 console.log("\tComplex method");
 
 let result = 0;
 result = values.reduce((acc, value) => acc + value.length, result);
-console.log(result + " characters");
+// console.log(result + " characters"); "Concaténation"
+console.log(`${result} characters`); // "Interpolation" USE ALTgr + 7 QUOTES
 
-if (result % 2 == 0) {
-  console.log("Even");
-} else {
-  console.log("Odd");
-}
+console.log(result % 2 == 0); // false is odd, true is even
+
+// "Opération Ternaire"
+console.log(`Le résultat est ${result % 2 == 0 ? 'even' : 'odd'}`);
+//                          condition ? true response : false response
