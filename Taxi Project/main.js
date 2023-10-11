@@ -32,24 +32,40 @@ class Personnage {
       "Never Gonna Give You Up",
       "I Love It",
     ];
-    this.artists = ["Wejdene", "Blessed Mane", "Eminem", "Rick Astley", "Icona Pop"];
+    this.artists = [
+      "Wejdene",
+      "Blessed Mane",
+      "Eminem",
+      "Rick Astley",
+      "Icona Pop",
+    ];
   }
 
   next(target) {
     target.feux += 1;
 
     let selection = target.ranMusic();
-    console.log(selection)
+    // console.log(selection)
 
     if (selection == 0) {
       this.mh -= 1;
       target.changments += 1;
       console.log(
-        `Oh no! ${this.name} is listening to ${this.musics[0]} by ${this.artists[0]}! He lost 1 mental health point and needs to take another taxi!`
+        `${target.feux}. Oh no! ${this.name} is listening to ${
+          this.musics[0]
+        } by ${
+          this.artists[0]
+        }! He lost 1 mental health point and needs to ride another taxi! ${
+          30 - target.feux
+        } traffic lights left!`
       );
     } else {
       console.log(
-        `${this.name} is listening to ${this.musics[selection]} by ${this.artists[selection]}! How cool! He can continue his ride!`
+        `${target.feux}. ${this.name} is listening to ${
+          this.musics[selection]
+        } by ${this.artists[selection]}! He can continue his ride! ${
+          30 - target.feux
+        } traffic lights left!`
       );
     }
   }
@@ -63,13 +79,17 @@ while (juan.mh > 0 && run.feux < 30) {
   juan.next(run);
   if (juan.mh == 0) {
     console.log(
-      `Oh no! Juan lost his mind and died! Game over! You passed ${run.feux} traffic lights and changed taxi ${run.changments} times!`
+      `Oh no! Juan lost his mind and exploded! Game over! He passed ${
+        run.feux
+      } traffic lights and rode ${run.changments + 1} taxi!`
     );
     break;
   }
   if (run.feux == 30) {
     console.log(
-      `Hurray! Juan didn't loose his mind and arrived home! He made by changing taxi ${run.changments} times!`
+      `Hurray! Juan didn't loose his mind and arrived home! He made it by riding ${
+        run.changments + 1
+      } taxis!`
     );
     break;
   }
