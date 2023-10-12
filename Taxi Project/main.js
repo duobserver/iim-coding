@@ -1,14 +1,4 @@
 // Classes are groups of attributes under custome names that can be cloned (called instances)
-
-let musics = [
-  "Anissa",
-  "Cry Dancing",
-  "The Real Slim Shady",
-  "Never Gonna Give You Up",
-  "I Love It",
-];
-let artists = ["Wejdene", "Blessed Mane", "Eminem", "Rick Astley", "Icona Pop"];
-
 class Trajet {
   constructor(radio, feux, changments) {
     this.radio = radio;
