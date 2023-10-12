@@ -15,7 +15,7 @@ class Killer {
   }
   next(target) {
     let action = Math.random();
-    console.log(action);
+    // console.log(action);
 
     if (action <= 0.2) {
       this.hp -= target.damage + 5;
@@ -72,10 +72,8 @@ for (let i = 0; i < 5; i++) {
   // delete names[name];
 }
 
-// console.log(survivors);
-
 while (killer.hp > 0 && survivors.length != 0) {
-  console.log(survivors)
+  // console.log(survivors)
   selection = Math.floor(Math.random() * survivors.length);
   result = killer.next(survivors[selection]);
   if (result == 1) {

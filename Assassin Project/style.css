@@ -39,3 +39,15 @@ a:active { text-decoration: none; }
 h2 {
   font-weight: 500;
 }
+
+button {
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 2px solid red;
+  border-style:dashed;
+}
+
+button:hover {
+  background-color: red;
+  color: black;
+}
