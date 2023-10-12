@@ -1,96 +1,92 @@
 // Classes are groups of attributes under custome names that can be cloned (called instances)
-
-let musics = [
-  "Anissa",
-  "Cry Dancing",
-  "The Real Slim Shady",
-  "Never Gonna Give You Up",
-  "I Love It",
+let names = [
+  "James",
+  "Mary",
+  "Robert",
+  "Patricia",
+  "John",
+  "Jennifer",
+  "Michael",
+  "Linda",
+  "David",
+  "Elizabeth",
+  "William",
+  "Barbara",
+  "Richard",
+  "Susan",
+  "Joseph",
+  "Jessica",
+  "Thomas",
+  "Sarah",
+  "Christopher",
+  "Karen",
 ];
-let artists = ["Wejdene", "Blessed Mane", "Eminem", "Rick Astley", "Icona Pop"];
 
-class Trajet {
-  constructor(radio, feux, changments) {
-    this.radio = radio;
-    this.feux = feux;
-    this.changments = changments;
-  }
-
-  ranMusic() {
-    return Math.floor(Math.random() * 5);
+class Survivor {
+  constructor(name, damage) {
+    this.name = name;
+    this.damage = damage;
+    this.status = "alive";
   }
 }
 
-class Personnage {
-  constructor(name, mh) {
-    this.name = name; // str
-    this.mh = mh; // int (mental health)
-    this.musics = [
-      "Anissa",
-      "Cry Dancing",
-      "The Real Slim Shady",
-      "Never Gonna Give You Up",
-      "I Love It",
-    ];
-    this.artists = [
-      "Wejdene",
-      "Blessed Mane",
-      "Eminem",
-      "Rick Astley",
-      "Icona Pop",
-    ];
+class Killer {
+  constructor() {
+    this.name = Jason;
+    this.hp = 100;
   }
-
   next(target) {
-    target.feux += 1;
+    let action = Math.random();
+    console.log(action);
 
-    let selection = target.ranMusic();
-    // console.log(selection)
-
-    if (selection == 0) {
-      this.mh -= 1;
-      target.changments += 1;
+    if (action <= 0.2) {
+      this.hp -= target.damage + 5;
+      target.status = "dead";
       console.log(
-        `${target.feux}. Oh no! ${this.name} is listening to ${
-          this.musics[0]
-        } by ${
-          this.artists[0]
-        }! He lost 1 mental health point and needs to ride another taxi! ${
-          30 - target.feux
-        } traffic lights left!`
+        `${this.name} attacks ${target.name}!\n${target.name} dealt ${
+          target.damage + 5
+        } points but died!`
       );
+    } else if (action <= 0.3) {
+      target.status = "dead";
+      console.log(`${this.name} killed ${target.name}!`);
     } else {
+      this.hp -= target.damage;
       console.log(
-        `${target.feux}. ${this.name} is listening to ${
-          this.musics[selection]
-        } by ${this.artists[selection]}! He can continue his ride! ${
-          30 - target.feux
-        } traffic lights left!`
+        `${this.name} attacks ${target.name}!\nBut ${target.name} dodged him and dealt ${target.damage} points!`
       );
     }
   }
 }
 
 // You can't call directly the class' methods, you need to create an instance first
-let juan = new Personnage("Juan", 10);
-let run = new Trajet(0, 0, 0);
+let killer = new Killer();
+let survivors = [];
 
-while (juan.mh > 0 && run.feux < 30) {
-  juan.next(run);
-  if (juan.mh == 0) {
-    console.log(
-      `Oh no! Juan lost his mind and exploded! Game over! He passed ${
-        run.feux
-      } traffic lights and rode ${run.changments + 1} taxi!`
-    );
-    break;
-  }
-  if (run.feux == 30) {
-    console.log(
-      `Hurray! Juan didn't loose his mind and arrived home! He made it by riding ${
-        run.changments + 1
-      } taxis!`
-    );
-    break;
-  }
+for (let i = 0; i < 5; i++) {
+  survivors.push(new Survivor(names[Math.floor(Math.random() * names.lenght)]));
 }
+
+console.log(survivors);
+
+console.log(Math.floor(Math.random() * survivors.lenght));
+
+// while (killer.hp > 0 && run.feux < 30) {
+//   killer.next(Math.floor(Math.random() * survivors.lenght));
+//   if (juan.mh == 0) {
+//     console.log(
+//       `Oh no! Juan lost his mind and exploded! Game over! He passed ${
+//         run.feux
+//       } traffic lights and rode ${run.changments + 1} taxi!`
+//     );
+//     break;
+//   }
+//   if (run.feux == 30) {
+//     console.log(
+//       `Hurray! Juan didn't loose his mind and arrived home! He made it by riding ${
+//         run.changments + 1
+//       } taxis!`
+//     );
+//     break;
+//   }
+// }
