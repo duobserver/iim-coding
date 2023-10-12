@@ -1,10 +1,11 @@
 // Classes are groups of attributes under custome names that can be cloned (called instances)
 class Survivor {
-  constructor(name) {
+  constructor(name, trait, damage) {
     this.name = name;
-    this.damage = 10;
+    this.trait = trait;
+    this.damage = damage;
 
-    console.log(this.name);
+    console.log(this.name, this.trait, this.damage);
   }
 }
 
@@ -18,10 +19,10 @@ class Killer {
     // console.log(action);
 
     if (action <= 0.2) {
-      this.hp -= target.damage + 5;
+      this.hp -= target.damage + 2;
       console.log(
         `${this.name} attacks ${target.name}!\n${target.name} dealt ${
-          target.damage + 5
+          target.damage + 2
         } points but died!`
       );
       return 1;
@@ -41,7 +42,7 @@ class Killer {
 // You can't call directly the class' methods, you need to create an instance first
 let killer = new Killer();
 
-const names = [
+let names = [
   "James",
   "Mary",
   "Robert",
@@ -64,12 +65,31 @@ const names = [
   "Karen",
 ];
 
+let characteristics = [
+  ["Weak", 6],
+  ["Scared", 7],
+  ["Blondy", 8],
+  ["Nerd", 9],
+  ["Assistant", 10],  
+  ["Agile", 11],
+  ["Sporty", 12],
+  ["Rageous", 13],
+  ["Shooter", 14],
+];
+
 let survivors = [];
 
 for (let i = 0; i < 5; i++) {
   let name = Math.floor(Math.random() * names.length);
-  survivors.push(new Survivor(names[name]));
-  // delete names[name];
+  let char = Math.floor(Math.random() * characteristics.length);
+  survivors.push(
+    new Survivor(
+      names[name],
+      characteristics[char][0],
+      characteristics[char][1]
+    )
+  );
+  names.splice(name, 1);
 }
 
 while (killer.hp > 0 && survivors.length != 0) {
@@ -77,17 +97,17 @@ while (killer.hp > 0 && survivors.length != 0) {
   selection = Math.floor(Math.random() * survivors.length);
   result = killer.next(survivors[selection]);
   if (result == 1) {
-    survivors.pop(selection);
+    survivors.splice(selection, 1);
   }
   if (killer.hp <= 0) {
     console.log(`Hurray! The gang got rid of Jason!`);
     break;
   }
-  
+
   if (survivors.length == 0) {
     console.log(
       `Oh no! Jason managed to kill every member of the gang! Game over!`
     );
-    break
+    break;
   }
 }
