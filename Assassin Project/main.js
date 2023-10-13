@@ -26,10 +26,10 @@ class Killer {
         `\t${this.name} attacks ${target.name}!\n\t${target.name} dealt 15 points but died!`
       );
       return 1;
-    } else if (target.death <= action < target.damage) {
+    } else if (target.death <= action < target.death + target.damage) {
       console.log(`\t${this.name} killed ${target.name}!`);
       return 1;
-    } else if (target.damage <= action < 1) {
+    } else if (target.death + target.damage <= target.death + target.damage + target.both) {
       this.hp -= 10;
       console.log(
         `\t${this.name} attacks ${target.name}!\n\tBut ${target.name} dodged him and dealt 10 points!`
