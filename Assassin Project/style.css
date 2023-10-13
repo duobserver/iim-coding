@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  padding: 0 10%;
+  padding: 0 80px;
   display: grid;
   grid-template-columns: 50% 50%;
   align-items: center;

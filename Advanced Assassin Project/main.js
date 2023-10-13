@@ -5,7 +5,7 @@ class Survivor {
     this.trait = trait;
     this.damage = damage;
 
-    console.log(this.name, this.trait, this.damage);
+    console.log(`${this.name} (${this.trait}, ${this.damage} dp)`);
   }
 }
 

@@ -4,7 +4,7 @@ class Survivor {
     this.name = name;
     this.trait = trait;
 
-    console.log(this.name, this.trait);
+    console.log(`\t${this.name}, ${this.trait}`);
   }
 }
 
@@ -77,6 +77,7 @@ let characteristics = [
 let survivors = [];
 let deathList = [];
 
+console.log("The gang ---")
 for (let i = 0; i < 5; i++) {
   let name = Math.floor(Math.random() * names.length);
   let char = Math.floor(Math.random() * characteristics.length);
@@ -84,13 +85,14 @@ for (let i = 0; i < 5; i++) {
   names.splice(name, 1);
 }
 
+console.log("Let's play ! ---")
 while (killer.hp > 0 && survivors.length != 0) {
   // console.log(survivors)
   selection = Math.floor(Math.random() * survivors.length);
   result = killer.next(survivors[selection]);
   if (result == 1) {
     deathList.push(survivors.pop(selection).name);
-    console.log(deathList);
+    // console.log(deathList);
   }
   if (killer.hp <= 0) {
     if (deathList.length == 0) {
