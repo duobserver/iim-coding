@@ -1,10 +1,11 @@
 // Classes are groups of attributes under custome names that can be cloned (called instances)
 class Survivor {
-  constructor(name, trait) {
+  constructor(name, trait, damage) {
     this.name = name;
     this.trait = trait;
+    this.damage = damage;
 
-    console.log(this.name, this.trait);
+    console.log(this.name, this.trait, this.damage);
   }
 }
 
@@ -18,18 +19,20 @@ class Killer {
     // console.log(action);
 
     if (action <= 0.2) {
-      this.hp -= 15;
+      this.hp -= target.damage + 2;
       console.log(
-        `${this.name} attacks ${target.name}!\n${target.name} dealt 15 points but died!`
+        `${this.name} attacks ${target.name}!\n${target.name} dealt ${
+          target.damage + 2
+        } points but died!`
       );
       return 1;
     } else if (action <= 0.3) {
-      console.log(`${this.name} killed someone!`);
+      console.log(`${this.name} killed ${target.name}!`);
       return 1;
     } else {
-      this.hp -= 10;
+      this.hp -= target.damage;
       console.log(
-        `${this.name} attacks ${target.name}!\nBut ${target.name} dodged him and dealt 10 points!`
+        `${this.name} attacks ${target.name}!\nBut ${target.name} dodged him and dealt ${target.damage} points!`
       );
       return 0;
     }
@@ -63,24 +66,29 @@ let names = [
 ];
 
 let characteristics = [
-  "Weak",
-  "Scared",
-  "Blondy",
-  "Nerd",
-  "Assistant",
-  "Agile",
-  "Sporty",
-  "Rageous",
-  "Shooter",
+  ["Weak", 6],
+  ["Scared", 7],
+  ["Blondy", 8],
+  ["Nerd", 9],
+  ["Assistant", 10],  
+  ["Agile", 11],
+  ["Sporty", 12],
+  ["Rageous", 13],
+  ["Shooter", 14],
 ];
 
 let survivors = [];
-let deathList = [];
 
 for (let i = 0; i < 5; i++) {
   let name = Math.floor(Math.random() * names.length);
   let char = Math.floor(Math.random() * characteristics.length);
-  survivors.push(new Survivor(names[name], characteristics[char]));
+  survivors.push(
+    new Survivor(
+      names[name],
+      characteristics[char][0],
+      characteristics[char][1]
+    )
+  );
   names.splice(name, 1);
 }
 
@@ -89,17 +97,10 @@ while (killer.hp > 0 && survivors.length != 0) {
   selection = Math.floor(Math.random() * survivors.length);
   result = killer.next(survivors[selection]);
   if (result == 1) {
-    deathList.push(survivors.pop(selection).name);
-    console.log(deathList);
+    survivors.splice(selection, 1);
   }
   if (killer.hp <= 0) {
-    if (deathList.length == 0) {
-      console.log(`Hurray! The gang got rid of Jason!\nNo one died`);
-    } else if (deathList.length == 1) {
-      console.log(`Hurray! The gang got rid of Jason!\n${deathList} is dead`);
-    } else {
-      console.log(`Hurray! The gang got rid of Jason!\n${deathList} are dead`);
-    }
+    console.log(`Hurray! The gang got rid of Jason!`);
     break;
   }
 
