@@ -30,12 +30,16 @@ body {
 }
 
 .maker {
-  color: cyan;
+  color: cyan !important;
   position: fixed;
   left: 5px;
   top: 10px;
   opacity: 50%;
   writing-mode: vertical-lr;
+}
+
+a {
+  color: cyan !important;
 }
 
 a:link {
@@ -83,7 +87,7 @@ table {
 }
 
 td {
-  padding: 5px;
+  padding: 5px 10px;
   border: 0;
 }
 

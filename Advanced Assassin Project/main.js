@@ -85,14 +85,20 @@ let survivors = [];
 let deathList = [];
 
 function generateGang() {
+  var table = document.getElementsByTagName("table");
+  if(table) table.parentNode.removeChild(table);
+
   // Creating survivors instances
   survivors = [];
-  let namesClone = names;
+  let namesClone = structuredClone(names);
 
   console.log("The gang ---");
   for (let i = 0; i < 5; i++) {
     console.log(names);
-    let name = namesClone.splice(Math.floor(Math.random() * namesClone.length), 1);
+    let name = namesClone.splice(
+      Math.floor(Math.random() * namesClone.length),
+      1
+    );
     let char = Math.floor(Math.random() * characteristics.length);
     survivors.push(
       new Survivor(
@@ -153,6 +159,12 @@ function generateGang() {
     // sets the border attribute of tbl to '2'
     tbl.setAttribute("border", "2");
   });
+  const allElements = document.querySelectorAll("*");
+  for (const element of allElements) {
+    element.style.setProperty("color", "purple");
+    element.style.setProperty("border-color", "purple");
+  }
+  
 }
 
 console.log("Let's play ! ---");
