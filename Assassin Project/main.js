@@ -29,7 +29,10 @@ class Killer {
     } else if (target.death <= action < target.death + target.damage) {
       console.log(`\t${this.name} killed ${target.name}!`);
       return 1;
-    } else if (target.death + target.damage <= target.death + target.damage + target.both) {
+    } else if (
+      target.death + target.damage <=
+      target.death + target.damage + target.both
+    ) {
       this.hp -= 10;
       console.log(
         `\t${this.name} attacks ${target.name}!\n\tBut ${target.name} dodged him and dealt 10 points!`
@@ -107,7 +110,7 @@ while (killer.hp > 0 && survivors.length != 0) {
 
   // Death
   if (result == 1) {
-    deathList.push(survivors[selection].name)
+    deathList.push(survivors[selection].name);
     survivors.splice(selection, 1);
   }
 
@@ -117,21 +120,21 @@ while (killer.hp > 0 && survivors.length != 0) {
       console.log(`End---\n\tEveryone died!`);
     } else if (deathList == 0) {
       console.log(
-        `End---\n\tHurray! The gang got rid of Jason!\n\tEveryone survived`
+        `End ---\n\tHurray! The gang got rid of Jason!\n\tEveryone survived`
       );
     } else if (deathList.length == 1) {
       console.log(
-        `End---\n\tHurray! The gang got rid of Jason!\n\tBut ${deathList} is dead`
+        `End ---\n\tHurray! The gang got rid of Jason!\n\tBut ${deathList} is dead`
       );
     } else {
       console.log(
-        `End---\n\tHurray! The gang got rid of Jason!\n\tBut ${deathList} are dead`
+        `End ---\n\tHurray! The gang got rid of Jason!\n\tBut ${deathList} are dead`
       );
     }
     break;
   } else if (survivors.length == 0) {
     console.log(
-      `End---\n\tOh no! Jason managed to kill every member of the gang! Game over!`
+      `End ---\n\tOh no! Jason managed to kill every member of the gang! Game over!`
     );
     break;
   }

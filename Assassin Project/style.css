@@ -3,6 +3,7 @@
   padding: 0;
   margin: 0;
   color: red;
+  transition-duration: 0.2s;
 }
 
 html,
@@ -13,14 +14,18 @@ body {
 
 html {
   background-color: black;
+  display: grid;
+  place-items: center;
+  align-items: center;
 }
 
 body {
-  padding: 0 80px;
-  display: grid;
-  grid-template-columns: 50% 50%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-items: center;
+  gap: 30px;
 }
 
 .maker {
@@ -42,6 +47,29 @@ a:active {
   text-decoration: none;
 }
 
+a:hover {
+  background-color: cyan;
+  color: black !important;
+}
+
 h2 {
   font-weight: 500;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 2px solid red;
+  border-style: dashed;
+}
+
+button:hover {
+  background-color: red;
+  color: black;
+}
+
+@media screen and (max-width: 850px) {
+  body {
+    flex-direction: column;
+  }
 }
