@@ -3,9 +3,9 @@ class Survivor {
   constructor(name, trait, death, damage, both) {
     this.name = name; // name of survivor (string)
     this.trait = trait; // trait of survivor (string)
-    this.death = death; // death probability (float 0.0 - 1.0)
-    this.damage = damage; // damage probability (float 0.0 - 1.0)
-    this.both = both; // damage and death probability (float 0.0 - 1.0)
+    this.death = death; // death probability (killed byt Jason)(float 0.0 to 1.0)
+    this.damage = damage; // damage probability (float 0.0 to 1.0)
+    this.both = both; // damage and death probability (float 0.0 to 1.0)
 
     // presenting the survivor in the console
     console.log(

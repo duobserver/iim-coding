@@ -1,80 +1,67 @@
-// creating musics list with Anissa
-const musics = [
-  ["Anissa", "Wejdene"],
-  ["Cry Dancing", "Blessed Mane"],
-  ["The Real Slim Shady", "Eminem"],
-  ["Never Gonna Give You Up", "Rick Astley"],
-  ["I Love It", "Icona Pop"],
-];
-
+// road class
 class Trajet {
   constructor() {
-    this.radio = 0;
-    this.feux = 0;
-    this.changments = 0;
-  }
-
-  ranMusic() {
-    return Math.floor(Math.random() * 5);
+    this.radio = [
+      ["Anissa", "Wejdene"],
+      ["Cry Dancing", "Blessed Mane"],
+      ["The Real Slim Shady", "Eminem"],
+      ["Never Gonna Give You Up", "Rick Astley"],
+      ["I Love It", "Icona Pop"],
+    ]; // listing all the playable musics (list)
+    this.feux = 30; // traffic lights counter (int)
+    this.changments = 0; // number of taxis John rode (int)
   }
 }
 
+// John's class
 class Personnage {
   constructor() {
-    this.name = "John";
-    this.mh = 10;
+    this.name = "John"; // name (string)
+    this.mh = 10; // mental health (int)
   }
 
   next(target) {
-    target.feux += 1;
+    // selecting a random music
+    let selection = Math.floor(Math.random() * target.radio.length);
 
-    // selecting a random music and checking if it's Anissa
-    let selection = target.ranMusic();
-    if (musics[selection][0] == "Anissa") {
+    // checking if it's Anissa
+    if (target.radio[selection][0] == "Anissa") {
       this.mh -= 1;
       target.changments += 1;
       console.log(
-        `${target.feux}. Oh no! ${this.name} is listening to ${
-          musics[selection][0]
-        } by ${
-          musics[selection][1]
-        }! He lost 1 mental health point and needs to ride another taxi!\n${
-          30 - target.feux
-        } traffic lights to go`
+        `${target.feux}. Oh no! ${this.name} is listening to ${target.radio[selection][0]} by ${target.radio[selection][1]}! He lost 1 mental health point and needs to ride another taxi!`
       );
     } else {
       console.log(
-        `${target.feux}. ${this.name} is listening to ${
-          musics[selection][0]
-        } by ${musics[selection][1]}! He can continue his ride!\n${
-          30 - target.feux
-        } traffic lights to go`
+        `${target.feux}. ${this.name} is listening to ${target.radio[selection][0]} by ${target.radio[selection][1]}! He can continue his ride!`
       );
     }
+    // showing how many traffic lights are left
+    console.log(`\t${target.feux - 1} traffic lights to go`);
+    target.feux -= 1;
   }
 }
 
-// You can't call directly the class' methods, you need to create an instance first
-let rider = new Personnage();
+// creating game instances
+let passenger = new Personnage();
 let run = new Trajet();
+run.changments += 1; // John is already riding one taxi
 
-while (rider.mh > 0 && run.feux < 30) {
-  rider.next(run);
-  if (rider.mh == 0) {
+// running game
+while (passenger.mh > 0 && run.feux > 0) {
+  // next traffic light
+  passenger.next(run);
+  if (passenger.mh == 0) {
+    // if John loses his mind, game over!
     console.log(
-      `Oh no! ${rider.name} lost his mind and exploded! Game over! He passed ${
-        run.feux
-      } traffic lights and rode ${run.changments + 1} taxi!`
+      `Oh no! ${passenger.name} lost his mind and exploded! Game over! He passed ${run.feux} traffic lights and rode ${run.changments} taxi!`
     );
     break;
   }
-  if (run.feux == 30) {
+  if (run.feux == 0) {
+    // if John passed all the traffic lights
     console.log(
-      `Hurray! ${
-        rider.name
-      } didn't loose his mind and arrived home! He made it by riding ${
-        run.changments + 1
-      } taxis!`
+      `Hurray! ${passenger.name} didn't loose his mind and arrived home! He rode ${run.changments} taxis!`
     );
     break;
   }
