@@ -48,7 +48,7 @@ let road = new Trajet();
 road.changments += 1; // John is already riding one taxi
 
 // running game
-console.log("Let's go home! ---")
+console.log("Let's go home! ---");
 while (passenger.mh > 0 && road.redLight > 0) {
   // next traffic light
   passenger.next(road);
