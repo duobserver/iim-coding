@@ -157,7 +157,7 @@ while (killer.hp > 0 && survivors.length != 0) {
     }
     break;
   } else if (survivors.length == 0) {
-    // Jason killed everyone
+    // is Jason killed everyone
     console.log(
       `End ---\n\tOh no! Jason managed to kill every member of the gang! Game over!`
     );
