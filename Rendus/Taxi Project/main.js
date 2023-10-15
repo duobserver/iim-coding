@@ -48,13 +48,14 @@ let road = new Trajet();
 road.changments += 1; // John is already riding one taxi
 
 // running game
+console.log("Let's go home! ---")
 while (passenger.mh > 0 && road.redLight > 0) {
   // next traffic light
   passenger.next(road);
   if (passenger.mh == 0) {
     // if John loses his mind, game over!
     console.log(
-      `Oh no! ${
+      `End ---\nOh no! ${
         passenger.name
       } lost his mind and exploded! Game over! He passed ${
         29 - road.redLight // John didn't pass the last logged traffic light
@@ -65,7 +66,7 @@ while (passenger.mh > 0 && road.redLight > 0) {
   if (road.redLight == 0) {
     // if John passed all the traffic lights
     console.log(
-      `Hurray! ${passenger.name} didn't loose his mind and arrived home! He rode ${road.changments} taxis!`
+      `End ---\nHurray! ${passenger.name} didn't loose his mind and arrived home! He rode ${road.changments} taxis!`
     );
     break;
   }

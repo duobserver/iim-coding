@@ -116,7 +116,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 // running the game
-console.log("Let's play ! ---");
+console.log("Let's play! ---");
 while (killer.hp > 0 && survivors.length != 0) {
   selection = Math.floor(Math.random() * survivors.length);
   result = killer.next(survivors[selection]);
@@ -132,7 +132,7 @@ while (killer.hp > 0 && survivors.length != 0) {
     // if Jason dies
     if (survivors.length == 0) {
       // and everyone else is dead
-      console.log(`End---\n\tEveryone died!`);
+      console.log(`End ---\n\tEveryone died!`);
     } else if (deathList == 0) {
       // and everyone is still alive
       console.log(
