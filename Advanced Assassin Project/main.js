@@ -85,9 +85,6 @@ let survivors = [];
 let deathList = [];
 
 function generateGang() {
-  var table = document.getElementsByTagName("table");
-  if(table) table.parentNode.removeChild(table);
-
   // Creating survivors instances
   survivors = [];
   let namesClone = structuredClone(names);
