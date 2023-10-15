@@ -45,7 +45,6 @@ class Personnage {
 // creating game instances
 let passenger = new Personnage();
 let road = new Trajet();
-road.changments += 1; // John is already riding one taxi
 
 // running game
 console.log("Let's go home! ---");
@@ -59,14 +58,14 @@ while (passenger.mh > 0 && road.redLight > 0) {
         passenger.name
       } lost his mind and exploded! Game over! He passed ${
         29 - road.redLight // John didn't pass the last logged traffic light
-      } traffic lights and rode ${road.changments} taxis!`
+      } traffic lights and changed taxi ${road.changments} times!`
     );
     break;
   }
   if (road.redLight == 0) {
     // if John passed all the traffic lights
     console.log(
-      `End ---\nHurray! ${passenger.name} didn't loose his mind and arrived home! He rode ${road.changments} taxis!`
+      `End ---\nHurray! ${passenger.name} didn't loose his mind and arrived home! He changed taxi ${road.changments} times!`
     );
     break;
   }
