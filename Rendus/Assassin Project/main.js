@@ -24,14 +24,17 @@ class Killer {
   // what happens now ?
   next(target) {
     let action = Math.random();
-
+    // console.log(action);
     // return true: the target died
     // return false: the target is still alive
-    if (0 <= action < target.death) {
+    if (action <= target.death) {
       // if Jason kills someone
       console.log(`\t${this.name} killed ${target.name}!`);
       return true;
-    } else if (target.death <= action < target.death + target.damage) {
+    } else if (
+      target.death < action &&
+      action <= target.death + target.damage
+    ) {
       // if someone dodges Jason and deals damage
       this.hp -= 10;
       console.log(
@@ -39,8 +42,8 @@ class Killer {
       );
       return false;
     } else if (
-      target.death + target.damage <=
-      target.death + target.damage + target.both
+      target.death + target.damage < action &&
+      action <= target.death + target.damage + target.both
     ) {
       // if someone gets killed but deals damage
       this.hp -= 15;
@@ -85,7 +88,7 @@ let names = [
 const characteristics = [
   ["Weak", 0.7, 0.2, 0.1],
   ["Scared", 0.6, 0.25, 0.15],
-  ["Blondy", 0.5, 0.3, 0, 25],
+  ["Blondy", 0.5, 0.3, 0.2],
   ["Nerd", 0.4, 0.35, 0.25],
   ["Assistant", 0.3, 0.5, 0.2],
   ["Agile", 0.1, 0.6, 0.3],
