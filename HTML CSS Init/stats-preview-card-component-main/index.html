@@ -38,7 +38,6 @@
         height: 100vh;
         background-color: hsl(233, 47%, 7%);
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
       }
@@ -59,16 +58,14 @@
       }
 
       .container {
-        margin: 10%;
+        width: min-content;
         background-color: hsl(244, 38%, 16%);
-        width: fit-content;
-        border-radius: 15px;
         overflow: hidden;
+        border-radius: 15px;
         justify-content: center;
       }
 
       .container > * {
-        color: white;
         width: 50%;
       }
 
@@ -82,9 +79,12 @@
 
       h1 {
         font-weight: 700;
+        color: white;
       }
 
-      h2 {color: white;}
+      h2 {
+        color: white;
+      }
 
       .stat div {
         color: hsla(0, 0%, 100%, 0.6);
@@ -98,6 +98,17 @@
 
       .stat {
         gap: 50px;
+      }
+
+      @media screen and (max-width: 720px) {
+        .container {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .container > * {
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -135,7 +146,7 @@
         <img
           src="images/image-header-desktop.jpg"
           alt="image-header-desktop"
-          style="mix-blend-mode: multiply; display: block;"
+          style="mix-blend-mode: multiply; display: block"
         />
       </div>
     </main>
