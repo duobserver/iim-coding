@@ -24,7 +24,8 @@
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
       * {
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
+        box-sizing: border-box;
       }
 
       html,
@@ -75,9 +76,25 @@
         padding: 0 5%;
       }
 
-      h1 { font-weight: 700; }
+      .tint {
+        background: hsl(277, 64%, 61%);
+      }
 
-      p { font-weight: 400;}
+      h1 {
+        font-weight: 700;
+      }
+
+      h2 {color: white;}
+
+      .stat div {
+        color: hsla(0, 0%, 100%, 0.6);
+        font-family: "Deca", sans-serif;
+      }
+
+      p {
+        font-weight: 400;
+        color: hsla(0, 0%, 100%, 0.75);
+      }
 
       .stat {
         gap: 50px;
@@ -100,7 +117,7 @@
 
         <div class="stat">
           <div>
-            <h2>10k+</h2>
+            <h2>10+</h2>
             COMPANIES
           </div>
           <div>
@@ -108,13 +125,19 @@
             TEMPLATES
           </div>
           <div>
-            <h2>12m+</h2>
+            <h2>12M+</h2>
             QUERIES
           </div>
         </div>
       </div>
 
-      <img src="images/image-header-desktop.jpg" alt="image-header-desktop" />
+      <div class="tint">
+        <img
+          src="images/image-header-desktop.jpg"
+          alt="image-header-desktop"
+          style="mix-blend-mode: multiply; display: block;"
+        />
+      </div>
     </main>
   </body>
 </html>
