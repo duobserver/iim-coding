@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>RCIV</title>
+  </head>
+  <body>
+    <div id="navButtons">
+      <input
+        type="checkbox"
+        id="navCheck"
+        onclick="hideNav(); responsiveMargin();"
+      />
+      <label for="navCheck"
+        ><span
+          id="openSidebar"
+          class="material-symbols-outlined navButton"
+          title="Afficher le menu"
+          >menu</span
+        >
+        <span
+          id="closeSidebar"
+          class="material-symbols-outlined navButton"
+          title="Cacher le menu"
+          >close</span
+        ></label
+      >
+      <input
+        type="button"
+        id="scrollTop"
+        onclick="document.getElementById('banner').scrollIntoView();"
+      />
+      <label for="scrollTop" id="scrollTopLabel"
+        ><span
+          class="material-symbols-outlined navButton"
+          title="Retourer en haut de la page"
+          >arrow_upward</span
+        ></label
+      >
+    </div>
+
+    <nav id="sidebar">
+      <ul>
+        <li>
+          <a
+            onclick="document.getElementById('competitions').scrollIntoView();"
+            href="#competitions"
+            >Compétitions</a
+          >
+        </li>
+        <ul>
+          <li>
+            <a
+              style="color: orangered"
+              href="ftc.html"
+              rel="noopener noreferrer"
+              >FTC</a
+            >
+          </li>
+          <li>
+            <a
+              id="nav_frc"
+              style="color: #009cd7"
+              href="frc.html"
+              rel="noopener noreferrer"
+              >FRC</a
+            >
+          </li>
+        </ul>
+        <li>
+          <a
+            onclick="document.getElementById('teams').scrollIntoView();"
+            href="#teams"
+            >Équipes</a
+          >
+        </li>
+        <ul>
+          <li>
+            <a
+              href="https://bit.ly/insta_frites"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Frites</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://bit.ly/insta_baguettechs"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Baguettechs</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://bit.ly/insta_frenchineers"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Frenchineers</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://bit.ly/insta_frc"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Geekos</a
+            >
+          </li>
+        </ul>
+        <li>
+          <a
+            onclick="document.getElementById('donate').scrollIntoView();"
+            href="#donate"
+            >Soutenir</a
+          >
+        </li>
+        <li>
+          <a
+            onclick="document.getElementById('sponsors').scrollIntoView();"
+            href="#sponsors"
+            >Sponsors</a
+          >
+        </li>
+        <li>
+          <a
+            onclick="document.getElementById('gallery').scrollIntoView();"
+            href="#gallery"
+            >Galerie</a
+          >
+        </li>
+        <li>
+          <a
+            onclick="document.getElementById('schedule').scrollIntoView();"
+            href="#schedule"
+            >Horaires</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <main id="scroller">
+      <section id="banner">
+        <div class="container" id="bannerContainer">
+          <img src="assets/logos/RCIV.png" alt="RCIV" />
+          <article>
+            <h1>👋 Bienvenue au Club de Robotique du CIV !</h1>
+            <p>
+              Nous sommes une association établie au
+              <a
+                href="https://bit.ly/civ-site"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Centre International de Valbonne</a
+              >
+              composée de 4 équipes. Nous sommes des dizaines d'élèves de la
+              troisième à la terminale, passionné.es par la programmation et la
+              construction de robots.<br />
+              <br />
+              <a
+                href="https://bit.ly/civ-maps"
+                target="_blank"
+                rel="noopener noreferrer"
+                >CIV sur Maps</a
+              >
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="competitions">
+        <div class="container" id="competitionsContainer">
+          <a href="ftc.html" class="competitionLink"
+            ><img
+              src="assets/logos/FIRSTTech_Type_White.png"
+              alt="ftc_logo"
+              id="ftcCompetitionLink"
+              rel="noopener noreferrer"
+            />
+            <div class="overlay">
+              Imaginez, construisez, programmez et pilotez un robot pour jouer
+              en solo ou duo!
+            </div></a
+          >
+          <a href="ftc.html" class="competitionLink"
+            ><img
+              src="assets/logos/FIRSTRobotics_Type_White.png"
+              alt="ftc_logo"
+              id="frcCompetitionLink"
+              rel="noopener noreferrer"
+            />
+            <div class="overlay">
+              Un niveau supérieur en programmation et construction pour des
+              compétitions encore plus spectaculaires !
+            </div></a
+          >
+          <article>
+            <h1>🏆 Les compétitions</h1>
+            <p>
+              Chaque année, nous nous rendons à des évènements organisés par
+              <a
+                href="https://firstinspires.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                >FIRST®</a
+              >
+              dans le monde entier (à Londres, au Québec ...) pour affronter des
+              équipes internationales 🌍. Nous participons aussi à d'autres
+              compétitions non-officielles nationales (à Lyon par exemple) 🏅.
+              Ces défis nous permettent d'élargir nos cercles d'amitié,
+              d'intéragir avec d'autres associations, de découvrir et de
+              comprendre les technologies employées par nos confrères 👀.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="teams">
+        <div class="container" id="teamsContainer">
+          <article>
+            <h1>👥 Les équipes</h1>
+            <p>
+              Vous pouvez supporter nos équipes de
+              <a href="ftc.html" rel="noopener noreferrer">FTC</a> et
+              <a href="frc.html" rel="noopener noreferrer">FRC</a> sur Instagram
+              ❤️.<br />
+              Vous pourrez rester au courant sur l'avancement de nos projets et
+              sur les compétitions à venir 👀.
+            </p>
+          </article>
+          <a href="https://bit.ly/insta_frites" target="_blank"
+            ><img src="assets/ig/igFrites.png" alt="igFrites"
+          /></a>
+          <a href="https://bit.ly/insta_baguettechs" target="_blank"
+            ><img src="assets/ig/igBaguettechs.png" alt="igBaguettechs"
+          /></a>
+          <a href="https://bit.ly/insta_frenchineers" target="_blank"
+            ><img src="assets/ig/igFrenchineers.png" alt="igFrenchineers"
+          /></a>
+          <a href="https://bit.ly/insta_frc" target="_blank"
+            ><img src="assets/ig/igGeekos.png" alt="igGeekos"
+          /></a>
+        </div>
+      </section>
+
+      <!-- Donations -->
+      <section id="donate">
+        <div class="container" id="donationContainer">
+          <article>
+            <h1>❤️ Faire un don</h1>
+            <p>
+              Si vous le souhaitez, vous pouvez soutenir le Club en faisant un
+              don sur notre cagnotte HelloAsso 🤩. Cet argent nous permettra
+              d'acheter du matériel pour construire et améliorer nos robots.
+              Nous apprécions votre générosité 🥰 et nous utiliserons l'argent
+              pour :
+            </p>
+            <ul>
+              <li>
+                <strong>Couvrir les dépenses du Club.</strong> Lorsque vous
+                faites un don, 30% de l'argent est attribué au Club, ce qui
+                permet de couvrir les frais administratifs, bancaires et
+                d'assurance.
+              </li>
+              <li>
+                <strong>Aider les équipes</strong> La part restante d'un don
+                (70%) est répartie équitablement entre les équipes du Club, qui
+                doivent gérer leurs propres finances.
+              </li>
+              <li>
+                <strong
+                  >Acheter des pièces et des outils pour les robots.</strong
+                >
+                Chaque machine contient plus de 5000€ de contrôleurs, moteurs,
+                capteurs, pièces découpées, imprimées en 3D ou gravées. Nous
+                espérons acheter des pièces telles que des moteurs plus
+                performants, des capteurs nécéssaires au mode autonome, et des
+                outils comme une CNC qui nous aideront grandement à avancer dans
+                nos projets.
+              </li>
+              <li>
+                <strong>Payer les frais des compétitions.</strong> La partition
+                à la FRC et à la FTC engendre des frais d'inscription et de
+                transport pour amener les équipes et leurs robots sur les lieux
+                des rencontres. Ces sommes sont payées avece l'argent attribué
+                au Club.
+              </li>
+              <li>
+                <strong>Financer la communication.</strong> Cela inclut les
+                sites web, les posters, et les T-shirts des équipes, ainsi que
+                la communication dans le lycée et ailleurs.
+              </li>
+              <li>
+                <strong>Financer les évènements.</strong> L'argent donné pourra
+                être utilisé pour organiser des évènements autres que les
+                compétitions (soirées portes ouvertes) ou participer à des
+                activités centrées sur les métiers de la robotique. Au-delà des
+                compétitions, ces évènements permettent d'attirer des sponsors
+                pouvant aussi nous aider financièrement.
+              </li>
+              <li>
+                <strong>Faire progresser le Club.</strong> Grâce à votre aide,
+                nous pourrons aussi adhérer à des infrastructures telles que les
+                FabLabs pour faciliter la construction des robots et la
+                communication. Ces financements supplémentaires permettent aux
+                membres du Club de découvrir l'univers de la robotique, de se
+                former et de rencontrer d'autres équipes.
+              </li>
+            </ul>
+            <a
+              href="https://bit.ly/HelloAsso-RobotiqueCIV"
+              target="_blank"
+              style="font-size: 2em"
+              rel="noopener noreferrer"
+              >Cagnotte HelloAsso</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <!-- Carousel Sponsors-->
+      <section id="sponsors">
+        <div class="container">
+          <h1>🤝 Sponsors</h1>
+          <p>
+            Un grand merci à tous nos sponsors 💎! Jetez-y un coup d'oeil en
+            utilisant les flèches directionnelles 😉.
+          </p>
+          <div class="carousel sponsorsCarousel">
+            <a href="https://www.arm.com/" target="_blank" id="logo1"
+              ><img src="assets/logos/Arm_logo_blue_150LG.png" alt="logo_arm"
+            /></a>
+            <a href="https://www.sap.com/" target="_blank" id="logo2"
+              ><img src="assets/logos/sap-logos-idLokd3X-r.png" alt="logo_sap"
+            /></a>
+            <a href="https://www.firstinspires.org/" target="_blank" id="logo3"
+              ><img
+                src="assets/logos/FIRST-REG-France-CMYK-H.png"
+                alt="logo_first"
+            /></a>
+            <a href="https://www.ville-valbonne.fr/" target="_blank" id="logo4"
+              ><img src="assets/logos/vsa.jpg" alt="logo_vsa"
+            /></a>
+            <a href="http://www.civfrance.com/" target="_blank" id="logo5"
+              ><img src="assets/logos/civ.png" alt="logo_civ"
+            /></a>
+            <a
+              href="https://ghaasfoundation.org/content/ghf/en/home.html"
+              target="_blank"
+              id="logo6"
+              ><img src="assets/logos/haas.png" alt="logo_haas"
+            /></a>
+            <a href="https://askida-taldea.com/en/" target="_blank" id="logo7"
+              ><img
+                src="assets/logos/Aski-da-1920x1080-1.png"
+                alt="logo_askida"
+            /></a>
+          </div>
+
+          <div class="carouselButtons">
+            <input
+              type="button"
+              id="sponsorsLeft"
+              onclick="carousel('sponsors', 'backward');"
+            />
+            <label for="sponsorsLeft"
+              ><span
+                class="material-symbols-outlined navButton"
+                title="Retourer en haut de la page"
+                >arrow_back</span
+              ></label
+            >
+            <div style="text-align: center">
+              <span id="sponsorNum"></span>/<span id="sponsorTotal"></span>
+            </div>
+            <input
+              type="button"
+              id="sponsorsRight"
+              onclick="carousel('sponsors', 'forward');"
+            />
+            <label for="sponsorsRight"
+              ><span
+                class="material-symbols-outlined navButton"
+                title="Retourer en haut de la page"
+                >arrow_forward</span
+              ></label
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Carousel Photos -->
+      <section id="gallery">
+        <div class="container">
+          <h1>📸 Galerie</h1>
+          <p>
+            Quelques photos cool qu'on a pris durant nos travaux. Encore, vous
+            pouvez utiliser les flèches.
+          </p>
+          <div class="carousel galleryCarousel">
+            <img src="assets/gallery/amphi.JPG" id="gallery1" />
+            <img src="assets/gallery/ring.jpg" id="gallery2" />
+            <img src="assets/gallery/fun.jpg" id="gallery3" />
+          </div>
+          <div class="carouselButtons">
+            <input
+              type="button"
+              id="galleryLeft"
+              onclick="carousel('gallery', 'backward');"
+            />
+            <label for="galleryLeft"
+              ><span
+                class="material-symbols-outlined navButton"
+                title="Image précédente"
+                >arrow_back</span
+              ></label
+            >
+            <div style="text-align: center">
+              <span id="galleryNum"></span>/<span id="galleryTotal"></span>
+            </div>
+            <input
+              type="button"
+              id="galleryRight"
+              onclick="carousel('gallery', 'forward');"
+            />
+            <label for="galleryRight"
+              ><span
+                class="material-symbols-outlined navButton"
+                title="Image suivante"
+                >arrow_forward</span
+              ></label
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Horaires et emplacement -->
+      <section id="schedule">
+        <div class="container">
+          <h1>Horaires</h1>
+          <p>
+            Le club ouvre aux 3<sup>èmes</sup> et lycéens à partir du 8
+            septembre.<br />
+            🕔 : Tous les mercredis de 13h à 15h et tous les vendredis de 15h à
+            19h.<br />
+            🌍 : Premier étage du bâtiment des prépas du Centre International de
+            Valbonne.
+          </p>
+        </div>
+      </section>
+    </main>
+    <script src="assets/script.js"></script>
+    <script src="assets/carousel.js"></script>
+  </body>
+</html>

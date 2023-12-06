@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>RCIV</title>
+  </head>
+  <body>
+    <div id="navButtons">
+      <input
+        type="checkbox"
+        id="navCheck"
+        onclick="hideNav(); responsiveMargin();"
+      />
+      <label for="navCheck"
+        ><span
+          id="openSidebar"
+          class="material-symbols-outlined navButton"
+          title="Afficher le menu"
+          >menu</span
+        >
+        <span
+          id="closeSidebar"
+          class="material-symbols-outlined navButton"
+          title="Cacher le menu"
+          >close</span
+        ></label
+      >
+      <input
+        type="button"
+        id="scrollTop"
+        onclick="document.getElementById('banner').scrollIntoView();"
+      />
+      <label for="scrollTop" id="scrollTopLabel"
+        ><span
+          class="material-symbols-outlined navButton"
+          title="Retourer en haut de la page"
+          >arrow_upward</span
+        ></label
+      >
+    </div>
+
+    <nav id="sidebar">
+      <ul>
+          <li>
+            <a
+              href="index.html"
+              rel="noopener noreferrer"
+              >RCIV</a
+            >
+          </li>
+          <li>
+            <a
+              id="nav_frc"
+              style="color: #009cd7"
+              href="frc.html"
+              rel="noopener noreferrer"
+              >FRC</a
+            >
+          </li>
+        <li>
+          <a
+            onclick="document.getElementById('teams').scrollIntoView();"
+            href="#teams"
+            >Équipes</a
+          >
+        </li>
+        <ul>
+          <li>
+            <a
+              href="https://bit.ly/insta_frites"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Frites</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://bit.ly/insta_baguettechs"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Baguettechs</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://bit.ly/insta_frenchineers"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Frenchineers</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://bit.ly/insta_frc"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Geekos</a
+            >
+          </li>
+        </ul>
+        <li>
+          <a
+            onclick="document.getElementById('donate').scrollIntoView();"
+            href="#donate"
+            >Soutenir</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <main id="scroller">
+     <!-- Présentation -->
+     <section id="banner" style="background-image: linear-gradient(45deg, hsl(16, 91%, 55%)0%, hsl(26, 91%, 55%)100%);">
+        <div class="container" id="bannerContainer">
+            <img src="assets/logos/FIRSTTech_IconVert_RGB_reverse.png">
+            <article>
+                <h1 style="text-align: left;">Le FTC, une première compet'</h1>
+                <p style="max-width: 600px;">
+                    Le First Tech Challenge est une compétition
+                    internationale de robotique organisée par <a href="https://firstinspires.org" target="_blank" class="text-link">FIRST&#xae;</a>, à laquelle le Club de Robotique du CIV participe depuis 2020.
+                    Chaque année, il y a un nouveau challenge, et nous devons construire un nouveau robot respectant des critères strictes.<br><br>
+
+                    Un match est constitué d’une phase autonome de 30
+                    secondes, où le robot se déplace tout seul sans aucune intervention humaine, puis de 2 minutes où le robot est controlé par un pilote. Il peut y avoir quatres robots sur le terrain pendant un match, et les équipes peuvent former deux alliances opposées (rouge ou bleu).<br><br>
+
+                    Durant notre première année de participation, nous sommes allés au tournoi régional de Cambridge pour participer au challenge Skystone, où il fallait construire des tours les plus hautes possibles.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Section équipes -->
+    <section id="squads">
+        <h1>Les équipes</h1>
+        <div class="container">
+            <div class="card">
+                <div id="card-container">
+                    <div class="card-banner" id="frites-banner"></div>
+                    <img src="./docs/assets/images/logo_frites.png" alt="logo_frites" class="card-pfp">
+                    <div class="card-text">
+                        <h1>Frites</h1>
+                        L’équipe qui faisait partie de l’Alliance Gagnante de 2020, qui a remporté le
+                        Control Award en 2020 et en 2023 et qui a gagné la compétition en 2021.
+                    </div>
+                </div>
+
+                <a href="https://bit.ly/insta_frites" class="card-social" target=_blank id="card-container"><img src="./docs/assets/images/ig_frites.png" alt="ig_frites"></a>
+            </div>
+
+            <div class="card">
+                <div id="card-container">
+                    <div class="card-banner" id="bague-banner"></div>
+                    <img src="./docs/assets/images/logo_baguettechs.png" alt="logo_baguettechs" class="card-pfp">
+                    <div class="card-text">
+                        <h1>Baguettechs</h1>
+                        L'équipe qui a joué avec les Frenchineers en finales pour emporter le Finalist Award avec eux.
+                    </div>
+                </div>
+
+                <a href="https://bit.ly/insta_baguettechs" class="card-social" target=_blank id="card-container"><img src="./docs/assets/images/ig_baguettechs.png" alt="ig_baguettechs"></a>
+            </div>
+
+            <div class="card">
+                <div id="card-container">
+                    <div class="card-banner" id="french-banner"></div>
+                    <img src="./docs/assets/images/logo_frenchineers.svg" alt="logo_frenchineers" class="card-pfp">
+                    <div class="card-text">
+                        <h1>Frenchineers</h1>
+                        L'équipe qui faisait partie de l'Alliance finaliste et qui a fini 3<sup>ème</sup> sur 17 à la FTC 2023.
+                    </div>
+                </div>
+
+                <a href="https://bit.ly/insta_frenchineers" class="card-social" target=_blank id="card-container"><img src="./docs/assets/images/ig_frenchineers.png" alt="ig_frenchineers"></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Historique -->
+    <section id="historic">
+        <h1>Historique</h1>
+        <div class="container">
+            <ul>
+                <li>
+                    À la First Tech Challenge 2023 à Lyon, les 3 équipes du CIV sont arrivés dans les top 6.
+                </li>
+                <li>
+                    Les membres de l'équipe des Frenchineers ont su aider une autre équipe française, diffusant le vrai message de FIRST®.
+                </li>
+                <li>
+                    La branche communicaiton et médiatisation des 3 équipes ont communiqué avec les autres équipes participant à la compétition, et grâce au côté internationale du CIV, c'était facile de communiquer avec les équipes italiennes, espagnoles et anglaises.
+                </li>
+            </ul>
+    </section>
+
+    <!--Section faire un don  -->
+    <section id="donate">
+        <h1>Faire un don</h1>
+        <div class="container" style="flex-direction: column !important;">
+            Si vous le souhaitez, vous pouvez soutenir le Club en faisant un don sur notre cagnotte HelloAsso &#129321;. Cet argent nous permettra d'acheter du matériel pour construire et améliorer nos robots. Nous apprécions votre générosité &#129392;.
+            <br><br>Chaque équipe gère ses propres finances. Lorsque vous faites un don, 30% de l&#39;argent est attribué à l&#39;association, et les 70% restants sont répartis équitablement entre les 3 équipes. L'argent attribué à l'association sert notamment à couvrir les dépenses administratives tels que les frais bancaires et d'assurance, ainsi que les dépenses communes aux trois équipes, comme le transport ou l'inscription.
+            <br><br>Nous utilisons l'argent de différentes façons, par exemple :
+            <ul>
+                <li>
+                    Pour acheter des pièces et des outils pour les robots. Chaque robot contient plus de 5000€ de contrôleurs, moteurs, capteurs, pièces découpées, imprimées en 3D, gravées etc. Nous espérons acheter des pièces telles que des moteurs plus performants, des capteurs nécéssaires au mode autonome, et des outils comme une CNC qui nous aideront grandement à avancer dans nos projets.
+                </li>
+                <li>
+                    Pour financer la communication. Cela inclut les sites web, posters, et T-shirts des équipes, ainsi que la communication dans le lycée et ailleurs.
+                </li>
+                <li>
+                    Pour financer les évènements que nous organisons et notre participation à d'autres évènements.
+                </li>
+                <li>
+                    Pour les frais engendrés par la participation au First Tech Challenge ou à d'autres compétitions de robotique. Cela inclut les frais d'inscription et les frais de transport (pour les robots et pour les participants).
+                </li>
+                <li>
+                    Pour nous permettre de participer à différentes activités, avec par exemple l'adhésion à des FabLabs et autres associations (pour aider pour la construction du robot ou la communication), ainsi que pour permettre aux élèves de découvrir différents domaines de la robotique, des procédés de construction ou encore pour rencontrer d'autres équipes.
+                </li>
+            </ul>
+        </div>
+        <a href="https://bit.ly/HelloAsso-RobotiqueCIV" target="_blank" style="font-size: 30px;" class="text-link">Cagnotte HelloAsso</a>
+    </section>
+    </main>
+    <script src="assets/script.js"></script>
+  </body>
+</html>
