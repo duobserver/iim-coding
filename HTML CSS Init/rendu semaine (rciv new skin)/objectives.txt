@@ -1,4 +1,5 @@
 - create a brand new skin for robotics website
-- ehanced semantic layout
+- enhanced semantic layout
 - rewrote paragrpahs
-- advanced javascript and vanilla carousel
+- advanced handmade javascript carousel
+- javascript responsive layout
