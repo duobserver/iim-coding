@@ -1,0 +1,24 @@
+section {
+    height: min-content;
+}
+
+#ftcTeamsContainer article {
+    grid-column: 1/-1;
+    grid-row: 1;
+}
+
+#ftcTeamsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: min-content min-content;
+}
+
+.team {
+    height: 100%;
+}
+
+#frcteam {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

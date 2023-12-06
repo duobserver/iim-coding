@@ -1,11 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/ftc.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>RCIV</title>
+  </head>
+  <body>
+    <div id="navButtons">
+      <input
+        type="checkbox"
+        id="navCheck"
+        onclick="hideNav(); responsiveMargin();"
+      />
+      <label for="navCheck"
+        ><span
+          id="openSidebar"
+          class="material-symbols-outlined navButton"
+          title="Afficher le menu"
+          >menu</span
+        >
+        <span
+          id="closeSidebar"
+          class="material-symbols-outlined navButton"
+          title="Cacher le menu"
+          >close</span
+        ></label
+      >
+      <input
+        type="button"
+        id="scrollTop"
+        onclick="document.getElementById('banner').scrollIntoView();"
+      />
+      <label for="scrollTop" id="scrollTopLabel"
+        ><span
+          class="material-symbols-outlined navButton"
+          title="Retourer en haut de la page"
+          >arrow_upward</span
+        ></label
+      >
+    </div>
+
+    <nav id="sidebar">
+      <ul>
+        <li>
+          <a href="index.html" rel="noopener noreferrer">RCIV</a>
+        </li>
+        <li>
+          <a
+            id="nav_frc"
+            style="color: orangered"
+            href="ftc.html"
+            rel="noopener noreferrer"
+            >FTC</a
+          >
+        </li>
+        <li>
+          <a
+            onclick="document.getElementById('teams').scrollIntoView();"
+            href="#team"
+            >Équipe</a
+          >
+        </li>
+        <li>
+          <a
+            onclick="document.getElementById('donate').scrollIntoView();"
+            href="#donate"
+            >Soutenir</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <main id="scroller">
+      <!-- Présentation -->
+      <section
+        id="banner"
+        style="
+          background-image: linear-gradient(
+            45deg,
+            hsl(206, 100%, 42%) 0%,
+            hsl(196, 100%, 42%) 100%
+          );
+        "
+      >
+        <div class="container" id="bannerContainer">
+          <img src="assets/logos/FIRSTRobotics_IconVert_RGB_reverse.png" />
+          <article>
+            <h1 style="text-align: left; color: white">
+              La FRC, pour aller plus loin
+            </h1>
+            <p style="max-width: 600px">
+              La First Robotic Competition est une compétition internationale de
+              robotique organisée par
+              <a
+                href="https://firstinspires.org"
+                target="_blank"
+                class="text-link"
+                >FIRST&#xae;</a
+              >
+              que nous venons d'intégrer cette année &#129395; (en 2023). Chaque
+              année, il y a un nouveau challenge, et nous devons construire un
+              nouveau robot respectant des critères stricts.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Section équipes -->
+      <section
+        id="frcteam"
+        style="background-image: url(assets/gallery/ftc\ lyon.jpg)"
+      >
+        <div class="container" style="place-content: center">
+          <a href="https://instagram.com/geekos_team9220" target="_blank"
+            ><img
+              src="assets/ig/igGeekos.png"
+              alt="igGeekos"
+              style="opacity: 50%"
+          /></a>
+        </div>
+      </section>
+
+      <!-- Section Historique -->
+      <section id="historic">
+        <div class="container">
+          <h1>Historique</h1>
+          <ul>
+            <li>
+              À la FRC 2023 au Québec, l'équipe de FRC du CIV a fini 21ème et a
+              fait partie des 8 alliances finalistes. Le classement non-officiel
+              mondial nous classe 2231ème/3294.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!--Section faire un don  -->
+      <section id="donate">
+        <h1>Faire un don</h1>
+        <div class="container" style="flex-direction: column !important">
+          Si vous le souhaitez, vous pouvez soutenir le Club en faisant un don
+          sur notre cagnotte HelloAsso &#129321;. Cet argent nous permettra
+          d'acheter du matériel pour construire et améliorer nos robots. Nous
+          apprécions votre générosité &#129392;.
+          <br /><br />Chaque équipe gère ses propres finances. Lorsque vous
+          faites un don, 30% de l&#39;argent est attribué à l&#39;association,
+          et les 70% restants sont répartis équitablement entre les 3 équipes.
+          L'argent attribué à l'association sert notamment à couvrir les
+          dépenses administratives tels que les frais bancaires et d'assurance,
+          ainsi que les dépenses communes aux trois équipes, comme le transport
+          ou l'inscription. <br /><br />Nous utilisons l'argent de différentes
+          façons, par exemple :
+          <ul>
+            <li>
+              Pour acheter des pièces et des outils pour les robots. Chaque
+              robot contient plus de 5000€ de contrôleurs, moteurs, capteurs,
+              pièces découpées, imprimées en 3D, gravées etc. Nous espérons
+              acheter des pièces telles que des moteurs plus performants, des
+              capteurs nécéssaires au mode autonome, et des outils comme une CNC
+              qui nous aideront grandement à avancer dans nos projets.
+            </li>
+            <li>
+              Pour financer la communication. Cela inclut les sites web,
+              posters, et T-shirts des équipes, ainsi que la communication dans
+              le lycée et ailleurs.
+            </li>
+            <li>
+              Pour financer les évènements que nous organisons et notre
+              participation à d'autres évènements.
+            </li>
+            <li>
+              Pour les frais engendrés par la participation au First Tech
+              Challenge ou à d'autres compétitions de robotique. Cela inclut les
+              frais d'inscription et les frais de transport (pour les robots et
+              pour les participants).
+            </li>
+            <li>
+              Pour nous permettre de participer à différentes activités, avec
+              par exemple l'adhésion à des FabLabs et autres associations (pour
+              aider pour la construction du robot ou la communication), ainsi
+              que pour permettre aux élèves de découvrir différents domaines de
+              la robotique, des procédés de construction ou encore pour
+              rencontrer d'autres équipes.
+            </li>
+          </ul>
+        </div>
+        <a
+          href="https://bit.ly/HelloAsso-RobotiqueCIV"
+          target="_blank"
+          style="font-size: 30px"
+          class="text-link"
+          >Cagnotte HelloAsso</a
+        >
+      </section>
+    </main>
+    <script src="assets/script.js"></script>
+  </body>
 </html>
