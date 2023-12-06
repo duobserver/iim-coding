@@ -34,14 +34,10 @@ function hideNav() {
     document.getElementById("sidebar").style.display = "none";
     document.getElementById("openSidebar").style.display = "block";
     document.getElementById("closeSidebar").style.display = "none";
-    document.getElementById("competitionsContainer").style.display = "grid";
   } else {
     document.getElementById("sidebar").style.display = "block";
     document.getElementById("openSidebar").style.display = "none";
     document.getElementById("closeSidebar").style.display = "block";
-    if (window.innerWidth < 768) {
-      document.getElementById("competitionsContainer").style.display = "none";
-    }
   }
 }
 
