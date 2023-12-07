@@ -10,10 +10,6 @@ var galleryCounter = gallery[0].childElementCount;
 document.getElementById("galleryTotal").innerHTML = parseFloat(galleryCounter);
 var counter2 = 1;
 
-window.onresize = function () {
-  relativeSolver();
-};
-
 function carousel(type, direction) {
   if (type == "sponsors") {
     var temp = counter1;
@@ -50,16 +46,5 @@ function carousel(type, direction) {
     document.getElementById("gallery" + parseFloat(counter2)).style.display =
       "initial";
     document.getElementById("galleryNum").innerHTML = parseFloat(counter2);
-  }
-}
-
-function relativeSolver() {
-  if (navCheck.checked == true) {
-    document.getElementById("competitionsContainer").style.display = "grid";
-  } else {
-
-    if (window.innerWidth < 768) {
-      document.getElementById("competitionsContainer").style.display = "none";
-    }
   }
 }

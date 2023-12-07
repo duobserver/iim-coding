@@ -13,7 +13,8 @@
       href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap"
       rel="stylesheet"
     />
-    <title>RCIV</title>
+    <link rel="icon" href="assets/logos/RCIV.png" />
+    <title>RCIV - FRC</title>
   </head>
   <body>
     <div id="navButtons">
@@ -53,7 +54,7 @@
     <nav id="sidebar">
       <ul>
         <li>
-          <a href="index.html" rel="noopener noreferrer">RCIV</a>
+          <a href="index.html" rel="noopener noreferrer">Accueil</a>
         </li>
         <li>
           <a
@@ -66,11 +67,18 @@
         </li>
         <li>
           <a
-            onclick="document.getElementById('teams').scrollIntoView();"
+            onclick="document.getElementById('frcteam').scrollIntoView();"
             href="#team"
             >Équipe</a
           >
         </li>
+        <li>
+            <a
+              onclick="document.getElementById('historic').scrollIntoView();"
+              href="#historic"
+              >Historique</a
+            >
+          </li>
         <li>
           <a
             onclick="document.getElementById('donate').scrollIntoView();"
@@ -82,21 +90,11 @@
     </nav>
 
     <main id="scroller">
-      <!-- Présentation -->
-      <section
-        id="banner"
-        style="
-          background-image: linear-gradient(
-            45deg,
-            hsl(206, 100%, 42%) 0%,
-            hsl(196, 100%, 42%) 100%
-          );
-        "
-      >
+      <section id="banner" class="bannerfrc">
         <div class="container" id="bannerContainer">
           <img src="assets/logos/FIRSTRobotics_IconVert_RGB_reverse.png" />
           <article>
-            <h1 style="text-align: left; color: white">
+            <h1>
               La FRC, pour aller plus loin
             </h1>
             <p style="max-width: 600px">
@@ -116,7 +114,6 @@
         </div>
       </section>
 
-      <!-- Section équipes -->
       <section id="frcteam">
         <div class="container" style="place-content: center">
           <a href="https://instagram.com/geekos_team9220" target="_blank"
@@ -125,7 +122,6 @@
         </div>
       </section>
 
-      <!-- Section Historique -->
       <section id="historic">
         <div class="container">
           <h1>Historique</h1>
@@ -139,7 +135,6 @@
         </div>
       </section>
 
-      <!--Section faire un don  -->
       <section id="donate">
         <h1>Faire un don</h1>
         <div class="container" style="flex-direction: column !important">

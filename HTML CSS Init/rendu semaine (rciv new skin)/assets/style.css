@@ -42,6 +42,7 @@ nav {
   margin: 0;
   padding: 15px;
   width: fit-content;
+  z-index: 1;
   background-color: hsl(0, 0%, 95%);
   position: fixed;
   height: 100%;
