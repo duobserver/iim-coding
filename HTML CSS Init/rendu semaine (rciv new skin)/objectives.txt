@@ -3,3 +3,10 @@
 - rewrote paragrpahs
 - advanced handmade javascript carousel
 - javascript responsive layout
+
+- add dark mode
+- add sitemap/xml file
+- verify noopener noreferrer links
+
+- organize yourself
+- wake up
