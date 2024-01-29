@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+  color: white;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 100px 1fr;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  grid-column: 1/-1;
+  grid-row: 1;
+}
+
+.swiper-slide {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+input, label {
+  z-index: 1;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+nav {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  grid-row: 2;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  padding-top: 15px;
+  text-wrap: pretty;
+}
+
+main {
+  padding: 20px 40px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(coding.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+main div:not(.active) {
+  display: none;
+}
