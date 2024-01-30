@@ -10,3 +10,8 @@ const swiper = new Swiper(".swiper", {
   direction: "horizontal",
   loop: true,
 });
+
+document.getElementById("sidebarButton").addEventListener("click", function () {
+  console.log("clicked")
+  document.getElementById("sidebar").classList.toggle("open");
+});

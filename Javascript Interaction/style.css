@@ -1,6 +1,8 @@
 * {
+  font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
   color: white;
+  transition: 1s;
 }
 
 body,
@@ -11,14 +13,11 @@ html {
 
 body {
   height: 100dvh;
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: 100px 1fr;
 }
 
 .swiper {
   width: 100%;
-  height: 100%;
+  height: 100px;
   grid-column: 1/-1;
   grid-row: 1;
 }
@@ -32,30 +31,62 @@ body {
   color: white;
 }
 
-input, label {
+input {
+  display: none;
+}
+
+label {
   z-index: 1;
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: white;
+  border-radius: 0 10px 0 0;
 }
 
-nav {
+label span {
+  font-size: 2em;
+  color: black;
+}
+
+.container {
+  display: flex;
+  height: calc(100dvh - 100px);
+}
+
+#sidebar {
   height: 100%;
-  width: 100%;
+  width: 0;
+  padding: 0;
+  overflow: hidden;
   background-color: black;
-  grid-row: 2;
+  visibility: hidden;
 }
 
-nav ul {
+#sidebar ul {
   list-style: none;
 }
 
-nav ul li {
+#sidebar ul li {
   padding-top: 15px;
   text-wrap: pretty;
 }
 
+#side ul li:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+#sidebar.open {
+  width: auto;
+  padding: 0 20px;
+  visibility: visible;
+}
+
 main {
+  width: 100%;
   padding: 20px 40px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(coding.png);

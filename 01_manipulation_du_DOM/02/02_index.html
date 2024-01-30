@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    
+    <style>
+        * {
+            font-family: sans-serif;
+            font-size: 1rem;
+            margin: 0;
+            transition: 0.4s;
+        }
+
+      .accordeon {
+        border: 1px solid rgba(146, 146, 146, 0.3);
+        width: 80%;
+        max-width: 600px;
+        margin: 10px auto;
+      }
+
+      .titre {
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 8px 16px rgba(146, 146, 146, 0.3);
+        -webkit-box-shadow: 0px 8px 16px rgba(146, 146, 146, 0.3);
+        -moz-box-shadow: 0px 8px 16px rgba(146, 146, 146, 0.3);
+      }
+
+      .titre p {
+        font-weight: 700;
+      }
+
+      .contenu {
+        padding: 0 20px;
+        height: 0;
+        visibility: hidden;
+        overflow: hidden;
+      }
+
+      .accordeon.open .contenu {
+        padding: 30px 20px;
+        height: auto;
+        visibility: visible;
+      }
+
+      .accordeon.open .titre span {
+        transform-origin: center;
+        transform: rotate(90deg);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="accordeon">
+      <div class="titre">
+        <p>Contenu des cours DW</p>
+        <p><span class="material-symbols-outlined"> chevron_right </span></p>
+      </div>
+      <div class="contenu">
+        <ul>
+          <li>Algo</li>
+          <li>HTML / CSS</li>
+          <li>JavaScript</li>
+          <li>PHP / MySQL</li>
+          <li>Réseau</li>
+        </ul>
+      </div>
+    </section>
+    <section class="accordeon">
+        <div class="titre">
+          <p>Contenu des cours CDEB</p>
+          <p><span class="material-symbols-outlined"> chevron_right </span></p>
+        </div>
+        <div class="contenu">
+          <ul>
+            <li>Marketing</li>
+            <li>Communication</li>
+            <li>Webmarketing</li>
+            <li>Brand Content</li>
+            <li>Content Marketing</li>
+          </ul>
+        </div>
+      </section>
+    <script src="02_app.js"></script>
+  </body>
+</html>

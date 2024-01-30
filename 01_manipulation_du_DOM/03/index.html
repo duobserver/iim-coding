@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+
+    <style>
+      * {
+        font-size: 1rem;
+        font-family: sans-serif;
+        margin: 0;
+      }
+
+      body {
+        width: 80%;
+        margin: 80px auto;
+      }
+
+      form {
+        border: 1px solid rgba(153, 153, 153, 0.6);
+      }
+
+      form > div {
+        margin: 30px 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input {
+        height: 20px;
+        width: 40%;
+      }
+
+      button {
+        margin-left: 20px;
+        margin-bottom: 30px;
+        padding: 10px 32px;
+        cursor: pointer;
+      }
+
+      .messageError {
+        border: 1px solid rgb(212, 42, 0);
+        color: rgb(212, 42, 0);
+        background-color: rgba(212, 42, 0, 0.4);
+        padding: 16px 32px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .messageSuccess {
+        border: 1px solid rgb(81, 150, 2);
+        color: rgb(81, 150, 2);
+        background-color: rgba(81, 150, 2, 0.4);
+        padding: 16px 32px;
+        margin-bottom: 20px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="messageError"><ul id="errList"></ul></div>
+    <div class="messageSuccess">Formulaire envoyé</div>
+
+    <form action="" method="post" enctype="multipart/form-data" id="myForm">
+      <div>
+        <label for="pseudo">Pseudo</label>
+        <input type="text" name="pseudo" id="pseudo" />
+      </div>
+      <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div>
+        <label for="second">Second</label>
+        <input type="text" name="second" id="second" />
+      </div>
+      <div>
+        <label for="age">age</label>
+        <input type="number" name="age" id="age" />
+      </div>
+      <div>
+        <label for="country">Country</label>
+        <select name="country" id="country" placeholder="Select">
+          <option value="france">France</option>
+          <option value="italy">Italy</option>
+          <option value="uk">United Kingdom</option>
+          <option value="germany">Germany</option>
+          <option value="spain">Spain</option>
+          <option value="usa">United States of America</option>
+        </select>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <div>
+        <label for="passwordcheck">Password Check</label>
+        <input type="password" name="passwordcheck" id="passwordcheck" />
+      </div>
+      <button type="submit">Send</button>
+    </form>
+
+    <script src="app.js"></script>
+  </body>
+</html>

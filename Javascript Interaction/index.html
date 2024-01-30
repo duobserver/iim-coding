@@ -16,17 +16,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <input type="checkbox" id="viewNav" />
-  <label for="viewNav">
-    <span
-      id="openNav"
-      class="material-symbols-outlined navButton"
-      title="Afficher le menu"
-      >menu</span
-    >
-  </label>
-
   <body>
+    <input type="button" id="sidebarButton" />
+    <label for="sidebarButton"
+      ><span class="material-symbols-outlined">chevron_right</span></label
+    >
+
     <!-- Slider main container -->
     <div class="swiper">
       <!-- Additional required wrapper -->
@@ -47,29 +42,31 @@
       </div>
     </div>
 
-    <nav>
-      <ul>
-        <li class="tab tab-cdi active">Coding & Digital Innovation</li>
-        <li class="tab tab-cdeb">Communication Digitale & E-Business</li>
-        <li class="tab tab-jv">Jeux-Vidéo</li>
-        <li class="tab tab-3d">Animation 3D</li>
-        <li class="tab tab-cd">Création & Design</li>
-      </ul>
-    </nav>
+    <div class="container">
+      <aside id="sidebar">
+        <ul>
+          <li class="tab tab-cdi active">Coding & Digital Innovation</li>
+          <li class="tab tab-cdeb">Communication Digitale & E-Business</li>
+          <li class="tab tab-jv">Jeux-Vidéo</li>
+          <li class="tab tab-3d">Animation 3D</li>
+          <li class="tab tab-cd">Création & Design</li>
+        </ul>
+      </aside>
 
-    <main>
-      <div class="content cdi active">
-        <h2>Coding & Digital Innovation</h2>
-        <p>Le coding c'est cool</p>
-      </div>
-      <div class="content cdeb">
-        <h2>Coding & Digital Innovation</h2>
-        <p>Le coding c'est cool</p>
-      </div>
-      <div class="content jv"></div>
-      <div class="content 3d"></div>
-      <div class="content cd"></div>
-    </main>
+      <main>
+        <div class="content cdi active">
+          <h2>Coding & Digital Innovation</h2>
+          <p>Le coding c'est cool</p>
+        </div>
+        <div class="content cdeb">
+          <h2>Coding & Digital Innovation</h2>
+          <p>Le coding c'est cool</p>
+        </div>
+        <div class="content jv"></div>
+        <div class="content 3d"></div>
+        <div class="content cd"></div>
+      </main>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
