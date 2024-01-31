@@ -14,6 +14,7 @@ const swiper = new Swiper(".swiper", {
 document.getElementById("sidebarButton").addEventListener("click", function () {
   console.log("clicked");
   document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("chevron").classList.toggle("rotate");
 });
 
 let axes = document.querySelectorAll(".tab");

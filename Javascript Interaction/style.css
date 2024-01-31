@@ -2,7 +2,7 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
   color: white;
-  transition: 0.5s;
+  /* transition: 0.5s; */
 }
 
 body,
@@ -41,23 +41,35 @@ input {
   display: none;
 }
 
-label {
+#chevron {
   z-index: 1;
   position: fixed;
   bottom: 0;
   left: 0;
   padding: 10px;
-  background-color: orange;
+  background-color: white;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-label span {
+#chevron span {
   color: black;
 }
 
+#chevron.rotate {
+  background-color: orange;
+}
+
+#chevron.rotate span {
+  transform-origin: center;
+  transform: rotate(180deg);
+  color: white;
+}
+
 .material-symbols-outlined {
-  font-variation-settings:
-  'wght' 700,
-  'opsz' 30
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .container {
@@ -77,30 +89,28 @@ label span {
 #sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-li {
-  padding: 10px 20px;
+#sidebar.open {
+  width: auto;
+  visibility: visible;
+}
+
+.tab {
+  padding: 15px 20px;
   font-weight: bold;
   color: black;
   text-wrap: pretty;
 }
 
-li:hover {
-  background-color: black;
-  color: white;
+.tab:hover {
+  background-color: #efefef;
   cursor: pointer;
 }
 
-#sidebar.open {
-  width: auto;
-  padding: 0 20px;
-  visibility: visible;
-}
-
 .tab-active {
-  background-color: orange;
-  color: white;
+  color: orange;
 }
 
 main {
