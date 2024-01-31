@@ -27,7 +27,7 @@
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
-        <div class="swiper-slide" style="background-color: red">
+        <div class="swiper-slide" id="slide1">
           <h2>Découvrez l'établissement</h2>
           <p>En vous inscrivant à notre JPO</p>
         </div>
@@ -43,9 +43,9 @@
     </div>
 
     <div class="container">
-      <aside id="sidebar">
+      <aside id="sidebar" class="open">
         <ul>
-          <li class="tab tab-cdi active">Coding & Digital Innovation</li>
+          <li class="tab tab-cdi tab-active">Coding & Digital Innovation</li>
           <li class="tab tab-cdeb">Communication Digitale & E-Business</li>
           <li class="tab tab-jv">Jeux-Vidéo</li>
           <li class="tab tab-3d">Animation 3D</li>
@@ -54,17 +54,26 @@
       </aside>
 
       <main>
-        <div class="content cdi active">
+        <div class="content active" id="cdi">
           <h2>Coding & Digital Innovation</h2>
           <p>Le coding c'est cool</p>
         </div>
-        <div class="content cdeb">
-          <h2>Coding & Digital Innovation</h2>
-          <p>Le coding c'est cool</p>
+        <div class="content" id="cdeb">
+          <h2>Communication Digitale & E-Business</h2>
+          <p>De la bonne daube</p>
         </div>
-        <div class="content jv"></div>
-        <div class="content 3d"></div>
-        <div class="content cd"></div>
+        <div class="content" id="jv">
+          <h2>Jeux Vidéos</h2>
+          <p>Construisez des jeux vidéos de A à Z en équipe</p>
+        </div>
+        <div class="content" id="3d">
+          <h2>Animation 3D</h2>
+          <p>Pour le cinéma de demain</p>
+        </div>
+        <div class="content" id="cd">
+          <h2>Création & Design</h2>
+          <p>Du papier (ou de l'écran) au concret</p>
+        </div>
       </main>
     </div>
 
