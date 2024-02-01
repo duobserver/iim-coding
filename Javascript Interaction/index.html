@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Axes IIM</title>
 
+    <link
+      rel="icon"
+      href="https://www.iim.fr/ecole-web/fav/favicon-32x32.png"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -22,22 +26,34 @@
       ><span class="material-symbols-outlined">chevron_right</span></label
     >
 
+    <a href="https://www.iim.fr/" id="iim">
+      <img src="https://www.iim.fr/ecole-web/wp-content/themes/iim/img/footer-iim.png" alt="iim">
+    </a>
+
     <!-- Slider main container -->
     <div class="swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
         <div class="swiper-slide" id="slide1">
-          <h2>Découvrez l'établissement</h2>
-          <p>En vous inscrivant à notre JPO</p>
+          <a href="formulaire.html">
+            <h3>JPO de l'IIM</h3>
+            <h2>Découvrez l'établissement</h2>
+          </a>
         </div>
-        <div class="swiper-slide" style="background-color: green">
-          <h2>Rencontrez nos étudiants</h2>
-          <p>En vous inscrivant à notre JPO</p>
+
+        <div class="swiper-slide" id="slide2">
+          <a href="formulaire.html">
+            <h3>JPO de l'IIM</h3>
+            <h2>Rencontrez nos étudiants</h2>
+          </a>
         </div>
-        <div class="swiper-slide" style="background-color: blue">
-          <h2>Participez à nos activités</h2>
-          <p>En vous inscrivant à notre JPO</p>
+
+        <div class="swiper-slide" id="slide3">
+          <a href="formulaire.html">
+            <h3>JPO de l'IIM</h3>
+            <h2>Participez à nos activités</h2>
+          </a>
         </div>
       </div>
     </div>
@@ -46,33 +62,45 @@
       <aside id="sidebar" class="open">
         <ul>
           <li class="tab tab-cdi tab-active">Coding & Digital Innovation</li>
-          <li class="tab tab-cdeb">Communication Digitale & E-Business</li>
-          <li class="tab tab-jv">Jeux-Vidéo</li>
           <li class="tab tab-3d">Animation 3D</li>
+          <li class="tab tab-jv">Jeux-Vidéo</li>
           <li class="tab tab-cd">Création & Design</li>
+          <li class="tab tab-cdeb">Communication Digitale & E-Business</li>
         </ul>
       </aside>
 
       <main>
         <div class="content active" id="cdi">
-          <h2>Coding & Digital Innovation</h2>
-          <p>Le coding c'est cool</p>
+          <h1>Coding & Digital Innovation</h1>
+          <h2>Des métiers essentiels dans la société de demain</h2>
+          <p>
+            La transformation digitale et les changements qu’elle implique sur
+            les consommateurs et les professionnels sont si nombreux que les
+            entreprises doivent adapter leurs systèmes d’information pour les
+            ouvrir aux plateformes web et mobiles et intégrer les dernières
+            évolutions telles que le cloud, les objets connectés, le big data,
+            l’intelligence artificielle ou le machine learning.
+          </p>
         </div>
-        <div class="content" id="cdeb">
-          <h2>Communication Digitale & E-Business</h2>
-          <p>De la bonne daube</p>
-        </div>
-        <div class="content" id="jv">
-          <h2>Jeux Vidéos</h2>
-          <p>Construisez des jeux vidéos de A à Z en équipe</p>
-        </div>
+
         <div class="content" id="3d">
-          <h2>Animation 3D</h2>
+          <h1>Animation 3D</h1>
           <p>Pour le cinéma de demain</p>
         </div>
+
+        <div class="content" id="jv">
+          <h1>Jeux Vidéos</h1>
+          <p>Construisez des jeux vidéos de A à Z en équipe</p>
+        </div>
+
         <div class="content" id="cd">
-          <h2>Création & Design</h2>
+          <h1>Création & Design</h1>
           <p>Du papier (ou de l'écran) au concret</p>
+        </div>
+
+        <div class="content" id="cdeb">
+          <h1>Communication Digitale & E-Business</h1>
+          <p>De la bonne daube</p>
         </div>
       </main>
     </div>

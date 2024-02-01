@@ -2,7 +2,7 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
   color: white;
-  /* transition: 0.5s; */
+  transition: 0.5s;
 }
 
 body,
@@ -20,6 +20,7 @@ body {
   height: 100px;
   grid-column: 1/-1;
   grid-row: 1;
+  border-bottom: 1px solid white;
 }
 
 .swiper-slide {
@@ -35,6 +36,37 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(iim.png);
   background-size: cover;
+  background-position-y: 50%;
+}
+
+#slide2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(2023.png);
+  background-size: cover;
+  background-position-y: 30%;
+}
+
+#slide3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(activities.png);
+  background-size: cover;
+  background-position-y: 50%;
+}
+
+a {
+  text-decoration: none;
+}
+
+#iim {
+  position: fixed;
+  z-index: 99;
+  top: 10px;
+  left: 10px;
+  height: 80px;
+}
+
+#iim img {
+  height: 100%;
 }
 
 input {
@@ -44,7 +76,7 @@ input {
 #chevron {
   z-index: 1;
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   padding: 10px;
   background-color: white;
@@ -84,6 +116,7 @@ input {
   overflow: hidden;
   background-color: white;
   visibility: hidden;
+  overflow: hidden;
 }
 
 #sidebar ul {
@@ -97,8 +130,12 @@ input {
   visibility: visible;
 }
 
-.tab {
+#sidebar.open .tab {
   padding: 15px 20px;
+}
+
+.tab {
+  padding: 15px 0;
   font-weight: bold;
   color: black;
   text-wrap: pretty;
@@ -125,4 +162,19 @@ main {
 
 main div:not(.active) {
   display: none;
+}
+
+h1 {
+  font-size: 4rem;
+  margin: 23px 0;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 13px 0;
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 0;
 }
