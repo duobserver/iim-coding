@@ -21,6 +21,8 @@
   </head>
 
   <body>
+    <!-- Structure HTML minimale *strictement* basée sur les consignes fournies -->
+
     <input type="button" id="sidebarButton" />
     <label for="sidebarButton" id="chevron" class="rotate"
       ><span class="material-symbols-outlined">chevron_right</span></label
@@ -58,19 +60,15 @@
       </div>
     </div>
 
-    <div class="container">
-      <aside id="sidebar" class="open">
-        <ul>
+        <ul id="sidebar" class="open">
           <li class="tab tab-cdi tab-active">Coding & Digital Innovation</li>
           <li class="tab tab-3d">Animation 3D</li>
           <li class="tab tab-jv">Jeux-Vidéo</li>
           <li class="tab tab-cd">Création & Design</li>
           <li class="tab tab-cdeb">Communication Digitale & E-Business</li>
         </ul>
-      </aside>
 
-      <main>
-        <div class="content active" id="cdi">
+        <div class="content active" id="cdi" style="background-color: black;">
           <h1>Coding & Digital Innovation</h1>
           <h2>Des métiers essentiels dans la société de demain</h2>
           <p>
@@ -85,7 +83,7 @@
 
         <div class="content" id="3d">
           <h1>Animation 3D</h1>
-          <p>Pour le cinéma de demain</p>
+          <h2>Pour le multimédia d'aujourd'hui et de demain</h2>
         </div>
 
         <div class="content" id="jv">
@@ -102,8 +100,6 @@
           <h1>Communication Digitale & E-Business</h1>
           <p>De la bonne daube</p>
         </div>
-      </main>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
