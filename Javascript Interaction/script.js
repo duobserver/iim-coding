@@ -1,6 +1,6 @@
 let axes = document.querySelectorAll(".tab");
 let contents = document.querySelectorAll(".content");
-let main = document.querySelector("main");
+let burger = document.querySelector("#programmes");
 
 // Paramétrage du carousel Swiper
 const swiper = new Swiper(".swiper", {
@@ -17,10 +17,8 @@ const swiper = new Swiper(".swiper", {
 });
 
 // Contrôle de la visibilité du menu burger
-document.getElementById("sidebarButton").addEventListener("click", function () {
-  console.log("clicked");
-  document.getElementById("sidebar").classList.toggle("open");
-  document.getElementById("chevron").classList.toggle("rotate");
+burger.addEventListener("click", function () {
+  burger.classList.toggle("open");
 });
 
 axes.forEach(function (item) {

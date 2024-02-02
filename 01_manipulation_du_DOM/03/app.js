@@ -15,7 +15,7 @@ let firstName = document.querySelector("#name");
 let secondName = document.querySelector("#second");
 let pseudo = document.querySelector("#pseudo");
 let age = document.querySelector("#age");
-// let country = document.querySelector("#country");
+let country = document.querySelector("#country");
 let email = document.querySelector("#email");
 let password = document.querySelector("#password");
 let passwordCheck = document.querySelector("#passwordcheck");
@@ -31,7 +31,7 @@ let passCheck = new RegExp(
 );
 
 //// running checklist
-form.addEventListener("submit", function (event) {
+myForm.addEventListener("submit", function (event) {
 
   // preventing suppression of inputs
   event.preventDefault();
@@ -55,7 +55,7 @@ form.addEventListener("submit", function (event) {
     firstName.classList.add("valid");
   }
 
-  
+  // checking second name length
   if (secondName.value.length < 2) {
     secondName.classList.remove("valid");
     secondName.classList.add("invalid");
@@ -68,6 +68,7 @@ form.addEventListener("submit", function (event) {
     secondName.classList.add("valid");
   }
 
+  // checking pseudo length
   if (pseudo.value.length < 6) {
     pseudo.classList.remove("valid");
     pseudo.classList.add("invalid");
@@ -80,6 +81,7 @@ form.addEventListener("submit", function (event) {
     pseudo.classList.add("valid");
   }
 
+  // checking age
   if (age.value < 18 || age.value > 70) {
     age.classList.remove("valid");
     age.classList.add("invalid");
@@ -92,17 +94,18 @@ form.addEventListener("submit", function (event) {
     age.classList.add("valid");
   }
 
-  // if (country.value == "select") {
-  //   country.classList.remove("valid");
-  //   country.classList.add("invalid");
-  //   errors.style.display = "block";
-  //   let li = document.createElement("li");
-  //   li.innerText = "Select a country";
-  //   errlist.appendChild(li);
-  // } else {
-  //   country.classList.remove("invalid");
-  //   country.classList.add("valid");
-  // }
+  // checking selected country
+  if (country.value == "select") {
+    country.classList.remove("valid");
+    country.classList.add("invalid");
+    errors.style.display = "block";
+    let li = document.createElement("li");
+    li.innerText = "Select a country";
+    errlist.appendChild(li);
+  } else {
+    country.classList.remove("invalid");
+    country.classList.add("valid");
+  }
 
   if (email.value == "") {
     email.classList.remove("valid");
