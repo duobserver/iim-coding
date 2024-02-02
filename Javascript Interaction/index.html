@@ -21,15 +21,16 @@
   </head>
 
   <body>
-    <!-- Structure HTML minimale *strictement* basée sur les consignes fournies -->
-
     <input type="button" id="sidebarButton" />
     <label for="sidebarButton" id="chevron" class="rotate"
       ><span class="material-symbols-outlined">chevron_right</span></label
     >
 
     <a href="https://www.iim.fr/" id="iim">
-      <img src="https://www.iim.fr/ecole-web/wp-content/themes/iim/img/footer-iim.png" alt="iim">
+      <img
+        src="https://www.iim.fr/ecole-web/wp-content/themes/iim/img/footer-iim.png"
+        alt="iim"
+      />
     </a>
 
     <!-- Slider main container -->
@@ -37,6 +38,7 @@
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
+        
         <div class="swiper-slide" id="slide1">
           <a href="formulaire.html">
             <h3>JPO de l'IIM</h3>
@@ -60,15 +62,19 @@
       </div>
     </div>
 
-        <ul id="sidebar" class="open">
+    <div class="container">
+      <aside id="sidebar" class="open">
+        <ul>
           <li class="tab tab-cdi tab-active">Coding & Digital Innovation</li>
-          <li class="tab tab-3d">Animation 3D</li>
+          <li class="tab tab-animation">Animation 3D</li>
           <li class="tab tab-jv">Jeux-Vidéo</li>
           <li class="tab tab-cd">Création & Design</li>
           <li class="tab tab-cdeb">Communication Digitale & E-Business</li>
         </ul>
+      </aside>
 
-        <div class="content active" id="cdi" style="background-color: black;">
+      <main>
+        <div class="content active" id="cdi">
           <h1>Coding & Digital Innovation</h1>
           <h2>Des métiers essentiels dans la société de demain</h2>
           <p>
@@ -81,25 +87,63 @@
           </p>
         </div>
 
-        <div class="content" id="3d">
+        <div class="content" id="animation">
           <h1>Animation 3D</h1>
           <h2>Pour le multimédia d'aujourd'hui et de demain</h2>
+          <p>
+            Intégrez l’école de l’animation 3D ! Les entreprises du secteur de
+            l’image de synthèse 3D et du cinéma d’animation produisent des
+            images de plus en plus étonnantes dans des secteurs d’activités qui
+            ne cessent de s’étendre grâce aux nombreuses innovations techniques.
+          </p>
         </div>
 
         <div class="content" id="jv">
           <h1>Jeux Vidéos</h1>
-          <p>Construisez des jeux vidéos de A à Z en équipe</p>
+          <h2>Construisez des jeux vidéos de A à Z</h2>
+          <p>
+            Pourquoi intégrer l’IIM, école du jeu vidéo ? Classée 4e école du
+            secteur par le Figaro ! Alliant créativité et innovation
+            technologique, le secteur du jeu vidéo est en plein essor, avec une
+            croissance et un chiffre d’affaires supérieurs à celui du cinéma.
+            Avec l’apparition de nouvelles plateformes (smartphones, réseaux
+            sociaux, réalité virtuelle et augmentée) et le développement du
+            digital (PSN, Xbox Live, TV interactive, Steam, cloud gaming,
+            e-sport), le jeu vidéo ne cesse de se réinventer pour séduire une
+            part toujours plus grande de joueurs et joueuses.
+          </p>
         </div>
 
         <div class="content" id="cd">
           <h1>Création & Design</h1>
-          <p>Du papier (ou de l'écran) au concret</p>
+          <h2>Du papier (ou de l'écran) au concret</h2>
+          <p>
+            Le digital transforme la façon dont les marques communiquent en même
+            temps qu’il crée de nouveaux supports et moyens d’interagir tels que
+            les interfaces sans contact, les objets connectés, la réalité
+            augmentée ou virtuelle. Avec l’évolution des codes visuels,
+            l’irruption de nouveaux usages et de nouveaux médias, il s’agit de
+            réinventer en permanence pour les créatifs les moyens de séduire et
+            toucher les usagers, clients ou joueurs pour leur faire vivre une
+            expérience.
+          </p>
         </div>
 
         <div class="content" id="cdeb">
           <h1>Communication Digitale & E-Business</h1>
-          <p>De la bonne daube</p>
+          <h2>Arpentez le monde du marketing</h2>
+          <p>
+            Nouvelles attentes des consommateurs, réseaux sociaux, explosion de
+            la vente en ligne, apparition de nouveaux services et de nouveaux
+            usages… La communication digitale est désormais partout. En moins de
+            20 ans, Internet a révolutionné l’économie mondiale et notre manière
+            de consommer. Tous les secteurs professionnels doivent intégrer
+            cette nouvelle donne et communiquer différemment. Ils font désormais
+            appel à des profils hybrides alliant business et technologies.
+          </p>
         </div>
+      </main>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>

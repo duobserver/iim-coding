@@ -36,7 +36,10 @@
       }
 
       input {
-        height: 20px;
+        height: 2em;
+      }
+
+      input:not(type="radio") {
         width: 40%;
       }
 
@@ -95,31 +98,37 @@
         <label for="email">Email</label>
         <input type="email" name="email" id="email" />
       </div>
-      
+
+      <div>
+        <p>Classe actuelle</p>
+        <input type="radio" id="premiere" name="classe" value="premiere" />
+        <label for="premiere">Première</label><br />
+
+        <input type="radio" id="terminale" name="classe" value="terminale" />
+        <label for="terminale">Terminale</label><br />
+
+        <input type="radio" id="bachelor" name="classe" value="bachelor" />
+        <label for="bachelor">BAC +3</label><br />
+
+        <input type="radio" id="master" name="classe" value="master" />
+        <label for="master">BAC +5</label>
+      </div>
+
       <div>
         <label for="classe">En classe de </label>
         <select name="classe" id="classe">
           <option value="null">...</option>
-          <option value="bac">T</option>
-          <option value="italy">Italy</option>
-          <option value="uk">United Kingdom</option>
-          <option value="germany">Germany</option>
-          <option value="spain">Spain</option>
+          <option value="premiere">Première</option>
+          <option value="terminale">Terminale</option>
+          <option value="bac1">BAC +1</option>
+          <option value="bac2">BAC +2</option>
+          <option value="bac3">BAC +3</option>
+          <option value="bac4">BAC +4</option>
+          <option value="bac5">BAC +5</option>
           <option value="usa">United States of America</option>
         </select>
       </div>
 
-      
-
-      <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
-      </div>
-
-      <div>
-        <label for="passwordcheck">Password Check</label>
-        <input type="password" name="passwordcheck" id="passwordcheck" />
-      </div>
       <button type="submit">Send</button>
     </form>
 
