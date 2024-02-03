@@ -2,7 +2,6 @@
 * {
     box-sizing: border-box;
     color: inherit;
-    background-color: inherit;
     font-family: "Prompt", Arial, Helvetica, sans-serif;
     transition-duration: 0.5s;
 }
@@ -16,10 +15,10 @@ html,
 body {
     margin: 0;
     padding: 0;
+    min-height: 100dvh;    
 }
 
 body {
-    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -66,14 +65,20 @@ header {
     background-position-y: 30%;
 }
 
+/* contenu principal */
+/* couvre 90% de la page */
+main {
+    height: 80%;
+}
+
 /* menu burger */
 /* couvre 10% de la page */
 nav {
     position: absolute;
     z-index: 1;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     color: black;
 }
 
@@ -87,8 +92,8 @@ nav {
 }
 
 .material-symbols-outlined {
-  font-size: 2rem;
-  font-weight: bold;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .links {
@@ -105,14 +110,18 @@ nav {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     list-style: none;
     overflow: hidden;
 }
 
 .tab {
+    height: 100%;
     text-align: center;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tab-active {
@@ -125,7 +134,7 @@ nav {
 }
 
 .programmes.open .title {
-    border-bottom: 1px solid black;
+    box-shadow: 0 8px 16px black;
 }
 
 .programmes.open span {
@@ -137,12 +146,6 @@ nav {
     visibility: visible;
 }
 
-/* contenu principal */
-/* couvre 80% de la page */
-main {
-    height: 80%;
-}
-
 /* articles sur les axes */
 article {
     height: 100%;
@@ -150,6 +153,7 @@ article {
 
 .content {
     height: 100%;
+    padding: 1.5rem 3rem;
     display: flex;
     flex-direction: column;
     background-position: center;
@@ -204,4 +208,25 @@ article {
             var(--darken-background)
         ),
         url("https://www.iim.fr/ecole-web/wp-content/uploads/2023/12/Etude-de-cas-Marketing-Contenu.jpg");
+}
+
+h1 {
+    font-size: 4rem;
+    margin: auto 0 23px 0;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 13px 0;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+p {
+    font-size: 1rem;
+    max-width: 65%;
+    text-wrap: pretty;
 }

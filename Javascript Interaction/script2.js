@@ -12,13 +12,21 @@ const swiper = new Swiper(".swiper", {
 // contrôle hauteur et visibilité du menu burger
 let main = document.querySelector("main");
 let burger = document.querySelector(".programmes");
-let title = document.querySelector(".title")
+let title = document.querySelector(".title");
 
 window.onload = function () {
-    let h = main.offsetHeight;
-    console.log(h)
-    burger.style.height = parseFloat(h) + "px";
+    navHeight();
 };
+
+window.onresize = function () {
+    navHeight();
+};
+
+function navHeight() {
+    let h = main.offsetHeight;
+    console.log(h);
+    burger.style.height = parseFloat(h) + "px";
+}
 
 title.addEventListener("click", function () {
     burger.classList.toggle("open");
@@ -58,5 +66,7 @@ tabs.forEach(function (item) {
         if (this.classList.contains("tab-cdeb")) {
             document.querySelector(".cdeb").classList.add("active");
         }
+
+        burger.classList.remove("open");
     });
 });
