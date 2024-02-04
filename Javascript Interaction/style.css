@@ -204,6 +204,7 @@ main {
   flex-direction: column;
   list-style: none;
   overflow: hidden;
+  background-color: transparent;
 }
 
 /* style des boutons/tabs pour afficher les articles sur les axes correspondants */
