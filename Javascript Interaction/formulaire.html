@@ -75,7 +75,7 @@
       <p class="titre">Études</p>
 
       <div>
-        <p>Classe actuelle</p>
+        <p>Niveau d'études actuel</p>
         <div class="inline">
           <input type="radio" id="premiere" name="classe" value="premiere" />
           <label for="premiere">Première</label>
@@ -124,13 +124,15 @@
       </div>
 
       <div class="inline">
-        <input type="checkbox" name="tos" id="tos" />
+        <input type="checkbox" name="tos" id="tos" onclick="tosCheck()" />
         <label for="passwordcheck"
           >J'accepte les conditions d'utilisation</label
         >
       </div>
 
-      <button type="submit">S'inscrire</button>
+      <div>
+        <button type="submit" id="valider"><p>S'inscrire</p></button>
+      </div>
     </form>
 
     <script src="formulaire.js"></script>

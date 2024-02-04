@@ -9,25 +9,52 @@
 
 :root {
   --border-radius: 40px;
+  --accent-color: #ee7f01;
 }
 
 body {
-  width: 80%;
-  margin: 80px auto;
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url("https://www.devinci.fr/wordpress/wp-content/uploads/2016/05/campus-pole-leonard-de-vinci.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 form {
+  width: 80%;
+  margin: 1rem;
   padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
   border: 1px solid grey;
   border-radius: var(--border-radius);
+}
+
+.titre {
+  flex: 0 0 100%;
 }
 
 .titre:not(:first-child) {
   border-top: 1px solid grey;
 }
 
-div {
-  width: 100%;
+p {
+  font-size: 1rem;
+}
+
+form > div {
+  flex: 0 0 100%;
   padding: 1rem;
 }
 
@@ -38,17 +65,24 @@ label {
 input {
   height: 2rem;
   border: 1px solid grey;
-  border-radius: calc(var(--border-radius) - 2rem);
 }
 
-input:not([type="radio"]):not([type="checkbox"]) {
-  width: 100%;
-  padding: 1rem;
+input[type="radio"], input[type="checkbox"] {
+  height: 1.5rem;
+  width: 1.5rem;
+  accent-color: var(--accent-color);
 }
 
 input:focus {
-  border: 2px solid #ee7f01;
+  border: 2px solid var(--accent-color);
   outline: none;
+}
+
+input:not([type="radio"]):not([type="checkbox"]),
+select {
+  width: 100%;
+  padding: 1rem;
+  border-radius: calc(var(--border-radius) - 2rem);
 }
 
 .inline {
@@ -58,20 +92,34 @@ input:focus {
 }
 
 button {
-  margin-left: 20px;
-  margin-bottom: 30px;
-  padding: 10px 32px;
+  width: 100%;
+  padding: 1rem 2rem;
   cursor: pointer;
+  border: none;
+  background-color: var(--accent-color);
+  border-radius: calc(var(--border-radius) - 2rem);
+}
+
+button:disabled {
+  background-color: lightgrey;
+}
+
+button:disabled:hover {
+  filter: none;
+  cursor: not-allowed;
+}
+
+button:hover {
+  filter: brightness(75%);
 }
 
 .valid {
-  border: 1px solid rgb(81, 150, 2);
-  background-color: rgba(113, 212, 0, 0.4);
+  border: 2px solid lightgreen;
 }
 
 .invalid {
-  border: 1px solid rgb(212, 42, 0);
-  background-color: rgba(212, 42, 0, 0.4);
+  border: 2px solid red;
+  color: red;
 }
 
 .notif-erreur {
@@ -90,4 +138,14 @@ button {
   padding: 16px 32px;
   margin-bottom: 20px;
   display: none;
+}
+
+@media only screen and (min-width: 960px) {
+  form > div {
+    flex: 0 0 50%;
+  }
+
+  div:last-child {
+    flex: 0 0 100%;
+  }
 }

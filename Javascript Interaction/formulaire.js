@@ -11,8 +11,11 @@ let adresse = document.querySelector("#adresse");
 let ville = document.querySelector("#ville");
 let code = document.querySelector("#codepostal");
 let pays = document.querySelector("#pays");
+let axes = document.querySelector("#axes");
 let password = document.querySelector("#password");
 let passwordCheck = document.querySelector("#passwordcheck");
+let tos = document.querySelector("#tos");
+let button = document.querySelector("#valider");
 
 // sélection des notifications
 let erreur = document.querySelector(".notif-erreur");
@@ -26,9 +29,19 @@ let nomCheck = /^[a-zA-Zéèàç\s-]*$/;
 let codeCheck = /^\d*$/;
 
 // ensemble de caractères obligatoires pour le mot de passe
-let passCheck = new RegExp(
-  "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$"
-);
+let passCheck = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
+
+window.onload = tosCheck();
+
+//// déblocage du bouton submit si le tos est accepté
+function tosCheck() {
+  if (tos.checked) {
+    console.log("checked");
+    button.disabled = false;
+  } else {
+    button.disabled = true;
+  }
+}
 
 //// vérification des champs
 formulaire.addEventListener("submit", function (event) {
@@ -132,6 +145,19 @@ formulaire.addEventListener("submit", function (event) {
   } else {
     pays.classList.remove("invalid");
     pays.classList.add("valid");
+  }
+
+  // vérification de l'axe sélectionné
+  if (axes.value == "select") {
+    axes.classList.remove("valid");
+    axes.classList.add("invalid");
+    erreur.style.display = "block";
+    let li = document.createElement("li");
+    li.innerText = "Veuillez sélectionner un axes préféré";
+    erreurList.appendChild(li);
+  } else {
+    axes.classList.remove("invalid");
+    axes.classList.add("valid");
   }
 
   // vérification de la longueur du mot de passe et des caractères obligatoires
