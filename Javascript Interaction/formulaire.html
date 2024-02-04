@@ -6,97 +6,66 @@
     <title>Inscription JPO</title>
 
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="icon"
+      href="https://www.iim.fr/ecole-web/fav/favicon-32x32.png"
     />
 
-    <style>
-      * {
-        font-size: 1rem;
-        font-family: sans-serif;
-        margin: 0;
-      }
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Prompt"
+    />
 
-      body {
-        width: 80%;
-        margin: 80px auto;
-      }
-
-      form {
-        border: 1px solid rgba(153, 153, 153, 0.6);
-      }
-
-      form > div {
-        margin: 30px 20px;
-      }
-
-      label {
-        display: block;
-        margin-bottom: 8px;
-      }
-
-      input {
-        height: 2em;
-      }
-
-      input:not(type="radio") {
-        width: 40%;
-      }
-
-      button {
-        margin-left: 20px;
-        margin-bottom: 30px;
-        padding: 10px 32px;
-        cursor: pointer;
-      }
-
-      .valid {
-        border: 1px solid rgb(81, 150, 2);
-        background-color: rgba(113, 212, 0, 0.4);
-      }
-
-      .invalid {
-        border: 1px solid rgb(212, 42, 0);
-        background-color: rgba(212, 42, 0, 0.4);
-      }
-
-      .messageError {
-        border: 1px solid rgb(212, 42, 0);
-        color: rgb(212, 42, 0);
-        background-color: rgba(212, 42, 0, 0.4);
-        padding: 16px 32px;
-        margin-bottom: 20px;
-        display: none;
-      }
-
-      .messageSuccess {
-        border: 1px solid rgb(81, 150, 2);
-        color: rgb(81, 150, 2);
-        background-color: rgba(81, 150, 2, 0.4);
-        padding: 16px 32px;
-        margin-bottom: 20px;
-        display: none;
-      }
-    </style>
+    <link rel="stylesheet" href="formulaire.css" />
   </head>
-  <body>
-    <div class="messageErreu"><ul></ul></div>
-    <div class="messageSucces">Formulaire envoyé</div>
 
-    <form action="" method="post" enctype="multipart/form-data" id="myForm">
+  <body>
+    <div class="notif-erreur"><ul></ul></div>
+    <div class="notif-succes">Formulaire envoyé</div>
+
+    <form action="" method="post" enctype="multipart/form-data" id="formulaire">
       <div>
         <label for="prenom">Prénom</label>
-        <input type="text" name="prenom" id="prenom" />
+        <input type="text" name="prenom" id="prenom" required/>
       </div>
 
       <div>
         <label for="nom">Nom</label>
-        <input type="text" name="nom" id="nom" />
+        <input type="text" name="nom" id="nom" required/>
       </div>
 
       <div>
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" />
+        <input type="email" name="email" id="email" required/>
+      </div>
+
+      <div>
+        <label for="adresse">Adresse</label>
+        <input type="text" name="adresse" id="adresse" required/>
+      </div>
+
+      <div>
+        <label for="ville">Ville</label>
+        <input type="text" name="ville" id="ville" required/>
+      </div>
+
+      <div>
+        <label for="codepostal">Code Postal</label>
+        <input type="text" name="codepostal" id="codepostal" required/>
+      </div>
+      
+      <div>
+        <label for="pays">Pays</label>
+        <select name="pays" id="pays">
+          <option value="null">Sélectionner</option>
+          <option value="france">France</option>
+          <option value="italie">Italie</option>
+          <option value="espagne">Espagne</option>
+          <option value="allemagne">Allemagne</option>
+          <option value="uk">Royaume-Uni</option>
+          <option value="belgique">Belgique</option>
+          <option value="suisse">Suisse</option>
+          <option value="suede">Suède</option>
+        </select>
       </div>
 
       <div>
@@ -115,23 +84,39 @@
       </div>
 
       <div>
-        <label for="classe">En classe de </label>
-        <select name="classe" id="classe">
-          <option value="null">...</option>
-          <option value="premiere">Première</option>
-          <option value="terminale">Terminale</option>
-          <option value="bac1">BAC +1</option>
-          <option value="bac2">BAC +2</option>
-          <option value="bac3">BAC +3</option>
-          <option value="bac4">BAC +4</option>
-          <option value="bac5">BAC +5</option>
-          <option value="usa">United States of America</option>
+        <label for="axes">Axe préféré</label>
+        <select name="axes" id="axes">
+          <option value="null">Sélectionner</option>
+          <option value="cdi">Coding & Digital Innovation</option>
+          <option value="ani">Animation 3D</option>
+          <option value="jv">Jeux Vidéo</option>
+          <option value="cd">Création & Design</option>
+          <option value="cdeb">Communication Digitale & e-business</option>
         </select>
+      </div>
+
+      <div>
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" id="password" />
+      </div>
+
+      <div>
+        <label for="passwordcheck"
+          >Vérification du mot de passe (ressaisir)</label
+        >
+        <input type="password" name="passwordcheck" id="passwordcheck" />
+      </div>
+
+      <div>
+        <input type="checkbox" name="tos" id="tos">
+        <label for="passwordcheck"
+          >J'accepte les conditions d'utilisation</label
+        >
       </div>
 
       <button type="submit">Send</button>
     </form>
 
-    <script src="app.js"></script>
+    <script src="formulaire.js"></script>
   </body>
 </html>

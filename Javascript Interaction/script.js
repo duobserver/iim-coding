@@ -1,12 +1,12 @@
 const swiper = new Swiper(".swiper", {
-    // Optional parameters
-    direction: "horizontal",
-    loop: true,
-    centeredSlides: true,
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-    },
+  // Optional parameters
+  direction: "horizontal",
+  loop: true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
 });
 
 // contrôle hauteur et visibilité du menu burger
@@ -16,34 +16,33 @@ let title = document.querySelector(".title");
 let main = document.querySelector("main");
 
 window.onload = function () {
-    navHeight();
+  navHeight();
 };
 
 window.onresize = function () {
-    navHeight();
+  navHeight();
 };
 
 function navHeight() {
-    if (window.innerWidth < 960) {
-        contents.forEach(function (item) {
-            item.style.paddingTop = parseFloat(title.offsetHeight) + "px";
-        });
+  if (window.innerWidth < 960) {
+    contents.forEach(function (item) {
+      item.style.paddingTop = parseFloat(title.offsetHeight) + "px";
+    });
 
-        let headerHeight = header.offsetHeight;
-        console.log(headerHeight);
-        burger.style.height =
-            parseFloat(window.innerHeight - headerHeight) + "px";
-    } else {
-        contents.forEach(function (item) {
-            item.style.paddingTop = "";
-        });
+    let headerHeight = header.offsetHeight;
+    console.log(headerHeight);
+    burger.style.height = parseFloat(window.innerHeight - headerHeight) + "px";
+  } else {
+    contents.forEach(function (item) {
+      item.style.paddingTop = "";
+    });
 
-        burger.style.height = "";
-    }
+    burger.style.height = "";
+  }
 }
 
 title.addEventListener("click", function () {
-    burger.classList.toggle("open");
+  burger.classList.toggle("open");
 });
 
 // contrôle des pages des programmes
@@ -51,36 +50,36 @@ let tabs = document.querySelectorAll(".tab");
 let contents = document.querySelectorAll(".content");
 
 tabs.forEach(function (item) {
-    item.addEventListener("click", function () {
-        tabs.forEach(function (item) {
-            item.classList.remove("tab-active");
-        });
-        contents.forEach(function (item) {
-            item.classList.remove("active");
-        });
-
-        this.classList.add("tab-active");
-
-        if (this.classList.contains("tab-cdi")) {
-            document.querySelector(".cdi").classList.add("active");
-        }
-
-        if (this.classList.contains("tab-an")) {
-            document.querySelector(".an").classList.add("active");
-        }
-
-        if (this.classList.contains("tab-jv")) {
-            document.querySelector(".jv").classList.add("active");
-        }
-
-        if (this.classList.contains("tab-cd")) {
-            document.querySelector(".cd").classList.add("active");
-        }
-
-        if (this.classList.contains("tab-cdeb")) {
-            document.querySelector(".cdeb").classList.add("active");
-        }
-
-        burger.classList.remove("open");
+  item.addEventListener("click", function () {
+    tabs.forEach(function (item) {
+      item.classList.remove("tab-active");
     });
+    contents.forEach(function (item) {
+      item.classList.remove("active");
+    });
+
+    this.classList.add("tab-active");
+
+    if (this.classList.contains("tab-cdi")) {
+      document.querySelector(".cdi").classList.add("active");
+    }
+
+    if (this.classList.contains("tab-an")) {
+      document.querySelector(".an").classList.add("active");
+    }
+
+    if (this.classList.contains("tab-jv")) {
+      document.querySelector(".jv").classList.add("active");
+    }
+
+    if (this.classList.contains("tab-cd")) {
+      document.querySelector(".cd").classList.add("active");
+    }
+
+    if (this.classList.contains("tab-cdeb")) {
+      document.querySelector(".cdeb").classList.add("active");
+    }
+
+    burger.classList.remove("open");
+  });
 });
