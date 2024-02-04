@@ -1,9 +1,8 @@
-//// déclaration des variables
-
-// sélection du formulaire entier
+// déclaration des variables
+// ciblage du formulaire entier
 let formulaire = document.querySelector("#formulaire");
 
-// sélection des champs
+// ciblage des champs du formulaire
 let prenom = document.querySelector("#prenom");
 let nom = document.querySelector("#nom");
 let email = document.querySelector("#email");
@@ -11,13 +10,16 @@ let adresse = document.querySelector("#adresse");
 let ville = document.querySelector("#ville");
 let code = document.querySelector("#codepostal");
 let pays = document.querySelector("#pays");
+let etudes = document.querySelectorAll("#classe");
 let axes = document.querySelector("#axes");
 let password = document.querySelector("#password");
 let passwordCheck = document.querySelector("#passwordcheck");
 let tos = document.querySelector("#tos");
 let button = document.querySelector("#valider");
 
-// sélection des notifications
+console.log(etudes);
+
+// ciblage des blocs de notification
 let erreur = document.querySelector(".notif-erreur");
 let erreurList = document.querySelector(".notif-erreur ul");
 let succes = document.querySelector(".notif-succes");
@@ -33,7 +35,7 @@ let passCheck = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
 
 window.onload = tosCheck();
 
-//// déblocage du bouton submit si le tos est accepté
+// déblocage du bouton de validation si les conditions d'utilisation/tos sont acceptés
 function tosCheck() {
   if (tos.checked) {
     console.log("checked");
@@ -43,13 +45,13 @@ function tosCheck() {
   }
 }
 
-//// vérification des champs
+// vérification des champs
 formulaire.addEventListener("submit", function (event) {
   // sauvegarde des champs après envoi
   event.preventDefault();
   console.log("formulaire envoyé");
 
-  // purge de la liste d'erreurs
+  // purge de la liste des erreurs
   document.querySelectorAll(".notif-erreur li").forEach(function (item) {
     item.remove();
   });
@@ -147,13 +149,30 @@ formulaire.addEventListener("submit", function (event) {
     pays.classList.add("valid");
   }
 
+  // vérification si un niveau d'études est sélectionné
+  let counter = 0;
+
+  etudes.forEach(function (item) {
+    if (item.checked) {
+      counter++;
+    }
+  });
+
+  console.log(counter);
+
+  if (counter == 0) {
+    let li = document.createElement("li");
+    li.innerText = "Veuillez sélectionner un niveau d'études actuel";
+    erreurList.appendChild(li);
+  }
+
   // vérification de l'axe sélectionné
   if (axes.value == "select") {
     axes.classList.remove("valid");
     axes.classList.add("invalid");
     erreur.style.display = "block";
     let li = document.createElement("li");
-    li.innerText = "Veuillez sélectionner un axes préféré";
+    li.innerText = "Veuillez sélectionner un axe préféré";
     erreurList.appendChild(li);
   } else {
     axes.classList.remove("invalid");
@@ -187,6 +206,7 @@ formulaire.addEventListener("submit", function (event) {
     passwordCheck.classList.add("valid");
   }
 
+  // affichage du résultat final (succès ou erreur)
   if (document.querySelectorAll(".notif-erreur ul li").length == 0) {
     succes.style.display = "block";
     formulaire.style.display = "none";

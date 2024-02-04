@@ -19,9 +19,13 @@
   </head>
 
   <body>
+    <!-- blocs de notification pour afficher l'état du formulaire -->
     <div class="notif-erreur"><ul></ul></div>
-    <div class="notif-succes">Votre inscription a été envoyée avec succès. Merci et à bientôt 👋</div>
+    <div class="notif-succes">
+      Votre inscription a été envoyée avec succès. Merci et à bientôt 👋
+    </div>
 
+    <!-- formulaire d'inscription -->
     <form action="" method="post" enctype="multipart/form-data" id="formulaire">
       <h1>Formulaire d'inscription à la Journée Portes Ouvertes</h1>
       <p class="titre">Informations personnelles</p>
@@ -78,22 +82,22 @@
       <div>
         <p>Niveau d'études actuel</p>
         <div class="inline">
-          <input type="radio" id="premiere" name="classe" value="premiere" />
+          <input type="radio" id="premiere" classe="classe" value="premiere" />
           <label for="premiere">Première</label>
         </div>
 
         <div class="inline">
-          <input type="radio" id="terminale" name="classe" value="terminale" />
+          <input type="radio" id="terminale" classe="classe" value="terminale" />
           <label for="terminale">Terminale</label>
         </div>
 
         <div class="inline">
-          <input type="radio" id="bachelor" name="classe" value="bachelor" />
+          <input type="radio" id="bachelor" classe="classe" value="bachelor" />
           <label for="bachelor">BAC +3</label>
         </div>
 
         <div class="inline">
-          <input type="radio" id="master" name="classe" value="master" />
+          <input type="radio" id="master" classe="classe" value="master" />
           <label for="master">BAC +5</label>
         </div>
       </div>
@@ -114,14 +118,19 @@
 
       <div>
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" />
+        <input type="password" name="password" id="password" required />
       </div>
 
       <div>
         <label for="passwordcheck"
           >Vérification du mot de passe (ressaisir)</label
         >
-        <input type="password" name="passwordcheck" id="passwordcheck" />
+        <input
+          type="password"
+          name="passwordcheck"
+          id="passwordcheck"
+          required
+        />
       </div>
 
       <div class="inline">

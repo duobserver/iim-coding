@@ -1,4 +1,4 @@
-/* propriétés générales */
+/* propriétés globales */
 * {
   box-sizing: border-box;
   color: inherit;
@@ -6,11 +6,16 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  background-color: inherit;
 }
 
+/* variables globales */
 :root {
   --darken-background: rgba(0, 0, 0, 0.6);
   --accent-color: #ee7f01;
+  --nav-background: white;
+  --nav-text: black;
+  --hover-color: #efefef;
 }
 
 /* style html et body */
@@ -20,26 +25,53 @@ body {
   padding: 0;
 }
 
+/* dimensions de base du body et placement du contenu en colonne */
 body {
   height: 100dvh;
   display: flex;
   flex-direction: column;
-
   background-color: black;
 }
 
-/* carousel jpo */
+/* style du bouton contrôlant le dark mode */
+#darkmode {
+  display: none;
+}
+
+/* position, dimension et aspect du bouton */
+#darkmodeLabel {
+  position: fixed;
+  width: auto;
+  height: auto;
+  bottom: 0;
+  right: 0;
+  background-color: var(--nav-background);
+  color: var(--nav-text);
+  padding: 1rem;
+  z-index: 99;
+  border-radius: 2rem 0 0 0;
+}
+
+/* style des icônes du bouton darkmode */
+#darkmodeLabel span {
+  font-size: 4rem;
+}
+
+/* carrousel jpo */
 /* couvre 20% de la page */
 header {
   flex: 1 0 20%;
   color: white;
+  background-color: transparent;
 }
 
+/* dimension du carrousel */
 .swiper {
   width: 100%;
   height: 100%;
 }
 
+/* centrage du contenu des slides */
 .swiper-slide {
   display: flex;
   flex-direction: column;
@@ -52,13 +84,14 @@ header {
   text-align: center;
 }
 
+/* style des liens/ancres */
 a {
   width: fit-content;
   padding: 0 2rem;
   margin: 1rem 0;
   text-decoration: none;
   background-color: var(--accent-color);
-  border-radius: 32px;
+  border-radius: 2rem;
 }
 
 a:hover,
@@ -67,6 +100,7 @@ button:hover {
   filter: brightness(75%);
 }
 
+/* image de fond personnalisée pour chaque slide */
 #slide1 {
   background-image: linear-gradient(
       var(--darken-background),
@@ -101,34 +135,40 @@ button:hover {
 /* couvre 80% de la page */
 main {
   flex: 1 0 80%;
+  background-color: transparent;
 }
 
 /* menu burger */
-/* couvre 10% de la page */
 .programmes {
   position: absolute;
   z-index: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
-  color: black;
+  color: var(--nav-text);
 }
 
+.programmes:hover {
+  cursor: pointer;
+}
+
+/* style de la zone de titre du burger */
 .title {
   height: auto;
   padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: var(--nav-background);
 }
 
+/* style et comportement de l'icône du burger (créée manuellement) */
 .burger-icone div {
   height: 5px;
   width: 40px;
   margin: 5px;
   border-radius: 5px;
-  background-color: black;
+  background-color: var(--nav-text);
   opacity: 100%;
   transition: all 0.5s;
 }
@@ -145,14 +185,16 @@ main {
   transform: translateY(-10px) rotate(-45deg);
 }
 
+/* style du menu des axes (en colonne)(largeur écran < 960px) */
 .links {
   height: 0;
-  background-color: white;
+  background-color: var(--nav-background);
   visibility: hidden;
   box-shadow: 0 5px 10px 0 gray inset;
   transition: 0.5s;
 }
 
+/* style de la liste des axes (en colonne)(largeur écran < 960px) */
 .links ul {
   width: 100%;
   height: 100%;
@@ -164,6 +206,7 @@ main {
   overflow: hidden;
 }
 
+/* style des boutons/tabs pour afficher les articles sur les axes correspondants */
 .tab {
   flex: 1 1 0;
   text-align: center;
@@ -173,15 +216,18 @@ main {
   justify-content: center;
 }
 
+/* style du tab actif */
 .tab-active {
   color: var(--accent-color);
 }
 
+/* style du tab si la souris est dessus */
 .tab:hover {
-  background-color: #efefef;
+  background-color: var(--hover-color);
   cursor: pointer;
 }
 
+/* style du menu burger s'il est ouvert (mode colonne)(largeur écran < 960px) */
 .programmes.open span {
   rotate: 90deg;
 }
@@ -194,8 +240,10 @@ main {
 /* articles sur les axes */
 article {
   height: 100%;
+  background-color: transparent;
 }
 
+/* style global des articles */
 .content {
   height: 100%;
   padding: 1.5rem 3rem;
@@ -208,10 +256,12 @@ article {
   color: white;
 }
 
+/* le tab sélectionné affiche l'article correspondant et cache les autres */
 .content:not(.active) {
   display: none;
 }
 
+/* style des zones de texte */
 h1 {
   font-size: 4rem;
 }
@@ -228,6 +278,7 @@ p {
   font-size: 1rem;
 }
 
+/* image de fond personnalisée pour chaque article */
 .cdi {
   background-image: linear-gradient(
       var(--darken-background),
@@ -268,6 +319,7 @@ p {
     url("https://www.iim.fr/ecole-web/wp-content/uploads/2023/12/Etude-de-cas-Marketing-Contenu.jpg");
 }
 
+/* style des éléments lorsque la largeur de l'écran est inférieure à 960px */
 @media only screen and (min-width: 960px) {
   .swiper-slide {
     flex-direction: row;

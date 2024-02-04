@@ -1,3 +1,4 @@
+/* propriétés globales */
 * {
   box-sizing: border-box;
   color: inherit;
@@ -7,11 +8,18 @@
   user-select: none; /* Standard syntax */
 }
 
+/* variables globales */
 :root {
   --border-radius: 40px;
   --accent-color: #ee7f01;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* dimensions du body et centrage du contenu */
 body {
   margin: 0;
   padding: 2rem 0;
@@ -21,16 +29,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background-image: linear-gradient(
-      rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0.6)
-    ),
+  /* image de fond personnalisée */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("https://www.devinci.fr/wordpress/wp-content/uploads/2016/05/campus-pole-leonard-de-vinci.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+/* dimensions du formulaire et organisation des inputs */
 form {
   width: 80%;
   margin: 0;
@@ -42,19 +49,18 @@ form {
   border-radius: var(--border-radius);
 }
 
+/* style du premier titre */
 h1 {
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
 }
 
+/* style des titres des sections */
 .titre {
   padding: 0.5rem;
   flex: 0 0 100%;
   font-weight: bold;
-}
-
-.titre:not(:first-child) {
   border-top: 1px solid grey;
 }
 
@@ -62,6 +68,7 @@ p {
   font-size: 1rem;
 }
 
+/* dimensions des zones d'input (largeur écran < 960px) */
 form > div {
   flex: 0 0 100%;
   padding: 1rem;
@@ -71,22 +78,27 @@ label {
   display: block;
 }
 
+/* style des inputs */
 input {
   height: 2rem;
   border: 1px solid grey;
 }
 
-input[type="radio"], input[type="checkbox"] {
+/* style spécifiques pour les radio et les checkbox */
+input[type="radio"],
+input[type="checkbox"] {
   height: 1.5rem;
   width: 1.5rem;
   accent-color: var(--accent-color);
 }
 
+/* style du input actif */
 input:focus {
   border: 2px solid var(--accent-color);
   outline: none;
 }
 
+/* style des inputs autres que les radio et les checkbox (+ menus déroulants) */
 input:not([type="radio"]):not([type="checkbox"]),
 select {
   width: 100%;
@@ -94,12 +106,14 @@ select {
   border-radius: calc(var(--border-radius) - 2rem);
 }
 
+/* alignement des labels avec les radio et les checkbox */
 .inline {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
+/* style du bouton de validation */
 button {
   width: 100%;
   padding: 1rem 2rem;
@@ -113,28 +127,34 @@ button p {
   font-weight: bold;
 }
 
+/* style du bouton s'il est désactivé */
 button:disabled {
   background-color: lightgrey;
 }
 
+/* style du curseur si le bouton est désactivé */
 button:disabled:hover {
   filter: none;
   cursor: not-allowed;
 }
 
+/* style du bouton si le curseur le survole */
 button:hover {
   filter: brightness(75%);
 }
 
+/* style des champs valides */
 .valid {
   border: 2px solid lightgreen;
 }
 
+/* style des champs invalides */
 .invalid {
   border: 2px solid red;
   color: red;
 }
 
+/* style de la notification d'erreur */
 .notif-erreur {
   width: 80%;
   border: 2px solid red;
@@ -145,6 +165,7 @@ button:hover {
   display: none;
 }
 
+/* style de la notification de confirmation */
 .notif-succes {
   width: 80%;
   border: 2px solid lightgreen;
@@ -156,6 +177,7 @@ button:hover {
   display: none;
 }
 
+/* style des éléments lorsque la largeur de l'écran est inférieure à 960px */
 @media only screen and (min-width: 960px) {
   form > div {
     flex: 0 0 50%;

@@ -17,12 +17,25 @@
 
     <link
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+
+    <link
+      rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Prompt"
     />
 
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Bouton pour contrôler le mode sombre -->
+    <input type="checkbox" id="darkmode" onclick="darkMode()" />
+    <label for="darkmode" id="darkmodeLabel">
+      <span class="material-symbols-outlined" id="turnOn"> dark_mode </span>
+      <span class="material-symbols-outlined" id="turnOff"> light_mode </span>
+    </label>
+
+    <!-- Carousel de la JPO -->
     <header>
       <!-- Slider main container -->
       <div class="swiper">
@@ -31,6 +44,7 @@
           <!-- Slides -->
 
           <div class="swiper-slide" id="slide1">
+            <!-- Texte + lien vers le formulaire d'inscription -->
             <h3>Découvrez l'établissement</h3>
             <a href="formulaire.html"><p>S'inscrire à la JPO</p></a>
           </div>
@@ -48,7 +62,9 @@
       </div>
     </header>
 
+    <!-- Contenu principal (tabs + description) -->
     <main>
+      <!-- Barre de navigation avec les tabs -->
       <nav class="programmes">
         <div class="title">
           <h3>Programmes</h3>
@@ -69,6 +85,7 @@
         </div>
       </nav>
 
+      <!-- Espace pour afficher les articles sur les axes -->
       <article>
         <div class="content cdi active">
           <h1>Coding & Digital Innovation</h1>
