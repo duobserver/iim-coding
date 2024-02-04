@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inscription JPO</title>
+    <titre>Inscription JPO</titre>
 
     <link
       rel="icon"
@@ -23,40 +23,44 @@
     <div class="notif-succes">Formulaire envoyé</div>
 
     <form action="" method="post" enctype="multipart/form-data" id="formulaire">
+      <p class="titre">Informations personnelles</p>
+
       <div>
         <label for="prenom">Prénom</label>
-        <input type="text" name="prenom" id="prenom" required/>
+        <input type="text" name="prenom" id="prenom" required />
       </div>
 
       <div>
         <label for="nom">Nom</label>
-        <input type="text" name="nom" id="nom" required/>
+        <input type="text" name="nom" id="nom" required />
       </div>
+
+      <p class="titre">Coordonnées</p>
 
       <div>
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" required/>
+        <input type="email" name="email" id="email" required />
       </div>
 
       <div>
         <label for="adresse">Adresse</label>
-        <input type="text" name="adresse" id="adresse" required/>
+        <input type="text" name="adresse" id="adresse" required />
       </div>
 
       <div>
         <label for="ville">Ville</label>
-        <input type="text" name="ville" id="ville" required/>
+        <input type="text" name="ville" id="ville" required />
       </div>
 
       <div>
         <label for="codepostal">Code Postal</label>
-        <input type="text" name="codepostal" id="codepostal" required/>
+        <input type="text" name="codepostal" id="codepostal" required />
       </div>
-      
+
       <div>
         <label for="pays">Pays</label>
         <select name="pays" id="pays">
-          <option value="null">Sélectionner</option>
+          <option value="select">Sélectionner</option>
           <option value="france">France</option>
           <option value="italie">Italie</option>
           <option value="espagne">Espagne</option>
@@ -68,19 +72,29 @@
         </select>
       </div>
 
+      <p class="titre">Études</p>
+
       <div>
         <p>Classe actuelle</p>
-        <input type="radio" id="premiere" name="classe" value="premiere" />
-        <label for="premiere">Première</label><br />
+        <div class="inline">
+          <input type="radio" id="premiere" name="classe" value="premiere" />
+          <label for="premiere">Première</label>
+        </div>
 
-        <input type="radio" id="terminale" name="classe" value="terminale" />
-        <label for="terminale">Terminale</label><br />
+        <div class="inline">
+          <input type="radio" id="terminale" name="classe" value="terminale" />
+          <label for="terminale">Terminale</label>
+        </div>
 
-        <input type="radio" id="bachelor" name="classe" value="bachelor" />
-        <label for="bachelor">BAC +3</label><br />
+        <div class="inline">
+          <input type="radio" id="bachelor" name="classe" value="bachelor" />
+          <label for="bachelor">BAC +3</label>
+        </div>
 
-        <input type="radio" id="master" name="classe" value="master" />
-        <label for="master">BAC +5</label>
+        <div class="inline">
+          <input type="radio" id="master" name="classe" value="master" />
+          <label for="master">BAC +5</label>
+        </div>
       </div>
 
       <div>
@@ -95,6 +109,8 @@
         </select>
       </div>
 
+      <p class="titre">Sécurité</p>
+
       <div>
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password" />
@@ -107,14 +123,14 @@
         <input type="password" name="passwordcheck" id="passwordcheck" />
       </div>
 
-      <div>
-        <input type="checkbox" name="tos" id="tos">
+      <div class="inline">
+        <input type="checkbox" name="tos" id="tos" />
         <label for="passwordcheck"
           >J'accepte les conditions d'utilisation</label
         >
       </div>
 
-      <button type="submit">Send</button>
+      <button type="submit">S'inscrire</button>
     </form>
 
     <script src="formulaire.js"></script>

@@ -292,7 +292,7 @@ p {
     padding: 16px 0;
   }
 
-  .article p {
+  .content > p {
     max-width: 75%;
   }
 }

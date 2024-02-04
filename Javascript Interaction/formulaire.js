@@ -7,96 +7,148 @@ let formulaire = document.querySelector("#formulaire");
 let prenom = document.querySelector("#prenom");
 let nom = document.querySelector("#nom");
 let email = document.querySelector("#email");
-let adresse = document.querySelector("#adress");
+let adresse = document.querySelector("#adresse");
 let ville = document.querySelector("#ville");
+let code = document.querySelector("#codepostal");
+let pays = document.querySelector("#pays");
 let password = document.querySelector("#password");
 let passwordCheck = document.querySelector("#passwordcheck");
 
-// selecting result panels
+// sélection des notifications
 let erreur = document.querySelector(".notif-erreur");
 let erreurList = document.querySelector(".notif-erreur ul");
 let succes = document.querySelector(".notif-succes");
 
-// creating allowed characters registry for password
+// ensemble de caractères autorisés pour le prénom et le nom
+let nomCheck = /^[a-zA-Zéèàç\s-]*$/;
+
+// ensemble de caractères autorisés pour le code postal
+let codeCheck = /^\d*$/;
+
+// ensemble de caractères obligatoires pour le mot de passe
 let passCheck = new RegExp(
-  "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
+  "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$"
 );
 
-//// running checklist
+//// vérification des champs
 formulaire.addEventListener("submit", function (event) {
-  // preventing suppression of inputs
+  // sauvegarde des champs après envoi
   event.preventDefault();
-  console.log("Form has been sent");
+  console.log("formulaire envoyé");
 
-  // deleting error list
-  document.querySelectorAll(".messageError li").forEach(function (item) {
+  // purge de la liste d'erreurs
+  document.querySelectorAll(".notif-erreur li").forEach(function (item) {
     item.remove();
   });
 
-  // checking first name length
-  if (prenom.value.length < 2) {
+  // vérification de la longueur du prénom et des caractères autorisés
+  if (prenom.value.length < 2 || nomCheck.test(prenom.value) == false) {
     prenom.classList.remove("valid");
     prenom.classList.add("invalid");
-    erreur.style.display = "block";
     let li = document.createElement("li");
-    li.innerText = "First name must contain at least 2 characters";
+    li.innerText =
+      'Votre prénom doit contenir au moins 2 caractères autorisés (A-Z, *apostrophe*, "-", "é", "è", "à", "ç", " ")';
     erreurList.appendChild(li);
   } else {
     prenom.classList.remove("invalid");
     prenom.classList.add("valid");
   }
 
-  // checking second name length
-  if (nom.value.length < 2) {
+  // vérification de la longueur du nom de famille et des caractères autorisés
+  if (nom.value.length < 2 || nomCheck.test(prenom.value) == false) {
     nom.classList.remove("valid");
     nom.classList.add("invalid");
     erreur.style.display = "block";
     let li = document.createElement("li");
-    li.innerText = "Second name name must contain at least 2 characters";
+    li.innerText =
+      'Votre nom de famille doit contenir au moins 2 caractères autorisés (A-Z, *apostrophe*, "-", "é", "è", "à", "ç", " ")';
     erreurList.appendChild(li);
   } else {
     nom.classList.remove("invalid");
     nom.classList.add("valid");
   }
 
-  // checking selected country
-  if (country.value == "select") {
-    country.classList.remove("valid");
-    country.classList.add("invalid");
-    erreur.style.display = "block";
-    let li = document.createElement("li");
-    li.innerText = "Select a country";
-    erreurList.appendChild(li);
-  } else {
-    country.classList.remove("invalid");
-    country.classList.add("valid");
-  }
-
-  if (email.value == "") {
+  // (la vérification de l'email est intégrée au navigateur)
+  if (email.value == "" || email.value.includes("@") == false) {
     email.classList.remove("valid");
     email.classList.add("invalid");
     erreur.style.display = "block";
     let li = document.createElement("li");
-    li.innerText = "Insert your email adress";
+    li.innerText = 'Votre email doit contenir un caractère "@"';
     erreurList.appendChild(li);
   } else {
     email.classList.remove("invalid");
     email.classList.add("valid");
   }
 
-  if (password.value.length < 10 || passCheck.test(password.value) == false) {
+  // vérification de la longueur de l'adresse
+  if (adresse.value.length < 2) {
+    adresse.classList.remove("valid");
+    adresse.classList.add("invalid");
+    erreur.style.display = "block";
+    let li = document.createElement("li");
+    li.innerText = "Votre adresse doit contenir au moins 2 caractères";
+    erreurList.appendChild(li);
+  } else {
+    adresse.classList.remove("invalid");
+    adresse.classList.add("valid");
+  }
+
+  // vérification de la longueur de la ville
+  if (ville.value.length < 2) {
+    ville.classList.remove("valid");
+    ville.classList.add("invalid");
+    erreur.style.display = "block";
+    let li = document.createElement("li");
+    li.innerText = "Le nom de votre ville doit contenir au moins 2 caractères";
+    erreurList.appendChild(li);
+  } else {
+    ville.classList.remove("invalid");
+    ville.classList.add("valid");
+  }
+
+  // vérification de la longueur du code postal
+  if (code.value.length != 5 || codeCheck.test(code.value) == false) {
+    console.log(code.value.length);
+    code.classList.remove("valid");
+    code.classList.add("invalid");
+    erreur.style.display = "block";
+    let li = document.createElement("li");
+    li.innerText = "Votre code postal doit contenir 5 chiffres";
+    erreurList.appendChild(li);
+  } else {
+    code.classList.remove("invalid");
+    code.classList.add("valid");
+  }
+
+  // vérification du pays sélectionné
+  if (pays.value == "select") {
+    pays.classList.remove("valid");
+    pays.classList.add("invalid");
+    erreur.style.display = "block";
+    let li = document.createElement("li");
+    li.innerText = "Veuillez sélectionner un pays";
+    erreurList.appendChild(li);
+  } else {
+    pays.classList.remove("invalid");
+    pays.classList.add("valid");
+  }
+
+  // vérification de la longueur du mot de passe et des caractères obligatoires
+  if (password.value.length < 6 || passCheck.test(password.value) == false) {
     password.classList.remove("valid");
     password.classList.add("invalid");
     erreur.style.display = "block";
     let li = document.createElement("li");
     li.innerText =
-      "Password must contains at least 10 characters, including lowercase, uppercase, numbers and special characterss";
+      "Votre mot de pass doit contenir au moins 6 caractères dont des minuscules (a-z), des majuscules (A-Z) et des chiffres (0-9)";
     erreurList.appendChild(li);
   } else {
     password.classList.remove("invalid");
     password.classList.add("valid");
   }
 
+  // double vérification du mot de passe
   if (password.value != passwordCheck.value) {
     passwordCheck.classList.remove("valid");
     passwordCheck.classList.add("invalid");
@@ -109,8 +161,10 @@ formulaire.addEventListener("submit", function (event) {
     passwordCheck.classList.add("valid");
   }
 
-  if (document.querySelectorAll(".messageError ul li").length == 0) {
+  if (document.querySelectorAll(".notif-erreur ul li").length == 0) {
     succes.style.display = "block";
-    // formulaire.reset();
+    formulaire.reset();
+  } else {
+    erreur.style.display = "block";
   }
 });
