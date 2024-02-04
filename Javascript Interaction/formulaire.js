@@ -167,7 +167,7 @@ formulaire.addEventListener("submit", function (event) {
     erreur.style.display = "block";
     let li = document.createElement("li");
     li.innerText =
-      "Votre mot de pass doit contenir au moins 6 caractères dont des minuscules (a-z), des majuscules (A-Z) et des chiffres (0-9)";
+      "Votre mot de passe doit contenir au moins 6 caractères dont des minuscules (a-z), des majuscules (A-Z) et des chiffres (0-9)";
     erreurList.appendChild(li);
   } else {
     password.classList.remove("invalid");
@@ -180,7 +180,7 @@ formulaire.addEventListener("submit", function (event) {
     passwordCheck.classList.add("invalid");
     erreur.style.display = "block";
     let li = document.createElement("li");
-    li.innerText = "Double check password isn't the same as original password";
+    li.innerText = "Veuillez ressaisir votre mot de passe correctement";
     erreurList.appendChild(li);
   } else {
     passwordCheck.classList.remove("invalid");
@@ -189,6 +189,8 @@ formulaire.addEventListener("submit", function (event) {
 
   if (document.querySelectorAll(".notif-erreur ul li").length == 0) {
     succes.style.display = "block";
+    formulaire.style.display = "none";
+    erreur.style.display = "none";
     formulaire.reset();
   } else {
     erreur.style.display = "block";

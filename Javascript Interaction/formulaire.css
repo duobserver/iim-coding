@@ -14,12 +14,13 @@
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 2rem 0;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2rem;
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.6)
@@ -32,7 +33,7 @@ body {
 
 form {
   width: 80%;
-  margin: 1rem;
+  margin: 0;
   padding: 2rem;
   display: flex;
   flex-wrap: wrap;
@@ -41,8 +42,16 @@ form {
   border-radius: var(--border-radius);
 }
 
+h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 .titre {
+  padding: 0.5rem;
   flex: 0 0 100%;
+  font-weight: bold;
 }
 
 .titre:not(:first-child) {
@@ -100,6 +109,10 @@ button {
   border-radius: calc(var(--border-radius) - 2rem);
 }
 
+button p {
+  font-weight: bold;
+}
+
 button:disabled {
   background-color: lightgrey;
 }
@@ -123,20 +136,23 @@ button:hover {
 }
 
 .notif-erreur {
-  border: 1px solid rgb(212, 42, 0);
-  color: rgb(212, 42, 0);
-  background-color: rgba(212, 42, 0, 0.4);
-  padding: 16px 32px;
-  margin-bottom: 20px;
+  width: 80%;
+  border: 2px solid red;
+  border-radius: var(--border-radius);
+  color: white;
+  background-color: rgba(255, 0, 0, 0.25);
+  padding: 1rem 2rem;
   display: none;
 }
 
 .notif-succes {
-  border: 1px solid rgb(81, 150, 2);
-  color: rgb(81, 150, 2);
-  background-color: rgba(81, 150, 2, 0.4);
-  padding: 16px 32px;
-  margin-bottom: 20px;
+  width: 80%;
+  border: 2px solid lightgreen;
+  border-radius: var(--border-radius);
+  color: white;
+  background-color: rgba(144, 238, 144, 0.25);
+  padding: 1rem 2rem;
+  text-align: center;
   display: none;
 }
 
