@@ -1,4 +1,4 @@
-<span style:"font-size: 2rem">🟧🟦🟨</span><br><br>
+<p style:"font-size: 2rem; margin: 0;">🟧🟦🟨</p><br><br>
 let title = document.createElement("h1");<br><br>
 title.innerText = "IIM-Coding";<br>
 title.style.color = "orange";<br><br>
