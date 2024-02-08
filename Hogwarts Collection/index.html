@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav class="burger-menu" id="Hogwarts Collection">
-      <p>Hogwarts Collection</p>
-      <ul>
-        <li class="burger-menu" id="Cartes">
-          <p>Cartes</p>
-          <ul>
+    <nav id="nav">
+      <p id="main-title" class="title">HOGWARTS COLLECTION</p>
+      <ul id="main-menu">
+        <li class="category">
+          <p class="title">Cartes</p>
+          <ul class="submenu">
             <li><p>Collection</p></li>
             <li><p>Favorites</p></li>
             <li><p>Échanger</p></li>
@@ -21,20 +21,17 @@
             <li><p>Boutique</p></li>
           </ul>
         </li>
-
-        <li class="burger-menu" id="Explorer">
-          <p>Explorer</p>
-          <ul>
+        <li class="category">
+          <p class="title">Explorer</p>
+          <ul class="submenu">
             <li><p>Catalogue</p></li>
             <li><p>Membres</p></li>
           </ul>
         </li>
-
-        <li class="burger-menu" id="Utilisateur">
-          <p>Utilisateur</p>
-          <ul>
-            <li><p>Se Connecter</p></li>
-            <li><p>S'inscrire</p></li>
+        <li class="category">
+          <p class="title">Utilisateur</p>
+          <ul class="submenu">
+            <li><p>Connexion</p></li>
             <li><p>Profil</p></li>
             <li><p>Paramètres</p></li>
           </ul>
@@ -42,7 +39,70 @@
       </ul>
     </nav>
 
-    <main>
+    <div id="overlay">
+      <div id="connexionForm">
+        <div id="connexionFormMode">
+          <p class="connexionMode" id="logIn">Connexion</p>
+          <p class="connexionMode" id="signUp">Inscription</p>
+        </div>
+        <form action="" class="logIn active">
+          <p>Connexion à un compte Hogwarts existant</p>
+          <div>
+            <label for="usernameLogIn">Nom d'utilisateur</label>
+            <input type="text" name="username" id="usernameLogIn"/>
+          </div>
+
+          <div>
+            <label for="passwordLogIn">Mot de Passe</label>
+            <input type="password" name="password" id="passwordLogIn"/>
+          </div>
+
+          <button type="submit">Se connecter</button>
+        </form>
+
+        <form action="" class="signUp">
+          <p>Création d'un nouveau compte Hogwarts</p>
+          <div>
+            <label for="usernameSignUp">Nom d'utilisateur</label>
+            <input type="text" name="username" id="usernameSignUp" />
+          </div>
+
+          <div>
+            <label for="age">Âge</label>
+            <input type="number" name="age" id="age" />
+          </div>
+
+          <div>
+            <label for="email">Adresse Email</label>
+            <input type="email" name="email" id="email" />
+          </div>
+
+          <div>
+            <label for="passwordSignUp">Mot de Passe</label>
+            <input type="password" name="password" id="passwordSignUp" />
+          </div>
+
+          <div>
+            <label for="passwordCheck">Confirmation du Mot de Passe</label>
+            <input type="password" name="passwordCheck" id="passwordCheck" />
+          </div>
+
+          <div class="inline">
+            <input type="checkbox" id="tos">
+            <label for="tos">J'ai lu et accepté les conditions d'utilisation</label>
+          </div>
+
+          <div class="inline">
+            <input type="checkbox" id="permanent">
+            <label for="permanent">Je comprends que je ne pourrai pas changer mon nom d'utilisateur après la création de mon compte</label>
+          </div>
+
+          <button type="submit">Créer un compte</button>
+        </form>
+      </div>
+    </div>
+
+    <main id="main">
       <div id="collection">
         <div class="card">harry</div>
         <div class="card">hermione</div>

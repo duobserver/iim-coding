@@ -1,36 +1,76 @@
-// let burgers = document.querySelectorAll(".burger-menu");
+// ouverture et fermeture des menus burger dans la navbar
+let titles = document.querySelectorAll(".title");
 
-// burgers.forEach(function (item) {
-//   item.addEventListener("click", function () {
-//     item.classList.toggle("open")
-//   });
-// });
-
-let burgers = document.querySelectorAll(".burger-menu p");
-
-burgers.forEach(function (item) {
+titles.forEach(function (item) {
   item.addEventListener("click", function () {
-    let target = document.getElementById(item.textContent);
-    if (target.classList.contains("main-menu") == false) {
-      target.classList.toggle("open");
+    if (item.classList.contains("full") == false) {
+      if (item.id == "main-title" && item.classList.contains("open-title")) {
+        console.log("close everything");
+        titles.forEach(function (item) {
+          item.classList.remove("open-title");
+          item.nextElementSibling.classList.remove("open-menu");
+        });
+      } else {
+        item.classList.toggle("open-title");
+        item.nextElementSibling.classList.toggle("open-menu");
+      }
     }
   });
 });
 
-window.onload = mainMenu();
-window.onresize = function () {
-  mainMenu();
+// appel automatique des fonctions au chargement ou redimmensionnement de la page
+window.onload = function () {
+  navMode();
+  navHeight();
 };
 
-function mainMenu() {
+window.onresize = function () {
+  navMode();
+  navHeight();
+};
+
+// verrouilage du menu burger principal si taille écran > 960px
+function navMode() {
   if (window.innerWidth > 960) {
-    document.getElementById("Hogwarts Collection").classList.add("main-menu");
+    // grand écran
+    document.getElementById("main-title").classList.add("full");
   } else {
-    document.getElementById("Hogwarts Collection").classList.remove("main-menu");
+    // smartphone
+    document.getElementById("main-title").classList.remove("full");
   }
-  document.getElementById("Hogwarts Collection").classList.remove("open");
+
+  // fermeture de tous les menus burgerS
+  titles.forEach(function (item) {
+    item.classList.remove("open-title");
+    item.nextElementSibling.classList.remove("open-menu");
+  });
 }
 
+// décalage de la zone principale sous la navbar
+function navHeight() {
+  let main = document.getElementById("main");
+  let nav = document.getElementById("nav");
+  main.style.paddingTop = parseFloat(nav.offsetHeight) + "px";
+}
+
+// changement du mode de connexion
+let connexionModes = document.querySelectorAll(".connexionMode");
+let forms = document.querySelectorAll("#connexionForm form");
+
+connexionModes.forEach(function (item) {
+  item.addEventListener("click", function () {
+    connexionModes.forEach(function (item) {
+      item.classList.remove("open-title")
+    })
+    forms.forEach(function (item) {
+      item.classList.remove("active");
+    });
+    item.classList.toggle("open-title");
+    document.querySelector("." + item.id).classList.add("active");
+  });
+});
+
+// sélection dynamique des images des cartes en fonction des personnages
 let cards = document.querySelectorAll(".card");
 
 cards.forEach(function (item) {
