@@ -1,9 +1,10 @@
 // fichier javascript dédié au contôle du formulaire de connexion au site (login ou signup)
 
 // ciblage des éléments
-let errors = document.querySelector("#connexionFormErrors ul");
-let connexionModes = document.querySelectorAll(".connexionMode");
-let forms = document.querySelectorAll(".connexionForm form");
+let errors = document.querySelector("#connectionFormErrors ul");
+let connexionModes = document.querySelectorAll(".connectionMode");
+let forms = document.querySelectorAll(".connectionForm form");
+let signUp = document.querySelector(".signUp");
 let inputs = document.querySelectorAll(".signUp input");
 let username = document.querySelector("#usernameSignUp");
 let age = document.querySelector("#age");
@@ -29,13 +30,12 @@ connexionModes.forEach(function (item) {
 });
 
 // ensemble de caractères autorisés pour le nom d'utilisateur
-let nameCheck = /^[a-zA-Zéèàç\s-]*$/;
+let nameCheck = /^[a-zA-Z0-9]*$/;
 
 // ensemble de caractères obligatoires pour le mot de passe
 let passCheck = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
 
 // déblocage du bouton de validation si les conditions d'utilisation/tos sont acceptés
-
 function userCheck() {
   if (tos.checked && permanent.checked) {
     console.log("checked");
@@ -46,8 +46,7 @@ function userCheck() {
 }
 
 // contrôle du formulaire d'inscription
-forms.forEach(function (item) {
-  item.addEventListener("submit", function (event) {
+  signUp.addEventListener("submit", function (event) {
     // sauvegarde des champs après envoi
     event.preventDefault();
     // console.log("formulaire envoyé");
@@ -66,7 +65,7 @@ forms.forEach(function (item) {
     if (username.value.length < 2 || nameCheck.test(username.value) == false) {
       username.classList.add("invalid");
       let li = document.createElement("li");
-      li.innerText = 'Votre prénom doit contenir au moins 2 caractères autorisés (A-Z, *apostrophe*, "-", "é", "è", "à", "ç", " ")';
+      li.innerText = "Votre prénom doit contenir au moins 2 caractères autorisés (a-z, A-Z, 0-9)";
       errors.appendChild(li);
     } else {
       username.classList.add("valid");
@@ -117,4 +116,3 @@ forms.forEach(function (item) {
       document.querySelector("#connexionFormErrors").style.display = "block";
     }
   });
-});

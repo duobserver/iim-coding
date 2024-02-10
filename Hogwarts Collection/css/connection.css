@@ -1,0 +1,121 @@
+/* style du formulaire de connection */
+.connectionForm {
+  width: 100%;
+  height: fit-content;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: white;
+  background-color: var(--primary-color);
+  border: 2px solid var(--accent-color);
+}
+
+#connectionFormErrors {
+  display: none;
+  flex: 0 0 100%;
+  height: fit-content;
+  background-color: rgba(255, 0, 0, 0.75);
+  border: 2px solid red;
+}
+
+#connectionFormErrors ul {
+  background-color: transparent;
+}
+
+#connectionFormMode {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.connectionMode {
+  margin: 0;
+  padding: 1rem 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.activeMode {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.connectionMode:hover {
+  background-color: var(--secondary-color);
+}
+
+.connectionForm form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.connectionForm form:not(.activeForm) {
+  display: none;
+}
+
+.connectionForm form p {
+  flex: 0 0 100%;
+  text-align: center;
+}
+
+.connectionForm form div {
+  flex: 0 0 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.connectionForm form div.inline {
+  flex: 0 0 100%;
+  flex-direction: row;
+  align-items: center;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  height: 1.5rem;
+  width: 1.5rem;
+  accent-color: var(--accent-color);
+}
+
+.connectionInput {
+  height: 2rem;
+  padding: 0 1rem;
+  border: 2px solid var(--secondary-color);
+  outline: none;
+}
+
+.connectionForm form input:focus {
+  border: 2px solid var(--accent-color);
+}
+
+#logInButton,
+#signUpButton {
+  width: 100%;
+  color: black;
+  background-color: var(--accent-color);
+  border: none;
+}
+
+#logInButton:hover,
+#signUpButton:hover {
+  filter: brightness(75%);
+}
+
+.valid {
+  border: 2px solid rgb(0, 255, 0);
+}
+
+.invalid {
+  border: 2px solid red;
+}
+
+@media only screen and (min-width: 960px) {
+  .connectionForm form div {
+    flex: 0 0 50%;
+    padding: 1rem;
+  }
+}

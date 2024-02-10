@@ -1,0 +1,131 @@
+/* fichier css à usage global */
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: inherit;
+  background-color: inherit;
+  user-select: none;
+  transition: all 0.5s;
+}
+
+:root {
+  --nav-height: 80px;
+  --primary-color: #111;
+  --secondary-color: #222;
+  --accent-color: orangered;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+/* style de la barre de navigation */
+nav {
+  min-height: var(--nav-height);
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  color: white;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.nav-title {
+  height: 100%;
+}
+
+.main-title {
+  height: var(--nav-height);
+}
+
+.nav-title, .nav-link {
+  margin: 0;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-title:not(.full):hover, .nav-link:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-menu, .sub-menu {
+  margin: 0;
+  padding: 0;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  list-style: none;
+}
+
+nav li {
+  margin: 0;
+  padding: 0;
+  padding-left: 2rem;
+  width: 100%;
+}
+
+.open-title {
+  color: var(--accent-color);
+}
+
+.open-menu {
+  height: auto;
+  padding: 1rem 0;
+  visibility: visible;
+}
+
+/* style de la zone principale */
+main {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  color: white;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1583997052103-b4a1cb974ce5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@media only screen and (min-width: 960px) {
+  nav {
+    height: 80px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .main-title {
+    height: 100%;
+  }
+
+  .main-menu {
+    height: 100%;
+    visibility: visible;
+    flex-direction: row;
+    overflow: visible;
+  }
+
+  .sub-menu {
+    border-width: 0 2px 2px 2px;
+    border-style: solid;
+    border-color: var(--accent-color);
+  }
+}

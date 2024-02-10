@@ -1,0 +1,22 @@
+/* fichier css dédié au style de la collection de cartes possédées */
+/* style de la collection */
+.collection {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* style des cartes individuelles */
+.card {
+  aspect-ratio: 1/1;
+  width: 200px;
+  color: transparent;
+  background-color: var(--accent-color);
+  background-position: top;
+  background-size: cover;
+  border: 2px solid var(--accent-color);
+  border-radius: 1rem;
+}
