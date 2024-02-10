@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/send.css" />
+  </head>
+  <body>
+    <custom-navbar></custom-navbar>
+
+    <main id="main">
+      <h1>Envoyer une carte</h1>
+      <p>Faites plaisir à un autre membre du Club en lui envoyant une de vos cartes</p>
+      <div class="sendForm">
+        <div id="sendFormErrors"><ul></ul></div>
+
+        <form action="">
+          <div class="formElement">
+            <label for="targetUser">Nom du destinataire</label>
+            <input class="sendInput" type="text" name="username" id="targetUser" />
+          </div>
+
+          <div class="formElement">
+            <label for="card">Carte à envoyer</label>
+            <select name="card" id="card" class="sendInput">
+              <option value="select">Sélectionner</option>
+              <option class="card">Harry Potter</option>
+              <option class="card">Hermione Granger</option>
+              <option class="card">Ron Weasley</option>
+              <option class="card">Albus Dumbledore</option>
+              <option class="card">Lord Voldemort</option>
+              <option class="card">Gellert Grindelwald</option>
+            </select>
+          </div>
+
+          <div class="formElement">
+            <label for="passwordSend">Mot de Passe</label>
+            <input class="sendInput" type="password" name="password" id="passwordSend" />
+          </div>
+
+          <div class="inline">
+            <button type="submit" id="logInButton"><p>Envoyer ma carte</p></button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script src="../javascript/script.js"></script>
+  </body>
+</html>

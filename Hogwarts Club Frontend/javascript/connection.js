@@ -4,7 +4,10 @@
 let errors = document.querySelector("#connectionFormErrors ul");
 let connexionModes = document.querySelectorAll(".connectionMode");
 let forms = document.querySelectorAll(".connectionForm form");
+let logIn = document.querySelector(".logIn");
 let signUp = document.querySelector(".signUp");
+let usernameLogIn = document.querySelector("#usernameLogIn");
+
 let inputs = document.querySelectorAll(".signUp input");
 let username = document.querySelector("#usernameSignUp");
 let age = document.querySelector("#age");
@@ -45,74 +48,78 @@ function userCheck() {
   }
 }
 
+usernameLogIn.addEventListener("input", function (event) {
+  localStorage.setItem("username", usernameLogIn.value);
+});
+
 // contrôle du formulaire d'inscription
-  signUp.addEventListener("submit", function (event) {
-    // sauvegarde des champs après envoi
-    event.preventDefault();
-    // console.log("formulaire envoyé");
+signUp.addEventListener("submit", function (event) {
+  // sauvegarde des champs après envoi
+  event.preventDefault();
+  // console.log("formulaire envoyé");
 
-    // purge de la liste des erreurs et des styles de validité
-    document.querySelectorAll("#connexionFormErrors li").forEach(function (item) {
-      item.remove();
-    });
-
-    inputs.forEach(function (item) {
-      item.classList.remove("valid");
-      item.classList.remove("invalid");
-    });
-
-    // vérification de la longueur et des caractères dans le nom d'utilisateur
-    if (username.value.length < 2 || nameCheck.test(username.value) == false) {
-      username.classList.add("invalid");
-      let li = document.createElement("li");
-      li.innerText = "Votre prénom doit contenir au moins 2 caractères autorisés (a-z, A-Z, 0-9)";
-      errors.appendChild(li);
-    } else {
-      username.classList.add("valid");
-    }
-
-    // vérification de l'age
-    if (age.value.length < 12) {
-      age.classList.add("invalid");
-      let li = document.createElement("li");
-      li.innerText = "Vous devez avoir au moins 12 ans";
-      errors.appendChild(li);
-    } else {
-      age.classList.add("valid");
-    }
-
-    // vérification de l'email
-    if (email.value == "" || email.value.includes("@") == false) {
-      email.classList.add("invalid");
-      let li = document.createElement("li");
-      li.innerText = 'Votre email doit contenir un caractère "@"';
-      errors.appendChild(li);
-    } else {
-      email.classList.add("valid");
-    }
-
-    // vérification de la longueur et des caractères obligatoires dans le mot de passe
-    if (password.value.length < 6 || passCheck.test(password.value) == false) {
-      password.classList.add("invalid");
-      let li = document.createElement("li");
-      li.innerText = "Votre mot de passe doit contenir au moins 6 caractères dont des minuscules (a-z), des majuscules (A-Z) et des chiffres (0-9)";
-      errors.appendChild(li);
-    } else {
-      password.classList.add("valid");
-    }
-
-    // double vérification du mot de passe
-    if (password.value != passwordCheck.value) {
-      passwordCheck.classList.add("invalid");
-      let li = document.createElement("li");
-      li.innerText = "Veuillez ressaisir votre mot de passe correctement";
-      errors.appendChild(li);
-    } else {
-      passwordCheck.classList.add("valid");
-    }
-
-    // affichage du résultat final (succès ou erreur)
-    if (document.querySelectorAll("#connexionFormErrors ul li").length > 0) {
-      document.querySelector("#connexionFormErrors").style.display = "block";
-    }
+  // purge de la liste des erreurs et des styles de validité
+  document.querySelectorAll("#connexionFormErrors li").forEach(function (item) {
+    item.remove();
   });
+
+  inputs.forEach(function (item) {
+    item.classList.remove("valid");
+    item.classList.remove("invalid");
+  });
+
+  // vérification de la longueur et des caractères dans le nom d'utilisateur
+  if (username.value.length < 2 || nameCheck.test(username.value) == false) {
+    username.classList.add("invalid");
+    let li = document.createElement("li");
+    li.innerText = "Votre prénom doit contenir au moins 2 caractères autorisés (a-z, A-Z, 0-9)";
+    errors.appendChild(li);
+  } else {
+    username.classList.add("valid");
+  }
+
+  // vérification de l'age
+  if (age.value.length < 12) {
+    age.classList.add("invalid");
+    let li = document.createElement("li");
+    li.innerText = "Vous devez avoir au moins 12 ans";
+    errors.appendChild(li);
+  } else {
+    age.classList.add("valid");
+  }
+
+  // vérification de l'email
+  if (email.value == "" || email.value.includes("@") == false) {
+    email.classList.add("invalid");
+    let li = document.createElement("li");
+    li.innerText = 'Votre email doit contenir un caractère "@"';
+    errors.appendChild(li);
+  } else {
+    email.classList.add("valid");
+  }
+
+  // vérification de la longueur et des caractères obligatoires dans le mot de passe
+  if (password.value.length < 6 || passCheck.test(password.value) == false) {
+    password.classList.add("invalid");
+    let li = document.createElement("li");
+    li.innerText = "Votre mot de passe doit contenir au moins 6 caractères dont des minuscules (a-z), des majuscules (A-Z) et des chiffres (0-9)";
+    errors.appendChild(li);
+  } else {
+    password.classList.add("valid");
+  }
+
+  // double vérification du mot de passe
+  if (password.value != passwordCheck.value) {
+    passwordCheck.classList.add("invalid");
+    let li = document.createElement("li");
+    li.innerText = "Veuillez ressaisir votre mot de passe correctement";
+    errors.appendChild(li);
+  } else {
+    passwordCheck.classList.add("valid");
+  }
+
+  // affichage du résultat final (succès ou erreur)
+  if (document.querySelectorAll("#connexionFormErrors ul li").length > 0) {
+    document.querySelector("#connexionFormErrors").style.display = "block";
+  }
+});

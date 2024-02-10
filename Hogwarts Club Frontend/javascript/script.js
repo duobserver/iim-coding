@@ -1,35 +1,92 @@
 // fichier javascript à usage global
 
-// crétion de la navbar
+// ajout automatique de la navbar
 class MyNav extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
+    <div id="overlay"></div>
     <nav id="nav">
       <p class="main-title nav-title">HOGWARTS CLUB</p>
       <ul class="main-menu">
         <li class="category">
-          <p class="nav-title">Cartes</p>
+          <p class="nav-title">
+            <span class="material-symbols-rounded">
+              grid_view
+            </span>Cartes</p>
+
           <ul class="sub-menu">
-            <li><a class="nav-link" href="collection.html">Collection</a></li>
-            <li><a class="nav-link" href="#">Favoris</a></li>
-            <li><a class="nav-link" href="#">Échanger</a></li>
-            <li><a class="nav-link" href="#">Cadeaux</a></li>
-            <li><a class="nav-link" href="#">Boutique</a></li>
+            <li><a class="nav-link" href="collection.html" title="Afficher toutes mes cartes">
+              <span class="material-symbols-rounded">
+                square
+              </span>Collection</a></li>
+
+            <li><a class="nav-link" href="favorites.html" title="Afficher mes cartes favorites">
+              <span class="material-symbols-rounded">
+                pages
+              </span>Favorites</a></li>
+
+            <li><a class="nav-link" href="send.html" title="Envoyer une carte à un membre">
+              <span class="material-symbols-rounded">
+                mail
+              </span>Envoyer</a></li>
+
+            <li><a class="nav-link" href="#">
+              <span class="material-symbols-rounded">
+                redeem
+              </span>Cadeaux</a></li>
+
+            <li><a class="nav-link" href="#">
+              <span class="material-symbols-rounded">
+                shopping_cart
+              </span>Boutique</a></li>
           </ul>
         </li>
+
         <li class="category">
-          <p class="nav-title">Explorer</p>
+          <p class="nav-title">
+            <span class="material-symbols-rounded">
+            search
+            </span>Explorer</p>
+
           <ul class="sub-menu">
-            <li><a class="nav-link" href="#">Catalogue</a></li>
-            <li><a class="nav-link" href="#">Membres</a></li>
+            <li><a class="nav-link" href="#">
+              <span class="material-symbols-rounded">
+                book
+              </span>Catalogue</a></li>
+
+            <li><a class="nav-link" href="#">
+              <span class="material-symbols-rounded">
+                groups
+              </span>Membres</a></li>
           </ul>
         </li>
+
         <li class="category">
-          <p class="nav-title">Utilisateur</p>
+          <p class="nav-title">
+            <span class="material-symbols-rounded">
+            person
+            </span>Membre</p>
+
           <ul class="sub-menu">
-            <li><a class="nav-link" href="connection.html">Connexion</a></li>
-            <li><a class="nav-link" href="#">Profil</a></li>
-            <li><a class="nav-link" href="#">Paramètres</a></li>
+            <li><a class="nav-link" href="connection.html">
+              <span class="material-symbols-rounded">
+                login
+              </span>Connexion</a></li>
+
+            <li><a class="nav-link" href="connection.html">
+              <span class="material-symbols-rounded">
+                logout
+              </span>Déonnexion</a></li>
+
+            <li><a class="nav-link" href="#">
+              <span class="material-symbols-rounded">
+                account_box
+              </span>Profil</a></li>
+
+            <li><a class="nav-link" href="#">
+              <span class="material-symbols-rounded">
+                settings
+              </span>Paramètres</a></li>
           </ul>
         </li>
       </ul>
@@ -41,26 +98,59 @@ customElements.define("custom-navbar", MyNav);
 
 // ouverture et fermeture des menus burger dans la navbar
 let titles = document.querySelectorAll(".nav-title");
+console.log(typeof titles);
 
 titles.forEach(function (item) {
   item.addEventListener("click", function () {
-    if (item.classList.contains("full") == false) {
-      if (item.classList == "main-title" && item.classList.contains("open-title")) {
+    if (!item.classList.contains("full")) {
+      if (item.classList.contains("main-title") && item.classList.contains("open-main-title")) {
         console.log("close everything");
         titles.forEach(function (item) {
+          item.classList.remove("open-main-title");
           item.classList.remove("open-title");
+          item.nextElementSibling.classList.remove("open-main-menu");
           item.nextElementSibling.classList.remove("open-menu");
         });
       } else {
-        item.classList.toggle("open-title");
-        item.nextElementSibling.classList.toggle("open-menu");
+        if (item.classList.contains("main-title")) {
+          item.classList.toggle("open-main-title");
+          item.nextElementSibling.classList.toggle("open-main-menu");
+        } else {
+          let a = document.querySelector(".open-title");
+          let b = document.querySelector(".open-menu");
+          if (a && a != item) {
+            a.classList.remove("open-title");
+            b.classList.remove("open-menu");
+          }
+
+          item.classList.toggle("open-title");
+          item.nextElementSibling.classList.toggle("open-menu");
+        }
+      }
+      a = document.querySelector(".open-title");
+      b = document.querySelector(".open-main-title");
+      if (a || b) {
+        document.querySelector("#overlay").style.opacity = "100%";
+        document.querySelector("#overlay").style.visibility = "visible";
+      } else {
+        document.querySelector("#overlay").style.opacity = "";
+        document.querySelector("#overlay").style.visibility = "";
       }
     }
   });
 });
 
-// appel automatique des fonctions au chargement ou redimmensionnement de la page
+// chargement automatique des icônes google et lancement des fonctions pour adapter les éléments à l'écran
 window.onload = function () {
+  document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">';
+
+  let usernameLogIn = document.querySelector("#usernameLogIn");
+  if (usernameLogIn) {
+    if (localStorage.getItem("username")) {
+      usernameLogIn.value = localStorage.getItem("username");
+    }
+  }
+
   navMode();
   navHeight();
   userCheck();
@@ -75,7 +165,10 @@ window.onresize = function () {
 function navMode() {
   if (window.innerWidth > 960) {
     // grand écran
-    document.querySelector(".main-title").classList.add("full");
+    let main = document.querySelector(".main-title");
+    main.classList.add("full");
+    main.classList.remove("open-main-title");
+    main.nextElementSibling.classList.remove("open-main-menu");
   } else {
     // smartphone
     document.querySelector(".main-title").classList.remove("full");
@@ -92,7 +185,7 @@ function navMode() {
 function navHeight() {
   let nav = document.getElementById("nav");
   let main = document.getElementById("main");
-  main.style.paddingTop = parseFloat(nav.offsetHeight * 2) + "px";
+  main.style.paddingTop = parseFloat(nav.offsetHeight * 1.5) + "px";
   main.style.paddingBottom = parseFloat(nav.offsetHeight) + "px";
   main.style.paddingLeft = parseFloat(nav.offsetHeight) + "px";
   main.style.paddingRight = parseFloat(nav.offsetHeight) + "px";
