@@ -1,9 +1,9 @@
 * {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  list-style: none;
   color: inherit;
   background-color: inherit;
+  user-select: none;
   /* transition: all 0.5s; */
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 body {
-  height: 100dvh;
+  min-height: 100dvh;
 }
 
 /* style de la barre de navigation */
@@ -54,6 +54,7 @@ nav ul {
   padding: 0;
   height: 0;
   visibility: hidden;
+  list-style: none;
 }
 
 #main-menu {
@@ -77,20 +78,53 @@ nav ul {
   visibility: visible;
 }
 
-/* style du formulaire de connexion */
-#connexionForm {
-  padding: 2rem;
-  width: min-content;
-  background-color: var(--primary-color);
+/* style de la zone principale */
+main {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: top;
+  justify-content: center;
   color: white;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1583997052103-b4a1cb974ce5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+main > div:not(.activeScreen) {
+  display: none;
+}
+
+/* style du formulaire de connexion */
+.connexionForm {
+  width: 100%;
+  height: fit-content;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: white;
+  background-color: var(--primary-color);
   border: 2px solid var(--accent-color);
 }
 
+#connexionFormErrors {
+  display: none;
+  flex: 0 0 100%;
+  height: fit-content;
+  background-color: rgba(255, 0, 0, 0.75);
+  border: 2px solid red;
+}
+
+#connexionFormErrors ul {
+  background-color: transparent;
+}
+
 #connexionFormMode {
-  width: 100%;
+  flex: 0 0 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
 }
 
 .connexionMode {
@@ -101,68 +135,85 @@ nav ul {
   justify-content: center;
 }
 
+.activeMode {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
 .connexionMode:hover {
   background-color: var(--secondary-color);
 }
 
-#connexionForm form {
-  margin-top: 1rem;
+.connexionForm form {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-#connexionForm form:not(.active) {
+.connexionForm form:not(.activeForm) {
   display: none;
 }
 
-#connexionForm form div {
+.connexionForm form p {
+  flex: 0 0 100%;
+}
+
+.connexionForm form div {
+  flex: 0 0 100%;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-#connexionForm form div.inline {
+.connexionForm form div.inline {
+  flex: 0 0 100%;
   flex-direction: row;
+  align-items: center;
 }
 
-#connexionForm form input {
+input[type="radio"],
+input[type="checkbox"] {
+  height: 1.5rem;
+  width: 1.5rem;
+  accent-color: var(--accent-color);
+}
+
+.connexionInput {
   height: 2rem;
+  padding: 0 1rem;
   border: 2px solid var(--secondary-color);
   outline: none;
 }
 
-#connexionForm form input:focus {
+.connexionForm form input:focus {
   border: 2px solid var(--accent-color);
 }
 
-/* style du cache */
-#overlay {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-/* style de la zone principale */
-main {
+#logInButton,
+#signUpButton {
   width: 100%;
-  height: 100%;
-
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1583997052103-b4a1cb974ce5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  color: black;
+  background-color: var(--accent-color);
+  border: none;
 }
 
-#collection {
+#logInButton:hover,
+#signUpButton:hover {
+  filter: brightness(75%);
+}
+
+.valid {
+  border: 2px solid rgb(0, 255, 0);
+}
+
+.invalid {
+  border: 2px solid red;
+}
+
+/* style des sections de cartes */
+.collection {
   padding: 1rem;
+  width: 90%;
   height: fit-content;
   display: flex;
   flex-direction: row;
@@ -195,5 +246,10 @@ main {
     border-width: 0 2px 2px 2px;
     border-style: solid;
     border-color: var(--accent-color);
+  }
+
+  .connexionForm form div {
+    flex: 0 0 50%;
+    padding: 1rem;
   }
 }

@@ -22,6 +22,7 @@ titles.forEach(function (item) {
 window.onload = function () {
   navMode();
   navHeight();
+  userCheck();
 };
 
 window.onresize = function () {
@@ -48,43 +49,13 @@ function navMode() {
 
 // décalage de la zone principale sous la navbar
 function navHeight() {
-  let main = document.getElementById("main");
-  let overlay = document.getElementById("overlay");
   let nav = document.getElementById("nav");
-  main.style.paddingTop = parseFloat(nav.offsetHeight) + "px";
-  overlay.style.paddingTop = parseFloat(nav.offsetHeight) + "px";
+  let main = document.getElementById("main");
+  main.style.paddingTop = parseFloat(nav.offsetHeight * 2) + "px";
+  main.style.paddingBottom = parseFloat(nav.offsetHeight) + "px";
+  main.style.paddingLeft = parseFloat(nav.offsetHeight) + "px";
+  main.style.paddingRight = parseFloat(nav.offsetHeight) + "px";
 }
-
-// changement du mode de connexion
-let connexionModes = document.querySelectorAll(".connexionMode");
-let forms = document.querySelectorAll("#connexionForm form");
-
-connexionModes.forEach(function (item) {
-  item.addEventListener("click", function () {
-    connexionModes.forEach(function (item) {
-      item.classList.remove("open-title");
-    });
-    forms.forEach(function (item) {
-      item.classList.remove("active");
-    });
-    item.classList.toggle("open-title");
-    document.querySelector("." + item.id).classList.add("active");
-  });
-});
-
-forms.forEach(function (item) {
-  item.addEventListener("submit", function (event) {
-  // sauvegarde des champs après envoi
-  event.preventDefault();
-  console.log("formulaire envoyé");
-
-  // purge de la liste des erreurs
-  document.querySelectorAll(".notif-erreur li").forEach(function (item) {
-    item.remove();
-  });
-});
-})
-
 
 // sélection dynamique des images des cartes en fonction des personnages
 let cards = document.querySelectorAll(".card");
