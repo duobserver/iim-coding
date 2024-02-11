@@ -34,11 +34,6 @@ class MyNav extends HTMLElement {
               <span class="material-symbols-rounded">
                 redeem
               </span>Cadeaux</a></li>
-
-            <li><a class="nav-link" href="#">
-              <span class="material-symbols-rounded">
-                shopping_cart
-              </span>Boutique</a></li>
           </ul>
         </li>
 
@@ -49,7 +44,7 @@ class MyNav extends HTMLElement {
             </span>Explorer</p>
 
           <ul class="sub-menu">
-            <li><a class="nav-link" href="#">
+            <li><a class="nav-link" href="catalogue.html">
               <span class="material-symbols-rounded">
                 book
               </span>Catalogue</a></li>
@@ -141,20 +136,16 @@ titles.forEach(function (item) {
 });
 
 // chargement automatique des icônes google et lancement des fonctions pour adapter les éléments à l'écran
-window.onload = function () {
-  document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">';
+document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">';
 
-  let usernameLogIn = document.querySelector("#usernameLogIn");
-  if (usernameLogIn) {
-    if (localStorage.getItem("username")) {
-      usernameLogIn.value = localStorage.getItem("username");
-    }
+let usernameLogIn = document.querySelector("#usernameLogIn");
+if (usernameLogIn) {
+  if (localStorage.getItem("username")) {
+    usernameLogIn.value = localStorage.getItem("username");
   }
-
-  navMode();
-  navHeight();
-  userCheck();
-};
+}
+navMode();
+navHeight();
 
 window.onresize = function () {
   navMode();

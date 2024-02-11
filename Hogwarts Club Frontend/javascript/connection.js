@@ -2,33 +2,34 @@
 
 // ciblage des éléments
 let errors = document.querySelector("#connectionFormErrors ul");
-let connexionModes = document.querySelectorAll(".connectionMode");
-let forms = document.querySelectorAll(".connectionForm form");
+
 let logIn = document.querySelector(".logIn");
 let signUp = document.querySelector(".signUp");
-let usernameLogIn = document.querySelector("#usernameLogIn");
 
 let inputs = document.querySelectorAll(".signUp input");
-let username = document.querySelector("#usernameSignUp");
-let age = document.querySelector("#age");
-let email = document.querySelector("#email");
 let password = document.querySelector("#passwordSignUp");
 let passwordCheck = document.querySelector("#passwordCheck");
-let tos = document.querySelector("#tos");
-let permanent = document.querySelector("#permanent");
-let button = document.querySelector("#signUpButton");
 
 // sélection du mode de connexion (login ou signup)
-connexionModes.forEach(function (item) {
+let formTitle = document.querySelectorAll(".formTitle");
+let mode = document.querySelectorAll(".mode");
+let forms = document.querySelectorAll(".formsDiv form");
+
+mode.forEach(function (item) {
   item.addEventListener("click", function () {
-    connexionModes.forEach(function (item) {
+    formTitle.forEach(function (item) {
+      item.classList.remove("activeForm");
+    });
+    mode.forEach(function (item) {
       item.classList.remove("activeMode");
     });
     forms.forEach(function (item) {
       item.classList.remove("activeForm");
     });
     item.classList.toggle("activeMode");
-    document.querySelector("." + item.id).classList.add("activeForm");
+    document.querySelectorAll("." + item.id).forEach((item) => {
+      item.classList.add("activeForm");
+    });
   });
 });
 
@@ -38,7 +39,10 @@ let nameCheck = /^[a-zA-Z0-9]*$/;
 // ensemble de caractères obligatoires pour le mot de passe
 let passCheck = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
 
-// déblocage du bouton de validation si les conditions d'utilisation/tos sont acceptés
+// verrouillage du bouton de validation si les conditions d'utilisation et l'avertissement ne sont pas acceptés
+let tos = document.querySelector("#tos");
+let permanent = document.querySelector("#permanent");
+let button = document.querySelector("#signUpButton");
 function userCheck() {
   if (tos.checked && permanent.checked) {
     console.log("checked");
@@ -48,7 +52,7 @@ function userCheck() {
   }
 }
 
-usernameLogIn.addEventListener("input", function (event) {
+usernameLogIn.addEventListener("input", function () {
   localStorage.setItem("username", usernameLogIn.value);
 });
 
@@ -69,16 +73,18 @@ signUp.addEventListener("submit", function (event) {
   });
 
   // vérification de la longueur et des caractères dans le nom d'utilisateur
-  if (username.value.length < 2 || nameCheck.test(username.value) == false) {
-    username.classList.add("invalid");
+  let usernameSignup = document.querySelector("#usernameSignUp");
+  if (usernameSignup.value.length < 2 || nameCheck.test(usernameSignup.value) == false) {
+    usernameSignup.classList.add("invalid");
     let li = document.createElement("li");
     li.innerText = "Votre prénom doit contenir au moins 2 caractères autorisés (a-z, A-Z, 0-9)";
     errors.appendChild(li);
   } else {
-    username.classList.add("valid");
+    usernameSignup.classList.add("valid");
   }
 
   // vérification de l'age
+  let age = document.querySelector("#age");
   if (age.value.length < 12) {
     age.classList.add("invalid");
     let li = document.createElement("li");
@@ -89,6 +95,7 @@ signUp.addEventListener("submit", function (event) {
   }
 
   // vérification de l'email
+  let email = document.querySelector("#email");
   if (email.value == "" || email.value.includes("@") == false) {
     email.classList.add("invalid");
     let li = document.createElement("li");
@@ -119,7 +126,11 @@ signUp.addEventListener("submit", function (event) {
   }
 
   // affichage du résultat final (succès ou erreur)
-  if (document.querySelectorAll("#connexionFormErrors ul li").length > 0) {
-    document.querySelector("#connexionFormErrors").style.display = "block";
+  if (document.querySelectorAll("#connectionFormErrors ul li").length > 0) {
+    document.querySelector("#connectionFormErrors").style.display = "block";
+  } else {
+    signUp.submit();
   }
 });
+
+userCheck();

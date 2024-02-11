@@ -6,75 +6,75 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/connection.css">
+    <link rel="stylesheet" href="../css/forms.css" />
   </head>
   <body>
     <custom-navbar></custom-navbar>
 
     <main id="main">
       <h1>Compte Hogwarts</h1>
-      <div class="connectionForm">
-        <div id="connectionFormErrors"><ul></ul></div>
+      <p class="formTitle logIn activeForm">Connectez-vous à un compte Hogwarts existant</p>
+      <p class="formTitle signUp">Créez un nouveau compte Hogwarts pour débuter votre collection</p>
+      <div class="formsDiv">
+        <div id="formErrors"><ul></ul></div>
 
-        <div id="connectionFormMode">
-          <p class="connectionMode activeMode" id="logIn">Connexion</p>
-          <p class="connectionMode" id="signUp">Inscription</p>
+        <div id="formMode">
+          <p class="mode activeMode" id="logIn">Connexion</p>
+          <p class="mode" id="signUp">Inscription</p>
         </div>
         <form action="" class="logIn activeForm">
-          <p>Connexion à un compte Hogwarts existant</p>
-          <div>
+          <div class="formElement">
             <label for="usernameLogIn">Nom d'utilisateur</label>
-            <input class="connectionInput" type="text" name="username" id="usernameLogIn" />
+            <input type="text" name="username" id="usernameLogIn" />
           </div>
 
-          <div>
+          <div class="formElement">
             <label for="passwordLogIn">Mot de Passe</label>
-            <input class="connectionInput" type="password" name="password" id="passwordLogIn" />
+            <input type="password" name="password" id="passwordLogIn" />
           </div>
 
-          <div class="inline">
+          <div class="formElement inline">
             <button type="submit" id="logInButton"><p>Se connecter</p></button>
           </div>
         </form>
 
         <form action="" class="signUp">
-          <p>Création d'un nouveau compte Hogwarts</p>
-          <div>
+          <div class="formElement">
             <label for="usernameSignUp">Nom d'utilisateur</label>
-            <input class="connectionInput" type="text" name="username" id="usernameSignUp" />
+            <input type="text" name="username" id="usernameSignUp" />
           </div>
 
-          <div>
+          <div class="formElement">
             <label for="age">Âge</label>
-            <input class="connectionInput" type="number" name="age" id="age" />
+            <input type="number" name="age" id="age" />
           </div>
 
-          <div>
+          <div class="formElement">
             <label for="email">Adresse Email</label>
-            <input class="connectionInput" type="email" name="email" id="email" />
+            <input type="email" name="email" id="email" />
           </div>
 
-          <div>
+          <div class="formElement">
             <label for="passwordSignUp">Mot de Passe</label>
-            <input class="connectionInput" type="password" name="password" id="passwordSignUp" />
+            <input type="password" name="password" id="passwordSignUp" />
           </div>
 
-          <div>
+          <div class="formElement">
             <label for="passwordCheck">Confirmation du Mot de Passe</label>
-            <input class="connectionInput" type="password" name="passwordCheck" id="passwordCheck" />
+            <input type="password" name="passwordCheck" id="passwordCheck" />
           </div>
 
-          <div class="inline">
+          <div class="inline formElement">
             <input type="checkbox" id="tos" onclick="userCheck()" />
             <label for="tos">J'ai lu et accepté les conditions d'utilisation</label>
           </div>
 
-          <div class="inline">
+          <div class="inline formElement">
             <input type="checkbox" id="permanent" onclick="userCheck()" />
             <label for="permanent">Je comprends qu'il sera impossible de changer mon nom d'utilisateur après la création de ce compte</label>
           </div>
 
-          <div class="inline">
+          <div class="inline formElement">
             <button type="submit" id="signUpButton"><p>Créer un compte</p></button>
           </div>
         </form>

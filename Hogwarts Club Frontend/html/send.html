@@ -6,7 +6,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/send.css" />
+    <link rel="stylesheet" href="../css/forms.css" />
   </head>
   <body>
     <custom-navbar></custom-navbar>
@@ -14,13 +14,13 @@
     <main id="main">
       <h1>Envoyer une carte</h1>
       <p>Faites plaisir à un autre membre du Club en lui envoyant une de vos cartes</p>
-      <div class="sendForm">
-        <div id="sendFormErrors"><ul></ul></div>
+      <div class="formsDiv">
+        <div id="formErrors"><ul></ul></div>
 
-        <form action="">
+        <form action="" class="send activeForm">
           <div class="formElement">
             <label for="targetUser">Nom du destinataire</label>
-            <input class="sendInput" type="text" name="username" id="targetUser" />
+            <input type="text" name="username" id="targetUser" />
           </div>
 
           <div class="formElement">
@@ -38,10 +38,10 @@
 
           <div class="formElement">
             <label for="passwordSend">Mot de Passe</label>
-            <input class="sendInput" type="password" name="password" id="passwordSend" />
+            <input type="password" name="password" id="passwordSend" />
           </div>
 
-          <div class="inline">
+          <div class="inline formElement">
             <button type="submit" id="logInButton"><p>Envoyer ma carte</p></button>
           </div>
         </form>

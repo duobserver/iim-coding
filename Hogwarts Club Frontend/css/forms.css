@@ -1,5 +1,10 @@
+/* fichier css dédié au style des formulaires */
 /* style du formulaire de connection */
-.connectionForm {
+.formTitle:not(.activeForm) {
+  display: none;
+}
+
+.formsDiv {
   width: 100%;
   height: fit-content;
   padding: 2rem;
@@ -9,27 +14,29 @@
   color: white;
   background-color: var(--primary-color);
   border: 2px solid var(--accent-color);
+  border-radius: var(--border-radius);
 }
 
-#connectionFormErrors {
+#formErrors {
   display: none;
   flex: 0 0 100%;
   height: fit-content;
   background-color: rgba(255, 0, 0, 0.75);
   border: 2px solid red;
+  border-radius: var(--border-radius);
 }
 
-#connectionFormErrors ul {
+#formErrors ul {
   background-color: transparent;
 }
 
-#connectionFormMode {
+#formMode {
   flex: 0 0 100%;
   display: flex;
   flex-direction: row;
 }
 
-.connectionMode {
+.mode {
   margin: 0;
   padding: 1rem 2rem;
   width: 100%;
@@ -42,25 +49,25 @@
   border-bottom: 2px solid var(--accent-color);
 }
 
-.connectionMode:hover {
+.mode:hover {
   background-color: var(--secondary-color);
 }
 
-.connectionForm form {
+.formsDiv form {
   display: flex;
   flex-wrap: wrap;
 }
 
-.connectionForm form:not(.activeForm) {
+.formsDiv form:not(.activeForm) {
   display: none;
 }
 
-.connectionForm form p {
+.formsDiv form p {
   flex: 0 0 100%;
   text-align: center;
 }
 
-.connectionForm form div {
+.formElement {
   flex: 0 0 100%;
   padding: 1rem 0;
   display: flex;
@@ -68,10 +75,26 @@
   gap: 0.5rem;
 }
 
-.connectionForm form div.inline {
+.inline {
   flex: 0 0 100%;
   flex-direction: row;
   align-items: center;
+}
+
+input {
+  height: 2rem;
+  padding: 0 1rem;
+  border: 2px solid var(--secondary-color);
+  outline: none;
+  border-radius: var(--border-radius);
+}
+
+input:hover {
+  border: 2px solid white;
+}
+
+input:focus {
+  border: 2px solid var(--accent-color);
 }
 
 input[type="radio"],
@@ -81,33 +104,20 @@ input[type="checkbox"] {
   accent-color: var(--accent-color);
 }
 
-.connectionInput {
-  height: 2rem;
-  padding: 0 1rem;
-  border: 2px solid var(--secondary-color);
-  outline: none;
-}
-
-.connectionForm form input:focus {
-  border: 2px solid var(--accent-color);
-}
-
 /* style des boutons de connexion */
-#logInButton,
-#signUpButton {
+.formElement button {
   width: 100%;
   color: black;
   background-color: var(--accent-color);
   border: none;
+  border-radius: var(--border-radius);
 }
 
-#logInButton:hover,
-#signUpButton:hover {
+.formElement button:hover {
   filter: brightness(75%);
 }
 
-#logInButton:disabled,
-#signUpButton:disabled {
+.formElement button:disabled {
   background-color: var(--secondary-color);
 }
 
@@ -120,8 +130,14 @@ input[type="checkbox"] {
 }
 
 @media only screen and (min-width: 960px) {
-  .connectionForm form div {
+  .formElement {
     flex: 0 0 50%;
     padding: 1rem;
+  }
+
+  .inline {
+    flex: 0 0 100%;
+    flex-direction: row;
+    align-items: center;
   }
 }
