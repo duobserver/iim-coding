@@ -1,14 +1,9 @@
 // fichier javascript dédié au contôle du formulaire de connexion au site (login ou signup)
 
 // ciblage des éléments
-let errors = document.querySelector("#connectionFormErrors ul");
+let errors = document.querySelector("#formErrors ul");
 
 let logIn = document.querySelector(".logIn");
-let signUp = document.querySelector(".signUp");
-
-let inputs = document.querySelectorAll(".signUp input");
-let password = document.querySelector("#passwordSignUp");
-let passwordCheck = document.querySelector("#passwordCheck");
 
 // sélection du mode de connexion (login ou signup)
 let formTitle = document.querySelectorAll(".formTitle");
@@ -43,6 +38,7 @@ let passCheck = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
 let tos = document.querySelector("#tos");
 let permanent = document.querySelector("#permanent");
 let button = document.querySelector("#signUpButton");
+
 function userCheck() {
   if (tos.checked && permanent.checked) {
     console.log("checked");
@@ -57,15 +53,21 @@ usernameLogIn.addEventListener("input", function () {
 });
 
 // contrôle du formulaire d'inscription
+let signUp = document.querySelector(".formsDiv .signUp");
+console.log(signUp)
+
 signUp.addEventListener("submit", function (event) {
   // sauvegarde des champs après envoi
   event.preventDefault();
-  // console.log("formulaire envoyé");
+  console.log("formulaire envoyé");
 
   // purge de la liste des erreurs et des styles de validité
-  document.querySelectorAll("#connexionFormErrors li").forEach(function (item) {
+  document.querySelectorAll("#formErrors li").forEach(function (item) {
     item.remove();
   });
+
+  // remise à zéro de l'état des inputs
+  let inputs = document.querySelectorAll(".signUp input");
 
   inputs.forEach(function (item) {
     item.classList.remove("valid");
@@ -77,7 +79,7 @@ signUp.addEventListener("submit", function (event) {
   if (usernameSignup.value.length < 2 || nameCheck.test(usernameSignup.value) == false) {
     usernameSignup.classList.add("invalid");
     let li = document.createElement("li");
-    li.innerText = "Votre prénom doit contenir au moins 2 caractères autorisés (a-z, A-Z, 0-9)";
+    li.innerText = "Votre nom d'utilisateur doit contenir au moins 2 caractères autorisés (a-z, A-Z, 0-9)";
     errors.appendChild(li);
   } else {
     usernameSignup.classList.add("valid");
@@ -106,6 +108,8 @@ signUp.addEventListener("submit", function (event) {
   }
 
   // vérification de la longueur et des caractères obligatoires dans le mot de passe
+  let password = document.querySelector("#passwordSignUp");
+
   if (password.value.length < 6 || passCheck.test(password.value) == false) {
     password.classList.add("invalid");
     let li = document.createElement("li");
@@ -116,6 +120,8 @@ signUp.addEventListener("submit", function (event) {
   }
 
   // double vérification du mot de passe
+  let passwordCheck = document.querySelector("#passwordCheck");
+
   if (password.value != passwordCheck.value) {
     passwordCheck.classList.add("invalid");
     let li = document.createElement("li");
@@ -126,8 +132,8 @@ signUp.addEventListener("submit", function (event) {
   }
 
   // affichage du résultat final (succès ou erreur)
-  if (document.querySelectorAll("#connectionFormErrors ul li").length > 0) {
-    document.querySelector("#connectionFormErrors").style.display = "block";
+  if (document.querySelectorAll("#formErrors ul li").length > 0) {
+    document.querySelector("#formErrors").style.display = "block";
   } else {
     signUp.submit();
   }

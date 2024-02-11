@@ -1,21 +1,22 @@
 // appel de l'API Harry Potter
-async function getCharacters() {
+async function getIDs() {
   let rep = await fetch("https://hp-api.onrender.com/api/characters");
   let reponse = await rep.json();
-  catalogue(reponse);
+  return(reponse);
 }
 
-// affichage des 24 premiers personnages sous la forme de cartes
-function catalogue(characters) {
+async function launch() {
+  let characters = await getIDs();
   for (let i = 0; i < 25; i++) {
     let card = document.createElement("div");
     card.innerHTML = `
-        ${characters[i].name}
+      ${characters[i].id}
     `;
     card.classList.add("card");
+    card.id = characters[i].id;
     card.style.backgroundImage = `url(${characters[i].image})`;
     document.querySelector(".collection").appendChild(card);
   }
 }
 
-getCharacters();
+launch();

@@ -20,14 +20,18 @@
 #formErrors {
   display: none;
   flex: 0 0 100%;
+  padding: 2rem;
   height: fit-content;
-  background-color: rgba(255, 0, 0, 0.75);
+  color: red;
+  background-color: var(--primary-color);
   border: 2px solid red;
   border-radius: var(--border-radius);
 }
 
 #formErrors ul {
   background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 #formMode {
@@ -81,7 +85,7 @@
   align-items: center;
 }
 
-input {
+input, select {
   height: 2rem;
   padding: 0 1rem;
   border: 2px solid var(--secondary-color);
@@ -89,11 +93,11 @@ input {
   border-radius: var(--border-radius);
 }
 
-input:hover {
+input:hover, select:hover {
   border: 2px solid white;
 }
 
-input:focus {
+input:focus, select:focus {
   border: 2px solid var(--accent-color);
 }
 

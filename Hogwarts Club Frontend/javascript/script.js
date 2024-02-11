@@ -6,7 +6,14 @@ class MyNav extends HTMLElement {
     this.innerHTML = `
     <div id="overlay"></div>
     <nav id="nav">
-      <p class="main-title nav-title">HOGWARTS CLUB</p>
+      <p class="main-title nav-title">HOGWARTS CLUB
+      <span class="material-symbols-rounded" id="open-menu-span">
+        menu
+      </span>
+      <span class="material-symbols-rounded" id="close-menu-span">
+        close
+      </span>
+      </p>
       <ul class="main-menu">
         <li class="category">
           <p class="nav-title">
@@ -30,29 +37,14 @@ class MyNav extends HTMLElement {
                 mail
               </span>Envoyer</a></li>
 
-            <li><a class="nav-link" href="#">
+            <li><a class="nav-link" href="boosters.html">
               <span class="material-symbols-rounded">
-                redeem
-              </span>Cadeaux</a></li>
-          </ul>
-        </li>
-
-        <li class="category">
-          <p class="nav-title">
-            <span class="material-symbols-rounded">
-            search
-            </span>Explorer</p>
-
-          <ul class="sub-menu">
+                bolt
+              </span>Boosters</a></li>
             <li><a class="nav-link" href="catalogue.html">
               <span class="material-symbols-rounded">
                 book
               </span>Catalogue</a></li>
-
-            <li><a class="nav-link" href="#">
-              <span class="material-symbols-rounded">
-                groups
-              </span>Membres</a></li>
           </ul>
         </li>
 
@@ -68,15 +60,10 @@ class MyNav extends HTMLElement {
                 login
               </span>Connexion</a></li>
 
-            <li><a class="nav-link" href="connection.html">
+            <li><a class="nav-link" href="disconnection.html">
               <span class="material-symbols-rounded">
                 logout
               </span>Déonnexion</a></li>
-
-            <li><a class="nav-link" href="#">
-              <span class="material-symbols-rounded">
-                account_box
-              </span>Profil</a></li>
 
             <li><a class="nav-link" href="#">
               <span class="material-symbols-rounded">
@@ -105,11 +92,15 @@ titles.forEach(function (item) {
           item.classList.remove("open-title");
           item.nextElementSibling.classList.remove("open-main-menu");
           item.nextElementSibling.classList.remove("open-menu");
+          document.querySelector("#open-menu-span").style.display = "block";
+          document.querySelector("#close-menu-span").style.display = "none";
         });
       } else {
         if (item.classList.contains("main-title")) {
           item.classList.toggle("open-main-title");
           item.nextElementSibling.classList.toggle("open-main-menu");
+          document.querySelector("#open-menu-span").style.display = "none";
+          document.querySelector("#close-menu-span").style.display = "block";
         } else {
           let a = document.querySelector(".open-title");
           let b = document.querySelector(".open-menu");
@@ -138,6 +129,8 @@ titles.forEach(function (item) {
 // chargement automatique des icônes google et lancement des fonctions pour adapter les éléments à l'écran
 document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">';
 
+document.head.innerHTML += '<link rel="icon" href="../bolt.svg">';
+
 let usernameLogIn = document.querySelector("#usernameLogIn");
 if (usernameLogIn) {
   if (localStorage.getItem("username")) {
@@ -160,9 +153,13 @@ function navMode() {
     main.classList.add("full");
     main.classList.remove("open-main-title");
     main.nextElementSibling.classList.remove("open-main-menu");
+    document.querySelector("#open-menu-span").style.display = "none";
+    document.querySelector("#close-menu-span").style.display = "none";
   } else {
     // smartphone
     document.querySelector(".main-title").classList.remove("full");
+    document.querySelector("#open-menu-span").style.display = "block";
+    document.querySelector("#close-menu-span").style.display = "none";
   }
 
   // fermeture de tous les menus burgers

@@ -1,0 +1,21 @@
+.disconnection {
+  padding: 2rem;
+  color: rgb(0, 255, 0);
+  background-color: var(--primary-color);
+  border: 2px solid rgb(0, 255, 0);
+  border-radius: var(--border-radius);
+}
+
+main a {
+  width: 100%;
+  color: black;
+  text-align: center;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+}
+
+main a:hover {
+  filter: brightness(75%);
+}
