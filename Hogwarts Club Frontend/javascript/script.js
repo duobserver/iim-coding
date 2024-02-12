@@ -29,7 +29,7 @@ class MyNav extends HTMLElement {
 
             <li><a class="nav-link" href="favorites.html" title="Afficher mes cartes favorites">
               <span class="material-symbols-rounded">
-                pages
+                favorite
               </span>Favorites</a></li>
 
             <li><a class="nav-link" href="boosters.html" title="Afficher le prochain booster disponibles">

@@ -9,38 +9,44 @@ async function getCharacters() {
 }
 
 // affichage automatique des images des cartes en fonction des personnages
-let cards = document.querySelectorAll(".card");
-console.log(cards);
-
 async function launch() {
   let characters = await getCharacters();
-  cards.forEach((item) => {
-    let cardId = item.innerHTML;
-    let cardIdTrimmed = cardId.replace(/^\s+|\s+$/gm, "");
-    let cardSpecs = characters.find((a) => a.id === cardIdTrimmed);
-    item.style.backgroundImage = `url(${cardSpecs.image})`;
-    item.title = cardSpecs.name;
-
-    if (cardSpecs.house == "Gryffindor") {
-      item.style.borderColor = "red";
-      item.classList.add("Gryffindor");
-    }
-
-    if (cardSpecs.house == "Slytherin") {
-      item.style.borderColor = "green";
-      item.classList.add("Slytherin");
-    }
-
-    if (cardSpecs.house == "Hufflepuff") {
-      item.style.borderColor = "gold";
-      item.classList.add("Hufflepuff");
-    }
-
-    if (cardSpecs.house == "Ravenclaw") {
-      item.style.borderColor = "cyan";
-      item.classList.add("Ravenclaw");
-    }
+  let cards = document.querySelectorAll(".card");
+  cards.forEach((element) => {
+    let temp = element.innerHTML;
+    element.innerHTML = `
+    <div class="image">${temp}</div>
+    <span class="material-symbols-rounded favorite"> favorite </span>
+    `;
+    element.id = temp;
+    let cardSpecs = characters.find((a) => a.id === temp);
+    element.classList.add(`${cardSpecs.house}`);
+    element.title = cardSpecs.name;
   });
+
+  let images = document.querySelectorAll(".card .image");
+  images.forEach((element) => {
+    console.log(element.innerHTML)
+    let cardSpecs = characters.find((a) => a.id === element.innerHTML);
+    element.style.backgroundImage = `url(${cardSpecs.image})`
+  });
+
+  let favorites = document.querySelectorAll(".card .favorite");
+  favorites.forEach((element) => {
+    element.addEventListener("click", function () {
+      element.classList.toggle("faved");
+    });
+  });
+
+  // cards.forEach((item) => {
+  //   let cardId = item.innerHTML;
+  //   let cardIdTrimmed = cardId.replace(/^\s+|\s+$/gm, "");
+  //   let cardSpecs = characters.find((a) => a.id === cardIdTrimmed);
+  //   item.style.backgroundImage = `url(${cardSpecs.image})`;
+  //   item.title = cardSpecs.name;
+
+  //
+  // });
 }
 
 launch();
@@ -48,11 +54,12 @@ launch();
 let filters = document.querySelectorAll("#filters button");
 
 filters.forEach((element) => {
+  let cards = document.querySelectorAll(".card");
   element.addEventListener("click", function () {
     cards.forEach((element) => {
       element.style.display = "";
     });
-    if ((element.innerHTML != "Pas de filtres")) {
+    if (element.innerHTML != "Pas de filtres") {
       cards.forEach((element) => {
         if (!element.classList.contains(this.innerHTML)) {
           element.style.display = "none";
