@@ -14,16 +14,12 @@ console.log(cards);
 
 async function launch() {
   let characters = await getCharacters();
-  console.log("launching");
   cards.forEach((item) => {
-    console.log("found item");
     let cardId = item.innerHTML;
-    console.log("found id");
     let cardIdTrimmed = cardId.replace(/^\s+|\s+$/gm, "");
-    console.log(cardIdTrimmed);
     let cardSpecs = characters.find(a => a.id === cardIdTrimmed);
-    console.log(cardSpecs);
     item.style.backgroundImage = `url(${cardSpecs.image})`;
+    item.title = cardSpecs.name;
 
     if (cardSpecs.house == "Gryffindor") {
       item.style.borderColor = "red";

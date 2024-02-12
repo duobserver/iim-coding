@@ -37,11 +37,12 @@ class MyNav extends HTMLElement {
                 mail
               </span>Envoyer</a></li>
 
-            <li><a class="nav-link" href="boosters.html">
+            <li><a class="nav-link" href="boosters.html" title="Afficher le prochain booster disponibles">
               <span class="material-symbols-rounded">
                 bolt
               </span>Boosters</a></li>
-            <li><a class="nav-link" href="catalogue.html">
+
+            <li><a class="nav-link" href="catalogue.html" title="Afficher toutes les cartes disponibles">
               <span class="material-symbols-rounded">
                 book
               </span>Catalogue</a></li>
