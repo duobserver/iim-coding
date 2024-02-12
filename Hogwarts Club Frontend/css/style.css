@@ -26,9 +26,8 @@ body {
   min-height: 100dvh;
 }
 
-#overlay {
+#overlay, #send-overlay {
   position: fixed;
-  z-index: 1;
   top: 0;
   bottom: 0;
   left: 0;
@@ -38,11 +37,43 @@ body {
   visibility: hidden;
 }
 
+#overlay {
+  z-index: 3;
+}
+
+#send-overlay {
+  z-index: 1;
+}
+
+/* style du bouton contrôlant le dark mode */
+#send-dialogue {
+  display: none;
+}
+
+/* position, dimension et aspect du bouton */
+.send-dialogue-label {
+  position: fixed;
+  width: auto;
+  height: auto;
+  bottom: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  z-index: 2;
+  border-radius: 2rem 0 0 0;
+}
+
+/* style des icônes du bouton darkmode */
+.send-dialogue-label span {
+  font-size: 3.5rem;
+}
+
 /* style de la barre de navigation */
 nav {
   min-height: var(--nav-height);
   position: fixed;
-  z-index: 2;
+  z-index: 4;
   top: 0;
   width: 100%;
   display: flex;
@@ -103,7 +134,7 @@ nav li {
   width: 100%;
 }
 
-.open-main-title, .open-title {
+.open-main-title, .open-title, .open {
   color: var(--accent-color);
 }
 

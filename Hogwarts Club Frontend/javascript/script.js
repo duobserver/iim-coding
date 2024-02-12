@@ -32,11 +32,6 @@ class MyNav extends HTMLElement {
                 pages
               </span>Favorites</a></li>
 
-            <li><a class="nav-link" href="send.html" title="Envoyer une carte à un membre">
-              <span class="material-symbols-rounded">
-                mail
-              </span>Envoyer</a></li>
-
             <li><a class="nav-link" href="boosters.html" title="Afficher le prochain booster disponibles">
               <span class="material-symbols-rounded">
                 bolt
@@ -73,7 +68,49 @@ class MyNav extends HTMLElement {
           </ul>
         </li>
       </ul>
-    </nav>`;
+    </nav>
+    
+    <div id="send-overlay"></div>
+
+    <input type="checkbox" id="send-dialogue" onclick="sendDial()" />
+    <label for="send-dialogue" class="send-dialogue-label">
+      <span class="material-symbols-rounded">mail</span>
+    </label>
+
+    <div class="send-screen">
+      <div class="formsDiv sendForm">
+      <form action="" class="send activeForm">
+      <h1>Envoyer une carte</h1>
+      <p>Faites plaisir à un autre membre du Club en lui envoyant une de vos cartes</p>
+        <div class="formElement">
+          <label for="targetUser">Nom du destinataire</label>
+          <input type="text" name="username" id="targetUser" />
+        </div>
+
+        <div class="formElement">
+          <label for="card">Carte à envoyer</label>
+          <select name="card" id="card">
+            <option value="select">Sélectionner</option>
+            <option>Harry Potter</option>
+            <option>Hermione Granger</option>
+            <option>Ron Weasley</option>
+            <option>Albus Dumbledore</option>
+            <option>Lord Voldemort</option>
+            <option>Gellert Grindelwald</option>
+          </select>
+        </div>
+
+        <div class="formElement">
+          <label for="passwordSend">Mot de Passe</label>
+          <input type="password" name="password" id="passwordSend" />
+        </div>
+
+        <div class="inline formElement">
+          <button type="submit" id="sendButton"><p>Envoyer ma carte</p></button>
+        </div>
+      </form>
+    </div>
+    </div>`;
   }
 }
 
@@ -129,7 +166,7 @@ titles.forEach(function (item) {
 
 // chargement automatique des icônes google et lancement des fonctions pour adapter les éléments à l'écran
 document.head.innerHTML += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">';
-
+document.head.innerHTML += '<link rel="stylesheet" href="../css/forms.css">';
 document.head.innerHTML += '<link rel="icon" href="../bolt.svg">';
 
 let usernameLogIn = document.querySelector("#usernameLogIn");
@@ -140,6 +177,7 @@ if (usernameLogIn) {
 }
 navMode();
 navHeight();
+sendDial();
 
 window.onresize = function () {
   navMode();
@@ -178,4 +216,26 @@ function navHeight() {
   main.style.paddingBottom = parseFloat(nav.offsetHeight) + "px";
   main.style.paddingLeft = parseFloat(nav.offsetHeight) + "px";
   main.style.paddingRight = parseFloat(nav.offsetHeight) + "px";
+}
+
+function sendDial() {
+  console.log("sendDial");
+  let sendOverlay = document.querySelector("#send-overlay");
+  let sendDialogue = document.querySelector("#send-dialogue");
+  let sendDialogueLabel = document.querySelector(".send-dialogue-label");
+  let sendScreen = document.querySelector(".send-screen");
+  console.log(sendScreen);
+  if (sendDialogue.checked) {
+    sendScreen.style.visibility = "visible";
+    sendScreen.style.opacity = "100%";
+    sendOverlay.style.visibility = "visible";
+    sendOverlay.style.opacity = "100%";
+    sendDialogueLabel.classList.add("open");
+  } else {
+    sendScreen.style.visibility = "hidden";
+    sendScreen.style.opacity = "0%";
+    sendOverlay.style.visibility = "hidden";
+    sendOverlay.style.opacity = "0%";
+    sendDialogueLabel.classList.remove("open");
+  }
 }
