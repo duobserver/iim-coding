@@ -73,7 +73,7 @@ class MyNav extends HTMLElement {
     <div id="send-overlay"></div>
 
     <input type="checkbox" id="send-dialogue" onclick="sendDial()" />
-    <label for="send-dialogue" class="send-dialogue-label">
+    <label for="send-dialogue" class="send-dialogue-label" title="Envoyer une carte">
       <span class="material-symbols-rounded">mail</span>
     </label>
 
