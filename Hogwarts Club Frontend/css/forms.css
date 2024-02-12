@@ -76,7 +76,7 @@
   flex-wrap: wrap;
 }
 
-.formsDiv form:not(.activeForm) {
+.formsDiv:not(.sendForm) form:not(.activeForm) {
   display: none;
 }
 

@@ -2,7 +2,7 @@
 async function getIDs() {
   let rep = await fetch("https://hp-api.onrender.com/api/characters");
   let reponse = await rep.json();
-  return(reponse);
+  return reponse;
 }
 
 async function launch() {
@@ -15,6 +15,7 @@ async function launch() {
     card.classList.add("card");
     card.id = characters[i].id;
     card.style.backgroundImage = `url(${characters[i].image})`;
+    card.title = characters[i].name;
     document.querySelector(".collection").appendChild(card);
   }
 }

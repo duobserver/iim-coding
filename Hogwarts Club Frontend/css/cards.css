@@ -12,6 +12,7 @@
 /* style des cartes individuelles */
 .card {
   width: 200px;
+  min-height: 200px;
   color: transparent;
   background-color: var(--accent-color);
   background-position: top;
