@@ -4,10 +4,12 @@
 //     console.log(data);
 //   });
 
+// collecting data of specific pokemon from API
 function fetchPokemon(pokemon) {
   return fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon).then((response) => response.json());
 }
 
+// requesting data of random pokemon and showing its name and sprite
 async function displayPokemon() {
   let rand = Math.floor(Math.random() * 1000);
   console.log(rand);
@@ -18,4 +20,5 @@ async function displayPokemon() {
   `;
 }
 
+// shwoing a first pokemon when the page is loaded
 displayPokemon();
