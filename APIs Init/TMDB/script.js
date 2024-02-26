@@ -14,5 +14,5 @@ async function displayMovie() {
   `;
 }
 
-// shwoing a first movie when the page is loaded
+// showing a first movie when the page is loaded
 displayMovie();
