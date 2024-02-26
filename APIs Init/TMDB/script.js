@@ -14,5 +14,5 @@ async function displayMovie() {
   `;
 }
 
-// shwoing a first pokemon when the page is loaded
+// shwoing a first movie when the page is loaded
 displayMovie();
