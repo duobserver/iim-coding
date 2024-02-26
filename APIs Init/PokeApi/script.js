@@ -9,7 +9,7 @@ function fetchPokemon(pokemon) {
 }
 
 async function displayPokemon() {
-  let rand = Math.floor(Math.random() * 1302);
+  let rand = Math.floor(Math.random() * 1000);
   console.log(rand);
   const data = await fetchPokemon(rand);
   document.querySelector("#pokemon").innerHTML = `
