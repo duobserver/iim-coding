@@ -1,0 +1,16 @@
+1. Pierrick souhaite s’inscrire sur mon site, il envoie ses informations
+pour qu’elles puissent être stockées
+
+2. Pierrick a tapé trop vite et s’est trompé dans son adresse, il envoie de
+nouvelles informations pour mettre à jour son lieu d’habitation
+
+3. Pierrick consulte sa page profil pour vérifier que tout est bon, il
+récupère ses informations pour les afficher sur le site
+
+4. Pierrick n’aime finalement pas ce site, il décide de supprimer son
+compte, et donc ses informations
+
+1. GET
+2. PUT
+3. POST
+4. DELETE
