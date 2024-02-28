@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/connection.css')}}" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% if user == 0: %}
+    <div>
+      <ul id="connectionStatus"></ul>
+    </div>
+
+    {% elif user == 1: %}
+    <div>
+      <ul id="connectionStatus">
+        <li>User not found</li>
+      </ul>
+    </div>
+
+    {% elif user == 2: %}
+    <div>
+      <ul id="connectionStatus">
+        <li>Wrong password</li>
+      </ul>
+    </div>
+
+    {% elif user == 3: %}
+    <div>
+      <ul id="connectionStatus">
+        <li>Successfully disconnected</li>
+      </ul>
+    </div>
+
+    {% elif user == 4: %}
+    <div>
+      <ul id="connectionStatus">
+        <li>Username is not available</li>
+      </ul>
+    </div>
+
+    {% else: %}
+    <div>
+      <ul id="connectionStatus">
+        <li>Welcome, {{ user }}</li>
+      </ul>
+    </div>
+
+    {% endif %}
+
+    <form action="{{ url_for('signin') }}" id="signin">
+      <input type="text" name="usernameSignIn" placeholder="Username" />
+      <input type="password" name="passwordSignIn" placeholder="Password" />
+      <input type="submit" value="Sign In" />
+    </form>
+
+    <form action="{{ url_for('signup') }}" id="signup">
+      <input type="text" name="usernameSignUp" id="usernameSignUp" placeholder="Username" required />
+      <input type="text" name="displayname" id="displayname" placeholder="Display Name" required />
+      <input type="email" name="email" id="email" placeholder="Email" required />
+      <input type="tel" name="phone" id="phone" placeholder="Phone Number" />
+      <input type="password" name="passwordSignUp" id="passwordSignUp" placeholder="Password" required />
+      <input type="password" name="passwordSignUpCheck" id="passwordSignUpCheck" placeholder="Confirm Password" required />
+      <input type="submit" value="Sign Up" />
+    </form>
+
+    <a href="{{ url_for('disconnect') }}">Disconnect</a>
+    <a href="{{ url_for('collection') }}">Collection</a>
+
+    <script src="{{url_for('static', filename='javascript/script.js')}}"></script>
+    <script src="{{url_for('static', filename='javascript/signup.js')}}"></script>
+  </body>
+</html>

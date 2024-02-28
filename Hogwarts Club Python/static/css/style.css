@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  font-family: "Century Gothic", Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+  padding: 0 2rem;
+}
+
+ul {
+  margin: 0;
+}
+
+.card {
+  height: 400px;
+  aspect-ratio: 1/1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 2px solid black;
+}
