@@ -52,6 +52,8 @@ def register(username, displayname, email, phone, password):
         connection.commit()
         cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_collection (id TEXT, quantity INT, favored INT)")
         connection.commit()
+        cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_friends (friendUsername TEXT, status INT)")
+        connection.commit()
 
         cursor.close()
         connection.close()
@@ -61,6 +63,52 @@ def register(username, displayname, email, phone, password):
     else:
         activeUser = 4
 
+def friendList():
+    global activeUser
+
+    if not type(activeUser) == int:
+        connection = sqlite3.connect('club.db')
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM " + activeUser + "_friends")
+        return cursor.fetchall()
+    
+    else:
+        return [()]
+
+def friendRequest(friendUsername):
+    global activeUser
+
+    connection = sqlite3.connect('club.db')
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO " + activeUser + "_friends (friendUsername, status) VALUES (?, ?)", (friendUsername, 0))
+    connection.commit()
+    cursor.execute("INSERT INTO " + friendUsername + "_friends (friendUsername, status) VALUES (?, ?)", (activeUser, 1))
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+def friendShip(friendUsername, action):
+    global activeUser
+
+    connection = sqlite3.connect('club.db')
+    cursor = connection.cursor()
+
+    if action == "accept":
+        cursor.execute("UPDATE " + activeUser + "_friends SET status = 2 WHERE friendUsername = '" + friendUsername + "'")
+        connection.commit()
+        cursor.execute("UPDATE " + friendUsername + "_friends SET status = 2 WHERE friendUsername = '" + activeUser + "'")
+        connection.commit()
+    
+    elif action == "reject" or action == "delete":
+        cursor.execute("DELETE FROM  " + activeUser + "_friends WHERE friendUsername = '" + friendUsername + "'")
+        connection.commit()
+        cursor.execute("DELETE FROM  " + friendUsername + "_friends WHERE friendUsername = '" + activeUser + "'")
+        connection.commit()
+
+    cursor.close()
+    connection.close()
+
 ##################################################
 # Flask emulation
 
@@ -69,7 +117,9 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     global activeUser
-    return render_template("connection.html", user = activeUser)
+
+    friends = friendList()
+    return render_template("connection.html", user = activeUser, friends = friends)
     
 
 @app.route('/signin')
@@ -108,5 +158,19 @@ def collection():
     cursor.execute(run)
     output = cursor.fetchall()
     return render_template("collection.html", response = output)
+
+@app.route('/friendrequest')
+def friendrequest():
+    collect = request.args
+    friendUsername = collect['friendUsername']
+    friendRequest(friendUsername)
+    return redirect(url_for('index'))
+
+@app.route('/friendship/<action>/<friendUsername>')
+def friendship(action, friendUsername):
+    # action = request.args.get('action')
+    # friendUsername = request.args.get('friendUsername')
+    friendShip(friendUsername, action)
+    return redirect(url_for('index'))
 
 app.run(debug=True)
