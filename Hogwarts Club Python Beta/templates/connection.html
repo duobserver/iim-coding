@@ -58,7 +58,7 @@
       <input type="submit" value="Sign In" />
     </form>
 
-    <a href="{{ url_for('disconnect') }}">Disconnect</a>
+    <a href="{{ url_for('signout') }}">Sign Out</a>
     <a href="{{ url_for('collection') }}">Collection</a>
 
     <h2>Sign Up</h2>
@@ -102,7 +102,7 @@
 
     <h2>Trades</h2>
     <h3>Trade Offers</h3>
-    <form action="{{ url_for('exchangerequest') }}">
+    <form action="{{ url_for('tradeoffer') }}">
       <input type="text" name="targetUsername" id="targetUsername" placeholder="Target Username" />
       <input type="text" name="cardToGive" id="cardToGive" placeholder="Card to give">
       <input type="text" name="cardToReceive" id="cardToReceive" placeholder="Card to receive">

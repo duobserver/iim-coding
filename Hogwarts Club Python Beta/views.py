@@ -12,7 +12,10 @@ activeUser = 0
 ##################################################
 # Database queries
 
-def connection(username, password):
+#########################
+# Account queries
+
+def signIn(username, password):
     """
     If the provided indentity is correct, this function allows a specific user to access his account
     """
@@ -40,13 +43,13 @@ def connection(username, password):
     cursor.close()
     connection.close()
 
-def register(username, displayname, email, phone, password):
+def signUp(username, displayname, email, phone, password):
     """
     If the provided new username isn't already used, this function creates a new account with the provided informations
     """
     global activeUser
 
-    data = (username, displayname, email, phone, password, 0, "", "hello world")
+    data = (username, displayname, email, phone, password, 0, "hello world")
 
     connection = sqlite3.connect('club.db')
     cursor = connection.cursor()
@@ -54,16 +57,35 @@ def register(username, displayname, email, phone, password):
     output = cursor.fetchall()
 
     if len(output) == 0:
-        # if the username isn't already used by another account
-        cursor.execute("INSERT INTO users (username, displayname, email, phone, password, light, last, bio) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", data)
+        # if the username isn't already used by another account, register account with provided informations
+        cursor.execute("INSERT INTO users (username, displayname, email, phone, password, light, bio) VALUES(?, ?, ?, ?, ?, ?, ?)", data)
         connection.commit()
-        cursor.execute("UPDATE users SET last = datetime('now', 'localtime') WHERE username = ?", (username,))
-        connection.commit()
+
+        # create card collection table for new accout
         cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_collection (id TEXT, quantity INT, favored INT)")
         connection.commit()
+
+        # create friends table for new account
         cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_friends (friendUsername TEXT, status INT)")
         connection.commit()
-        cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_trades (tradeId INT, traderUsername TEXT, status INT, cardToGive TEXT, cardToReceive TEXT, PRIMARY KEY('tradeId))")
+
+        # create ongoing trades table for new account
+        cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_trades (tradeId INT, traderUsername TEXT, status INT, cardToGive TEXT, cardToReceive TEXT, PRIMARY KEY('tradeId'))")
+        connection.commit()
+        
+        # create logs table for new account
+        cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_logs (timestamp TEXT, type TEXT, event TEXT)")
+        connection.commit()
+
+        # add first log to logs table
+        cursor.execute("INSERT INTO " + username + "_logs (timestamp, type, event) VALUES (datetime('now'), 'signup', 'Account created')")
+
+        # create booster table for new account
+        cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_booster (lastTaken TEXT, available INT, cardId INT)")
+        connection.commit()
+
+        # give first booster to account
+        cursor.execute("INSERT INTO " + username + "_booster (lastTaken, available, cardId) VALUES (datetime('now'), 1, 1)")
         connection.commit()
 
         cursor.close()
@@ -75,7 +97,11 @@ def register(username, displayname, email, phone, password):
         # if the username is already used by another account
         cursor.close()
         connection.close()
+        
         activeUser = 4
+
+#########################
+# Cards queries
 
 def hasCard(username, cardId):
     """
@@ -107,7 +133,7 @@ def addCard(username, cardId):
     card = cursor.fetchall()
 
     if len(card) == 1:
-        # if the user already has copy of this card
+        # if the user already one or more copies of this card
         cursor.execute("UPDATE " + username + "_collection SET quantity = quantity + 1 WHERE id =" + cardId)
         connection.commit()
 
@@ -144,7 +170,7 @@ def removeCard(username, cardId):
     connection.close()
 
 #########################
-# Friends system
+# Friends queries
 
 def friendList():
     """
@@ -208,7 +234,7 @@ def friendAction(friendUsername, action):
     connection.close()
 
 #########################
-# Card trading system
+# Trading queries
 
 def tradesList():
     global activeUser
@@ -275,7 +301,7 @@ def tradeOffer(traderUsername, cardToGive, cardToReceive):
 
 def tradeDelete(tradeId):
     """
-    This function deletes a trade offer in both traders' tables (because it has been deleted by thu ser who sent the offer or rejected by the use who received the offer)
+    This function deletes a trade offer in both traders' tables (because it has been deleted by the user who sent the offer or rejected by the user who received the offer)
     """
     global activeUser
 
@@ -360,23 +386,22 @@ def signin():
     collect = request.args
     username = collect['usernameSignIn']
     password = collect['passwordSignIn']
-    connection(username, password)
+    signIn(username, password)
     return redirect(url_for('index'))
 
 @app.route('/signup')
 def signup():
-    print("signing up!")
     collect = request.args
     username = collect['usernameSignUp']
     displayname = collect['displayname']
     email = collect['email']
     phone = collect['phone']
     password = collect['passwordSignUp']
-    register(username, displayname, email, phone, password)
+    signUp(username, displayname, email, phone, password)
     return redirect(url_for('index'))
 
-@app.route('/disconnect')
-def disconnect():
+@app.route('/signout')
+def signout():
     global activeUser
     activeUser = 3
     return redirect(url_for('index'))
@@ -411,8 +436,8 @@ def friendAction(action, friendUsername):
     friendAction(friendUsername, action)
     return redirect(url_for('index'))
 
-@app.route('/tradeOffer')
-def tradeOffer():
+@app.route('/tradeoffer')
+def tradeoffer():
     collect = request.args
     targetUsername = collect['targetUsername']
     cardToGive = collect['cardToGive']
@@ -424,5 +449,23 @@ def tradeOffer():
 def trade(action, id):
     tradeAction(action, id)
     return redirect(url_for('index'))
+
+##################################################
+# Script autorun
+
+#########################
+# Users table generation
+
+connection = sqlite3.connect('club.db')
+cursor = connection.cursor()
+
+cursor.execute("CREATE TABLE IF NOT EXISTS users (username TEXT, displayname TEXT, email TEXT, phone TEXT, password TEXT, light INT, bio TEXT)")
+connection.commit()
+
+cursor.close()
+connection.close()
+
+#########################
+# Flask server emulation start
 
 app.run(debug=True)
