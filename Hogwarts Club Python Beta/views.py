@@ -1,7 +1,7 @@
 ##################################################
 # Packages
 
-import sqlite3
+import sqlite3, random
 from flask import Flask, render_template, request, redirect, url_for
 
 ##################################################
@@ -63,7 +63,7 @@ def register(username, displayname, email, phone, password):
         connection.commit()
         cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_friends (friendUsername TEXT, status INT)")
         connection.commit()
-        cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_trades (traderUsername TEXT, status INT, cardToGive TEXT, cardToReceive TEXT)")
+        cursor.execute("CREATE TABLE IF NOT EXISTS " + username + "_trades (tradeId INT, traderUsername TEXT, status INT, cardToGive TEXT, cardToReceive TEXT, PRIMARY KEY('tradeId))")
         connection.commit()
 
         cursor.close()
@@ -217,7 +217,7 @@ def tradesList():
         connection = sqlite3.connect('club.db')
         cursor = connection.cursor()
 
-        cursor.execute("SELECT ROWINT, * FROM " + activeUser + "_trades")
+        cursor.execute("SELECT * FROM " + activeUser + "_trades")
         output = cursor.fetchall()
 
         cursor.close()
@@ -228,34 +228,68 @@ def tradesList():
     else:
         return []
 
+def tradeIdVerify(tradeId, username, traderUsername):
+    """
+    This function verifies if the tradeId is already used in another contract in both traders' tables
+    """
+    connection = sqlite3.connect('club.db')
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM " + username + "_trades WHERE tradeId = " + str(tradeId))
+    tradeContract1 = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM " + traderUsername + "_trades WHERE tradeId = " + str(tradeId))
+    tradeContract2 = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    if len(tradeContract1) == 0 and len(tradeContract1) == 0:
+        return False
+    
+    return True
+
 def tradeOffer(traderUsername, cardToGive, cardToReceive):
+    """
+    This function adds a trade offer in both traders' tables with a pending (0) status for the user who sent the offer and a confimation status (1) for the user who received it
+    """
     global activeUser
+
+    # create a random id for the trade offer and verify that it isn't already used by another trade offer in both traders' tables
+    tradeId = random.randint(0, 100000)
+
+    while tradeIdVerify(tradeId, activeUser, traderUsername):
+        tradeId = random.randint(0, 100000)
 
     connection = sqlite3.connect('club.db')
     cursor = connection.cursor()
 
-    cursor.execute("INSERT INTO " + activeUser + "_trades (traderUsername, status, cardToGive, cardToReceive) VALUES (?, ?, ?, ?)", (traderUsername, 0, cardToGive, cardToReceive))
+    cursor.execute("INSERT INTO " + activeUser + "_trades (tradeId, traderUsername, status, cardToGive, cardToReceive) VALUES (?, ?, ?, ?, ?)", (tradeId, traderUsername, 0, cardToGive, cardToReceive))
     connection.commit()
 
-    cursor.execute("INSERT INTO " + traderUsername + "_trades (traderUsername, status, cardToGive, cardToReceive) VALUES (?, ?, ?, ?)", (activeUser, 1, cardToReceive, cardToGive))
+    cursor.execute("INSERT INTO " + traderUsername + "_trades (tradeId, traderUsername, status, cardToGive, cardToReceive) VALUES (?, ?, ?, ?, ?)", (tradeId, activeUser, 1, cardToReceive, cardToGive))
     connection.commit()
 
     cursor.close()
     connection.close()
 
 def tradeDelete(tradeId):
+    """
+    This function deletes a trade offer in both traders' tables (because it has been deleted by thu ser who sent the offer or rejected by the use who received the offer)
+    """
     global activeUser
 
     connection = sqlite3.connect('club.db')
     cursor = connection.cursor()
 
-    cursor.execute("SELECT targetUsername FROM " + activeUser + "_trades WHERE id = " + str(tradeId))
-    exchange = cursor.fetchall()
+    # find the user that received the trade offer
+    cursor.execute("SELECT traderUsername FROM " + activeUser + "_trades WHERE tradeId = " + str(tradeId))
+    tradeContract = cursor.fetchall()
 
-    cursor.execute("DELETE FROM " + activeUser + "_trades WHERE id = " + str(tradeId))
+    cursor.execute("DELETE FROM " + tradeContract[0][0] + "_trades WHERE tradeId = " + str(tradeId))
     connection.commit()
 
-    cursor.execute("DELETE FROM " + exchange[0][0] + "_trades WHERE id = " + str(tradeId))
+    cursor.execute("DELETE FROM " + activeUser + "_trades WHERE tradeId = " + str(tradeId))
     connection.commit()
 
     cursor.close()
@@ -386,8 +420,8 @@ def tradeOffer():
     tradeOffer(targetUsername, cardToGive, cardToReceive)
     return redirect(url_for('index'))
 
-@app.route('/exchange/<action>/<id>')
-def exchange(action, id):
+@app.route('/trade/<action>/<id>')
+def trade(action, id):
     tradeAction(action, id)
     return redirect(url_for('index'))
 

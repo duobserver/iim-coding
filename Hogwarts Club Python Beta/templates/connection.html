@@ -100,8 +100,8 @@
     </div>
     {% endfor %}
 
-    <h2>Exchange Requests</h2>
-    <h3>Send Request</h3>
+    <h2>Trades</h2>
+    <h3>Trade Offers</h3>
     <form action="{{ url_for('exchangerequest') }}">
       <input type="text" name="targetUsername" id="targetUsername" placeholder="Target Username" />
       <input type="text" name="cardToGive" id="cardToGive" placeholder="Card to give">
@@ -109,9 +109,9 @@
       <input type="submit" value="Send" />
     </form>
 
-    <h3>Exchange List</h3>
-    {% for exchange in exchanges %}
-    <div class="exchange">
+    <h3>Trades List</h3>
+    {% for contract in trades %}
+    <div class="trade">
       <p>Between you and {{ exchange[1] }} </p>
 
       {% if exchange[2] == 0 %}

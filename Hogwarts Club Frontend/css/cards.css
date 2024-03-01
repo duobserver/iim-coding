@@ -7,6 +7,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
+  background-color: transparent;
 }
 
 /* style des cartes individuelles */
@@ -14,15 +15,28 @@
   width: 200px;
   min-height: 200px;
   color: transparent;
-  background-color: var(--accent-color);
+  /* background-color: var(--accent-color); */
   background-position: top;
   background-size: cover;
   border: 3px solid var(--accent-color);
   border-radius: 1rem;
   overflow: hidden;
+
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5.1px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.card .image {
+.cardTitle {
+  margin: 0;
+  padding: 1rem 0;
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+
+.cardImage {
   width: 100%;
   aspect-ratio: 1/1;
   background-position: top;
@@ -55,7 +69,6 @@
 
 #filters button:hover {
   background-color: var(--secondary-color);
-
 }
 
 .Gryffindor {

@@ -2,7 +2,7 @@
 
 // appel de l'API Harry Potter
 async function getCharacters() {
-  let rep = await fetch("https://hp-api.onrender.com/api/characters");
+  let rep = await fetch("https://hp-api.lainocs.fr/characters");
   let reponse = await rep.json();
   console.log("got answer");
   return reponse;
@@ -15,38 +15,25 @@ async function launch() {
   cards.forEach((element) => {
     let temp = element.innerHTML;
     element.innerHTML = `
-    <div class="image">${temp}</div>
+    <a class="cardLink">
+      <p class="cardTitle"></p>
+      <div class="cardImage"></div>
+    </a>
     <span class="material-symbols-rounded favorite"> favorite </span>
     `;
     element.id = temp;
-    let cardSpecs = characters.find((a) => a.id === temp);
-    element.classList.add(`${cardSpecs.house}`);
+    let cardSpecs = characters[temp];
+
     element.title = cardSpecs.name;
-  });
+    element.classList.add(`${cardSpecs.house}`);
 
-  let images = document.querySelectorAll(".card .image");
-  images.forEach((element) => {
-    console.log(element.innerHTML)
-    let cardSpecs = characters.find((a) => a.id === element.innerHTML);
-    element.style.backgroundImage = `url(${cardSpecs.image})`
-  });
-
-  let favorites = document.querySelectorAll(".card .favorite");
-  favorites.forEach((element) => {
-    element.addEventListener("click", function () {
-      element.classList.toggle("faved");
+    element.querySelector(".cardLink").setAttribute("href", `card.html?id=${temp}`);
+    element.querySelector(".cardTitle").innerHTML = cardSpecs.name;
+    element.querySelector(".cardImage").style.backgroundImage = `url(${cardSpecs.image})`;
+    element.querySelector(".favorite").addEventListener("click", function () {
+      element.querySelector(".favorite").classList.toggle("faved");
     });
   });
-
-  // cards.forEach((item) => {
-  //   let cardId = item.innerHTML;
-  //   let cardIdTrimmed = cardId.replace(/^\s+|\s+$/gm, "");
-  //   let cardSpecs = characters.find((a) => a.id === cardIdTrimmed);
-  //   item.style.backgroundImage = `url(${cardSpecs.image})`;
-  //   item.title = cardSpecs.name;
-
-  //
-  // });
 }
 
 launch();
