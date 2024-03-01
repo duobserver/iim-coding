@@ -86,6 +86,7 @@
 
       {% if friend[1] == 0 %}
       <div>Pending</div>
+      <a href="{{ url_for('friendship', action = 'delete', friendUsername = friend[0]) }}" class="delete">Delete</a>
 
       {% elif friend[1] == 1 %}
       <a href="{{ url_for('friendship', action = 'accept', friendUsername = friend[0]) }}" class="accept">Accept</a>
@@ -94,6 +95,32 @@
       {% elif friend[1] == 2 %}
       <div>Accepted</div>
       <a href="{{ url_for('friendship', action = 'delete', friendUsername = friend[0]) }}" class="delete">Delete</a>
+
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <h2>Exchange Requests</h2>
+    <h3>Send Request</h3>
+    <form action="{{ url_for('exchangerequest') }}">
+      <input type="text" name="targetUsername" id="targetUsername" placeholder="Target Username" />
+      <input type="text" name="cardToGive" id="cardToGive" placeholder="Card to give">
+      <input type="text" name="cardToReceive" id="cardToReceive" placeholder="Card to receive">
+      <input type="submit" value="Send" />
+    </form>
+
+    <h3>Exchange List</h3>
+    {% for exchange in exchanges %}
+    <div class="exchange">
+      <p>Between you and {{ exchange[1] }} </p>
+
+      {% if exchange[2] == 0 %}
+      <div>Pending</div>
+      <a href="{{ url_for('exchange', action = 'delete', id = exchange[0]) }}" class="delete">Delete</a>
+
+      {% elif exchange[2] == 1 %}
+      <a href="{{ url_for('exchange', action = 'accept', id = exchange[0]) }}" class="accept">Accept</a>
+      <a href="{{ url_for('exchange', action = 'reject', id = exchange[0]) }}" class="reject">Reject</a>
 
       {% endif %}
     </div>
