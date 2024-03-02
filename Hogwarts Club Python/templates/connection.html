@@ -9,43 +9,16 @@
     <title>Document</title>
   </head>
   <body>
-    {% if user == 0: %}
-    <div>
-      <ul id="connectionStatus"></ul>
-    </div>
-
-    {% elif user == 1: %}
+    {% if user[0] == 0: %}
     <div>
       <ul id="connectionStatus">
-        <li>User not found</li>
-      </ul>
-    </div>
-
-    {% elif user == 2: %}
-    <div>
-      <ul id="connectionStatus">
-        <li>Wrong password</li>
-      </ul>
-    </div>
-
-    {% elif user == 3: %}
-    <div>
-      <ul id="connectionStatus">
-        <li>Successfully disconnected</li>
-      </ul>
-    </div>
-
-    {% elif user == 4: %}
-    <div>
-      <ul id="connectionStatus">
-        <li>Username is not available</li>
-      </ul>
+        <li>{{ user[1] }}</li></ul>
     </div>
 
     {% else: %}
     <div>
       <ul id="connectionStatus">
-        <li>Welcome, {{ user }}</li>
+        <li>Welcome, {{ user[1] }}</li>
       </ul>
     </div>
 

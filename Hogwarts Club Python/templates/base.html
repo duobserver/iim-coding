@@ -1,0 +1,151 @@
+<!-- Flask/Jinja page template template -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+
+        {% block styles %}{% endblock %}
+
+        <title>{% block title %}{% endblock %} | Hogwarts Club</title>
+    </head>
+    <body>
+        <nav id="main">
+            <p class="main-title">
+                HOGWARTS CLUB
+                <span class="material-symbols-rounded" id="open-menu-span"> menu </span>
+                <span class="material-symbols-rounded" id="close-menu-span"> close </span>
+            </p>
+
+            <ul class="main-menu">
+                {% if user[0] == 1: %}
+
+                    <li class="sub">
+                        <p class="sub-title" title="My cards"><span class="material-symbols-rounded"> grid_view </span>Cards</p>
+
+                        <ul class="sub-menu">
+                            <li title="My cards collection">
+                                <a class="nav-link" href="{{ url_for('collection') }}"><span class="material-symbols-rounded"> square </span>Collection</a>
+                            </li>
+
+                            <li title="My free booster">
+                                <a class="nav-link" href="{{ url_for('booster') }}"><span class="material-symbols-rounded"> bolt </span>Booster</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sub">
+                        <p class="sub-title" title="Discover"><span class="material-symbols-rounded"> search </span>Discover</p>
+
+                        <ul class="sub-menu">
+                            <li title="Club members">
+                                <a class="nav-link" href="{{ url_for('members') }}"><span class="material-symbols-rounded"> groups </span>Members</a>
+                            </li>
+
+                            <li title="Cards catalogue">
+                                <a class="nav-link" href="{{ url_for('catalogue') }}"><span class="material-symbols-rounded"> book </span>Catalogue</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sub">
+                        <p class="sub-title" title="Account"><span class="material-symbols-rounded"> person </span>{{ user[1] }}</p>
+
+                        <ul class="sub-menu">
+                            <li title="My public profile">
+                                <a class="nav-link" href="{{ url_for('profile', username = user[1]) }}"><span class="material-symbols-rounded"> visibility </span>Profile</a>
+                            </li>
+
+                            <li title="Account settings">
+                                <a class="nav-link" href="{{ url_for('settings', username = user[1]) }}"><span class="material-symbols-rounded"> settings </span>Settings</a>
+                            </li>
+
+                            <li title="Log out">
+                                <a class="nav-link" href="{{ url_for('logout') }}"><span class="material-symbols-rounded"> logout </span>Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                {% else: %}
+                
+                    <li class="sub">
+                        <p class="sub-title" title="Discover"><span class="material-symbols-rounded"> search </span>Discover</p>
+
+                        <ul class="sub-menu">
+                            <li title="Club members">
+                                <a class="nav-link" href="{{ url_for('members') }}"><span class="material-symbols-rounded"> groups </span>Members</a>
+                            </li>
+
+                            <li title="Cards catalogue">
+                                <a class="nav-link" href="{{ url_for('catalogue') }}"><span class="material-symbols-rounded"> book </span>Catalogue</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sub">
+                        <p class="sub-title" title="Account"><span class="material-symbols-rounded"> person </span>Account</p>
+
+                        <ul class="sub-menu">
+                            <li title="Log out">
+                                <a class="nav-link" href="{{ url_for('authentication') }}"><span class="material-symbols-rounded"> login </span>Log In / Sign Up</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div id="overlay"></div>
+
+        <main>
+            {% block content %}{% endblock content %}
+        </main>
+
+        <!-- <div id="send-overlay"></div>
+
+        <input type="checkbox" id="send-dialogue" onclick="sendDial()" />
+        <label for="send-dialogue" class="send-dialogue-label" title="Envoyer une carte">
+            <span class="material-symbols-rounded">mail</span>
+        </label>
+
+        <div class="send-screen">
+            <div class="formsDiv sendForm">
+                <form action="" class="send activeForm">
+                    <h1>Envoyer une carte</h1>
+                    <p>Faites plaisir à un autre membre du Club en lui envoyant une de vos cartes</p>
+                    <div class="formElement">
+                        <label for="targetUser">Nom du destinataire</label>
+                        <input type="text" name="username" id="targetUser" />
+                    </div>
+
+                    <div class="formElement">
+                        <label for="card">Carte à envoyer</label>
+                        <select name="card" id="card">
+                            <option value="select">Sélectionner</option>
+                            <option>Harry Potter</option>
+                            <option>Hermione Granger</option>
+                            <option>Ron Weasley</option>
+                            <option>Albus Dumbledore</option>
+                            <option>Lord Voldemort</option>
+                            <option>Gellert Grindelwald</option>
+                        </select>
+                    </div>
+
+                    <div class="formElement">
+                        <label for="passwordSend">Mot de Passe</label>
+                        <input type="password" name="password" id="passwordSend" />
+                    </div>
+
+                    <div class="inline formElement">
+                        <button type="submit" id="sendButton"><p>Envoyer ma carte</p></button>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+        <script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+
+    </body>
+</html>

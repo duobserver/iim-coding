@@ -1,21 +1,53 @@
-function fecthCharacters() {
-  return fetch(`https://hp-api.lainocs.fr/characters`).then((response) => response.json());
+titles = document.querySelectorAll(".main-title, .sub-title")
+
+navMode();
+navHeight();
+
+window.onresize = function () {
+    navMode();
+    navHeight();
+};
+
+titles.forEach(element => {
+    element.addEventListener("click", function () {
+        if (element.classList.contains("main-title")) {
+            
+        } else {
+            
+        }
+    })
+});
+
+function navMode() {
+    if (window.innerWidth > 960) {
+        // grand écran
+        let main = document.querySelector(".main-title");
+        main.classList.add("full");
+        main.classList.remove("open-main-title");
+        main.nextElementSibling.classList.remove("open-main-menu");
+        document.querySelector("#open-menu-span").style.display = "none";
+        document.querySelector("#close-menu-span").style.display = "none";
+
+    } else {
+        // smartphone
+        document.querySelector(".main-title").classList.remove("full");
+        document.querySelector("#open-menu-span").style.display = "block";
+        document.querySelector("#close-menu-span").style.display = "none";
+    }
+
+    // fermeture de tous les menus burgers
+    titles.forEach(function (item) {
+        item.classList.remove("open-title");
+        item.nextElementSibling.classList.remove("open-menu");
+    });
 }
 
-async function displayCharacters() {
-  const data = await fecthCharacters();
-  let cards = document.querySelectorAll(".card");
-  let cardLinks = document.querySelectorAll(".cardLink");
-
-  cards.forEach((element) => {
-    console.log(typeof +element.id);
-    element.style.backgroundImage = `url(${data[+element.id-1].image})`;
-  });
-
-  cardLinks.forEach(element => {
-    element.setAttribute("href", `{{ url_for("card", character=${+element.id}) }}`);
-    element.classList.add(data[+element.id].house)
-  });
+// décalage de la zone principale sous la navbar
+function navHeight() {
+    let nav = document.querySelector("nav");
+    let main = document.querySelector("main");
+    main.style.paddingTop = parseFloat(nav.offsetHeight * 1.5) + "px";
+    main.style.paddingBottom = parseFloat(nav.offsetHeight) + "px";
+    main.style.paddingLeft = parseFloat(nav.offsetHeight) + "px";
+    main.style.paddingRight = parseFloat(nav.offsetHeight) + "px";
 }
-
-displayCharacters();

@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, redirect, url_for
 ##################################################
 # Global variable
 
-activeUser = 0
+activeUser = [0, "No user connected"]
 
 ##################################################
 # Database queries
@@ -15,7 +15,7 @@ activeUser = 0
 #########################
 # Account queries
 
-def signIn(username, password):
+def logIn(username, password):
     """
     If the provided indentity is correct, this function allows a specific user to access his account
     """
@@ -23,22 +23,21 @@ def signIn(username, password):
 
     connection = sqlite3.connect('club.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT password FROM users WHERE username='" + username + "'")
+    cursor.execute("SELECT password FROM users WHERE username = '" + username + "'")
     output = cursor.fetchall()
 
     if len(output) != 0:
         # if the username exists and the password is correct
         if password == output[0][0]:
-            activeUser = username
-            print(activeUser)
+            activeUser = [1, username]
         
         else:
             # if the username exists but the password is wrong
-            activeUser = 2
+            activeUser = [0, "Wrong password"]
         
     else:
         # if the username doesn't exist
-        activeUser = 1
+        activeUser = [0, "Username not found"]
 
     cursor.close()
     connection.close()
@@ -91,14 +90,14 @@ def signUp(username, displayname, email, phone, password):
         cursor.close()
         connection.close()
 
-        activeUser = username
+        activeUser = [1, username]
 
     else:
         # if the username is already used by another account
         cursor.close()
         connection.close()
         
-        activeUser = 4
+        activeUser = [0, "Username already used by another account"]
 
 #########################
 # Cards queries
@@ -172,41 +171,33 @@ def removeCard(username, cardId):
 #########################
 # Friends queries
 
-def friendList():
+def friendList(username):
     """
-    If an user is effectively active/connected, this function returns his friend list
+    This function returns the user's friends list
     """
-    global activeUser
+    connection = sqlite3.connect('club.db')
+    cursor = connection.cursor()
 
-    if not type(activeUser) == int:
-        connection = sqlite3.connect('club.db')
-        cursor = connection.cursor()
+    cursor.execute("SELECT * FROM " + username + "_friends")
+    output =  cursor.fetchall()
 
-        cursor.execute("SELECT * FROM " + activeUser + "_friends")
-        output =  cursor.fetchall()
+    cursor.close()
+    connection.close()
 
-        cursor.close()
-        connection.close()
+    return output
 
-        return output
-    
-    else:
-        return [()]
-
-def friendRequest(friendUsername):
+def friendRequest(username, friendUsername):
     """
     This function adds a pending (0) friend request in the user's friends table
     It also adds a pending friend request in the targeted user's friends table sinci he needs to accept it or not (1)
     """
-    global activeUser
-
     connection = sqlite3.connect('club.db')
     cursor = connection.cursor()
 
-    cursor.execute("INSERT INTO " + activeUser + "_friends (friendUsername, status) VALUES (?, ?)", (friendUsername, 0))
+    cursor.execute("INSERT INTO " + username + "_friends (friendUsername, status) VALUES (?, ?)", (friendUsername, 0))
     connection.commit()
     
-    cursor.execute("INSERT INTO " + friendUsername + "_friends (friendUsername, status) VALUES (?, ?)", (activeUser, 1))
+    cursor.execute("INSERT INTO " + friendUsername + "_friends (friendUsername, status) VALUES (?, ?)", (username, 1))
     connection.commit()
 
     cursor.close()
@@ -236,23 +227,17 @@ def friendAction(friendUsername, action):
 #########################
 # Trading queries
 
-def tradesList():
-    global activeUser
+def tradesList(username):
+    connection = sqlite3.connect('club.db')
+    cursor = connection.cursor()
 
-    if not type(activeUser) == int:
-        connection = sqlite3.connect('club.db')
-        cursor = connection.cursor()
+    cursor.execute("SELECT * FROM " + username + "_trades")
+    output = cursor.fetchall()
 
-        cursor.execute("SELECT * FROM " + activeUser + "_trades")
-        output = cursor.fetchall()
+    cursor.close()
+    connection.close()
 
-        cursor.close()
-        connection.close()
-
-        return output
-    
-    else:
-        return []
+    return output
 
 def tradeIdVerify(tradeId, username, traderUsername):
     """
@@ -376,17 +361,24 @@ app = Flask(__name__)
 def index():
     global activeUser
 
-    friends = friendList()
-    exchange = tradesList()
-    return render_template("connection.html", user = activeUser, friends = friends, exchanges = exchange)
+    if activeUser[0] == 1:
+        return render_template("index.html", user = activeUser, friends = friendList(activeUser[1]), exchanges = tradesList(activeUser[1]))
     
+    else:
+        return render_template("index.html", user = activeUser, friends = [], exchanges = [])
+    
+@app.route('/authentication')
+def authentication():
+    global activeUser
 
-@app.route('/signin')
-def signin():
+    return render_template("authentication.html", user = activeUser)
+
+@app.route('/login')
+def login():
     collect = request.args
-    username = collect['usernameSignIn']
-    password = collect['passwordSignIn']
-    signIn(username, password)
+    username = collect['usernameLogIn']
+    password = collect['passwordLogIn']
+    logIn(username, password)
     return redirect(url_for('index'))
 
 @app.route('/signup')
@@ -400,20 +392,20 @@ def signup():
     signUp(username, displayname, email, phone, password)
     return redirect(url_for('index'))
 
-@app.route('/signout')
-def signout():
+@app.route('/logout')
+def logout():
     global activeUser
-    activeUser = 3
+    activeUser = [0, "Successfully logged out"]
     return redirect(url_for('index'))
 
 @app.route('/collection')
 def collection():
     global activeUser
 
-    if not type(activeUser) == int:
+    if activeUser[0] == 1:
         connection = sqlite3.connect('club.db')
         cursor = connection.cursor()
-        cursor.execute("SELECT id FROM " + activeUser + "_collection")
+        cursor.execute("SELECT id FROM " + activeUser[1] + "_collection")
         output = cursor.fetchall()
         cursor.close()
         connection.close()
@@ -424,15 +416,16 @@ def collection():
 
 @app.route('/friendrequest')
 def friendrequest():
-    collect = request.args
-    friendUsername = collect['friendUsername']
-    friendRequest(friendUsername)
-    return redirect(url_for('index'))
+    global activeUser
+
+    if activeUser[0] == 1:
+        collect = request.args
+        friendUsername = collect['friendUsername']
+        friendRequest(activeUser[1], friendUsername)
+        return redirect(url_for('index'))
 
 @app.route('/friendAction/<action>/<friendUsername>')
 def friendAction(action, friendUsername):
-    # action = request.args.get('action')
-    # friendUsername = request.args.get('friendUsername')
     friendAction(friendUsername, action)
     return redirect(url_for('index'))
 
@@ -449,6 +442,26 @@ def tradeoffer():
 def trade(action, id):
     tradeAction(action, id)
     return redirect(url_for('index'))
+
+@app.route('/members')
+def members():
+    pass
+
+@app.route('/catalogue')
+def catalogue():
+    pass
+
+@app.route('/booster')
+def booster():
+    pass
+
+@app.route('/profile/<username>')
+def profile(username):
+    pass
+
+@app.route('/settings/<username>')
+def settings(username):
+    pass
 
 ##################################################
 # Script autorun
