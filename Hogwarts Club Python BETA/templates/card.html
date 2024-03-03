@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}" />
+
+{% endblock %} {% block title %} Collection {% endblock %} {% block content %}
+
+<div id="{{ cardId }}" class="card">
+    <div id="image"></div>
+    <div id="cardSpecs">
+        <section>
+            <div>
+                <h2 class="spec" id="name"></h2>
+                <h3 class="spec" id="actor"></h3>
+            </div>
+        </section>
+
+        <section>
+            <div class="separator">Wizard qualities</div>
+            <div>
+                <div class="spec" id="blood">Blood: </div>
+                <div class="spec" id="wand">Wand: </div>
+                <div class="spec" id="patronus">Patronus: </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="separator">Hogwarts position</div>
+            <div>
+                <div class="spec" id="role">Role: </div>
+                <div class="spec" id="house">House: </div>
+            </div>
+            
+        </section>
+
+        <section>
+            <div class="separator">Aspect</div>
+            <div>
+                <div class="spec" id="eyes">Eyes: </div>
+                <div class="spec" id="hairs">Hairs: </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %} {% block scripts %}
+
+<script src="{{ url_for('static', filename='javascript/card.js') }}"></script>
+
+{% endblock %}

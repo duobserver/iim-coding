@@ -168,6 +168,35 @@ def removeCard(username, cardId):
     cursor.close()
     connection.close()
 
+def Favorite(username, cardId):
+    """
+    This function sets a specific card as favorite or not in the user's collection
+    """
+    print(cardId)
+
+    connection = sqlite3.connect('club.db')
+    cursor = connection.cursor()
+
+    # looking for a card copy in the user's collection
+    cursor.execute("SELECT * FROM " + username + "_collection WHERE id = " + str(cardId))
+    card = cursor.fetchall()
+
+    if len(card) == 1:
+        if card[0][2] == 1:
+            # if the user has the card and it's set as favorite
+            cursor.execute("UPDATE " + username + "_collection SET favored = 0 WHERE id =" + cardId)
+            connection.commit()
+
+        else:
+            # if the user has the card and it's not set as favorite
+            cursor.execute("UPDATE " + username + "_collection SET favored = 1 WHERE id =" + cardId)
+            connection.commit()
+
+    cursor.close()
+    connection.close()
+
+
+
 #########################
 # Friends queries
 
@@ -357,6 +386,9 @@ def tradeAction(action, id):
 
 app = Flask(__name__)
 
+#########################
+# Home page
+
 @app.route('/')
 def index():
     global activeUser
@@ -366,7 +398,10 @@ def index():
     
     else:
         return render_template("index.html", user = activeUser, friends = [], exchanges = [])
-    
+
+#########################
+# Account connection pages
+
 @app.route('/authentication')
 def authentication():
     global activeUser
@@ -398,6 +433,9 @@ def logout():
     activeUser = [0, "Successfully logged out"]
     return redirect(url_for('index'))
 
+#########################
+# User's collection page
+
 @app.route('/collection')
 def collection():
     global activeUser
@@ -405,14 +443,75 @@ def collection():
     if activeUser[0] == 1:
         connection = sqlite3.connect('club.db')
         cursor = connection.cursor()
-        cursor.execute("SELECT id FROM " + activeUser[1] + "_collection")
+
+        cursor.execute("SELECT * FROM " + activeUser[1] + "_collection")
         output = cursor.fetchall()
+
         cursor.close()
         connection.close()
-        return render_template("collection.html", response = output)
+        return render_template("collection.html", user = activeUser,  response = output)
     
     else:
-        return render_template("collection.html", response = [])
+        return render_template("collection.html", user = activeUser)
+
+@app.route('/favorites')
+def favorites():
+    global activeUser
+
+    if activeUser[0] == 1:
+        connection = sqlite3.connect('club.db')
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT * FROM " + activeUser[1] + "_collection WHERE favored = 1")
+        output = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+        return render_template("favorites.html", user = activeUser,  response = output)
+    
+    else:
+        return render_template("collection.html", user = activeUser)
+
+@app.route('/card/<cardId>')
+def card(cardId):
+    global activeUser
+
+    if activeUser[0] == 1:
+        return render_template("card.html", user = activeUser, cardId = cardId)
+
+    return redirect(url_for('index'))
+
+@app.route('/fave/<cardId>')
+def fave(cardId):
+    global activeUser
+
+    if activeUser[0] == 1:
+        Favorite(activeUser[1], cardId)
+
+    return redirect(url_for('collection'))
+
+#########################
+# User's friends pages
+
+@app.route('/friends')
+def friends():
+    global activeUser
+
+    if activeUser[0] == 1:
+        connection = sqlite3.connect('club.db')
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT * FROM " + activeUser[1] + "_friends")
+        output = cursor.fetchall()
+
+        print(output)
+
+        cursor.close()
+        connection.close()
+        return render_template("friends.html", user = activeUser,  friends = output)
+    
+    else:
+        return render_template("friends.html", user = activeUser)
 
 @app.route('/friendrequest')
 def friendrequest():
@@ -424,8 +523,8 @@ def friendrequest():
         friendRequest(activeUser[1], friendUsername)
         return redirect(url_for('index'))
 
-@app.route('/friendAction/<action>/<friendUsername>')
-def friendAction(action, friendUsername):
+@app.route('/friendaction/<action>/<friendUsername>')
+def friendaction(action, friendUsername):
     friendAction(friendUsername, action)
     return redirect(url_for('index'))
 
@@ -453,7 +552,7 @@ def catalogue():
 
 @app.route('/booster')
 def booster():
-    pass
+    return ("Work In Progress")
 
 @app.route('/profile/<username>')
 def profile(username):

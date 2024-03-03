@@ -1,0 +1,65 @@
+{% extends "base.html" %} 
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/friends.css') }}" />
+
+{% endblock %}
+
+{% block title %}
+
+Collection
+
+{% endblock %}
+
+{% block content %}
+
+<h2>My friends</h2>
+<p>Here you can view your current friends and send new friend requests.</p>
+
+<div id="friends">
+    {% for friend in friends %}
+
+    <div class="friend">
+        <div class="friendInfo">
+            {% if friend[1] == 0 or friend[1] == 1: %}
+            <!-- if it's a pending friend request -->
+                <span class="material-symbols-rounded pending" title="Pending"> schedule </span>
+            
+            {% else: %}
+            <!-- if the friend has been accepted -->
+                <span class="material-symbols-rounded accepted" title="Accepted"> check_circle </span>
+
+            {% endif %}
+
+            <p><strong>{{ friend[0] }}</strong></p>
+        </div>
+
+        <div class="friendOptions">
+            {% if friend[1] == 0 %}
+            <!-- if it's a pending friend request -->
+            <a href="{{ url_for('friendaction', action = 'delete', friendUsername = friend[0]) }}" class="delete"><span class="material-symbols-rounded reject" title="Delete friend request"> cancel </span></a>
+
+            {% elif friend[1] == 1 %}
+            <!-- if the scipt is waiting for a response (pending) -->
+            <a href="{{ url_for('friendaction', action = 'accept', friendUsername = friend[0]) }}" class="accept"><span class="material-symbols-rounded accept" title="Accept friend request"> check_circle </span></a>
+
+            <a href="{{ url_for('friendaction', action = 'reject', friendUsername = friend[0]) }}" class="reject"><span class="material-symbols-rounded reject" title="Reject friend request"> cancel </span></a>
+
+            {% elif friend[1] == 2 %}
+            <!-- if the friend request haas been accepted -->
+            <a href="{{ url_for('friendaction', action = 'delete', friendUsername = friend[0]) }}" class="delete"><span class="material-symbols-rounded reject" title="Delete friend"> cancel </span> </a>
+
+            {% endif %}
+        </div>        
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='javascript/cards.js') }}"></script>
+
+{% endblock %}

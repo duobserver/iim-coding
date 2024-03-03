@@ -1,0 +1,51 @@
+#friends {
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--primaryColor);
+}
+
+.friend, .friendInfo, .friendOptions {
+    /* padding: 0 1rem; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: white;
+}
+
+.friend:not(:first-child) {
+    border-top: 1px solid grey;
+}
+
+.friendOptions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+a {
+    display: flex;
+    align-items: center;
+}
+
+.pending {
+    color: orange;
+}
+
+.accept {
+    color: greenyellow;
+    font-size: 2rem;
+    font-variation-settings: "FILL" 0;
+}
+
+.reject {
+    color: red;
+    font-size: 2rem;
+    font-variation-settings: "FILL" 0;
+}
+
+.accepted {
+    color: greenyellow;
+}

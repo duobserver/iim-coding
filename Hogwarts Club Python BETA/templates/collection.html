@@ -1,0 +1,51 @@
+{% extends "base.html" %} 
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}" />
+
+{% endblock %}
+
+{% block title %}
+
+Collection
+
+{% endblock %}
+
+{% block content %}
+
+<h2>My cards collection</h2>
+<p>Every card that you own on this account will be shown here.</p>
+
+<div class="cards">
+    {% for card in response %}
+
+    <div class="card" id="{{ card[0] }}">
+        <a class="cardLink" href="{{ url_for('card', cardId = card[0]) }}">
+            <div class="cardName"></div>
+            <div class="cardImage"></div>
+        </a>
+
+        {% if card[2] == 1 %}
+        <a class="cardFavorite faved" href="{{ url_for('fave', cardId = card[0]) }}">
+            <span class="material-symbols-rounded">favorite</span>
+        </a>
+
+        {% else %}
+        <a class="cardFavorite" href="{{ url_for('fave', cardId = card[0]) }}">
+            <span class="material-symbols-rounded">favorite</span>
+        </a>
+
+        {% endif %}
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='javascript/cards.js') }}"></script>
+
+{% endblock %}

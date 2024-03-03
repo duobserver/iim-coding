@@ -1,65 +1,77 @@
-<!-- Flask/Jinja page template template -->
+<!-- Flask/Jinja template -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+        <!-- Load additional css files -->
         {% block styles %}{% endblock %}
 
+        <!-- Set a custom tab title -->
         <title>{% block title %}{% endblock %} | Hogwarts Club</title>
     </head>
     <body>
+        <!-- Custom navbar -->
         <nav id="main">
-            <p class="main-title">
+            <div class="main-title">
                 HOGWARTS CLUB
                 <span class="material-symbols-rounded" id="open-menu-span"> menu </span>
                 <span class="material-symbols-rounded" id="close-menu-span"> close </span>
-            </p>
+            </div>
 
             <ul class="main-menu">
+                <!-- If an user is connected -->
                 {% if user[0] == 1: %}
 
                     <li class="sub">
-                        <p class="sub-title" title="My cards"><span class="material-symbols-rounded"> grid_view </span>Cards</p>
+                        <div class="sub-title" title="My cards"><span class="material-symbols-rounded"> grid_view </span>Cards</div>
 
                         <ul class="sub-menu">
                             <li title="My cards collection">
                                 <a class="nav-link" href="{{ url_for('collection') }}"><span class="material-symbols-rounded"> square </span>Collection</a>
                             </li>
 
+                            <li title="My favorite cards">
+                                <a class="nav-link" href="{{ url_for('favorites') }}"><span class="material-symbols-rounded"> favorite </span>Favorites</a>
+                            </li>
+
                             <li title="My free booster">
-                                <a class="nav-link" href="{{ url_for('booster') }}"><span class="material-symbols-rounded"> bolt </span>Booster</a>
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> bolt </span>Booster</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="sub">
-                        <p class="sub-title" title="Discover"><span class="material-symbols-rounded"> search </span>Discover</p>
+                        <div class="sub-title" title="Discover"><span class="material-symbols-rounded"> search </span>Discover</div>
 
                         <ul class="sub-menu">
                             <li title="Club members">
-                                <a class="nav-link" href="{{ url_for('members') }}"><span class="material-symbols-rounded"> groups </span>Members</a>
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> groups </span>Members</a>
                             </li>
 
                             <li title="Cards catalogue">
-                                <a class="nav-link" href="{{ url_for('catalogue') }}"><span class="material-symbols-rounded"> book </span>Catalogue</a>
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> book </span>Catalogue</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="sub">
-                        <p class="sub-title" title="Account"><span class="material-symbols-rounded"> person </span>{{ user[1] }}</p>
+                        <div class="sub-title" title="Account"><span class="material-symbols-rounded"> person </span>{{ user[1] }}</div>
 
                         <ul class="sub-menu">
                             <li title="My public profile">
-                                <a class="nav-link" href="{{ url_for('profile', username = user[1]) }}"><span class="material-symbols-rounded"> visibility </span>Profile</a>
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> visibility </span>Profile</a>
+                            </li>
+
+                            <li title="My friends">
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> groups </span>Friends</a>
                             </li>
 
                             <li title="Account settings">
-                                <a class="nav-link" href="{{ url_for('settings', username = user[1]) }}"><span class="material-symbols-rounded"> settings </span>Settings</a>
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> settings </span>Settings</a>
                             </li>
 
                             <li title="Log out">
@@ -69,23 +81,24 @@
                     </li>
 
                 {% else: %}
-                
+                <!-- If there are no connected users -->
+
                     <li class="sub">
-                        <p class="sub-title" title="Discover"><span class="material-symbols-rounded"> search </span>Discover</p>
+                        <div class="sub-title" title="Discover"><span class="material-symbols-rounded"> search </span>Discover</div>
 
                         <ul class="sub-menu">
                             <li title="Club members">
-                                <a class="nav-link" href="{{ url_for('members') }}"><span class="material-symbols-rounded"> groups </span>Members</a>
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> groups </span>Members</a>
                             </li>
 
                             <li title="Cards catalogue">
-                                <a class="nav-link" href="{{ url_for('catalogue') }}"><span class="material-symbols-rounded"> book </span>Catalogue</a>
+                                <a class="nav-link" href=""><span class="material-symbols-rounded"> book </span>Catalogue</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="sub">
-                        <p class="sub-title" title="Account"><span class="material-symbols-rounded"> person </span>Account</p>
+                        <div class="sub-title" title="Account"><span class="material-symbols-rounded"> person </span>Account</div>
 
                         <ul class="sub-menu">
                             <li title="Log out">
@@ -101,7 +114,16 @@
         <div id="overlay"></div>
 
         <main>
-            {% block content %}{% endblock content %}
+            {% if "authentication" in request.path or user[0] == 1: %}
+                {% block content %}{% endblock content %}
+
+            {% else: %}
+                <div>
+                    Please sign in to view this content
+                </div>
+                <a href="{{ url_for('authentication') }}">Log In / Sign Up</a>
+
+            {% endif %}            
         </main>
 
         <!-- <div id="send-overlay"></div>
@@ -145,7 +167,11 @@
                 </form>
             </div>
         </div> -->
+
         <script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+
+        <!-- Load additional javascript files -->
+        {% block scripts %}{% endblock %}
 
     </body>
 </html>

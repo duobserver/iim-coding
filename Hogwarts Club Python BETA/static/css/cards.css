@@ -1,0 +1,63 @@
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    width: 150px;
+
+    border: var(--border);
+    border-radius: 1rem;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5.1px);
+    -webkit-backdrop-filter: blur(10px);
+
+    overflow: hidden;
+}
+
+.cardName {
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    color: white;
+    background-color: var(--primaryColor);
+}
+
+.cardImage {
+    aspect-ratio: 1/1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cardFavorite {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    color: white;
+    background-color: var(--primaryColor);
+}
+
+.faved {
+    color: red;
+}
+
+.Gryffindor {
+    border-color: gold;
+}
+
+.Slytherin {
+    border-color: green;
+}
+
+.Ravenclaw {
+    border-color: cyan;
+}
+
+.Hufflepuff {
+    border-color: red;
+}

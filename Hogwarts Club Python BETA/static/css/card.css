@@ -1,0 +1,80 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Gryffindor {
+    border-color: gold;
+}
+
+.Slytherin {
+    border-color: green;
+}
+
+.Ravenclaw {
+    border-color: cyan;
+}
+
+.Hufflepuff {
+    border-color: red;
+}
+
+.card > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+}
+
+#image {
+    height: 400px;
+    aspect-ratio: 1/1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    border-width: 2px;
+    border-style: solid;
+
+    backdrop-filter: blur(5.1px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#cardSpecs {
+    height: 100%;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    background-color: var(--primaryColor);
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card h2, .card h3 {
+    text-align: center;
+}
+
+h3 {
+    color: var(--secondaryColor);
+}
+
+.separator {
+    text-align: center;
+    padding: 0.5rem 0;
+    color: var(--secondaryColor);
+    border-top: 2px solid var(--secondaryColor);
+}
+
+@media only screen and (min-width: 960px) {
+    .card {
+        flex-direction: row;
+    }
+}
