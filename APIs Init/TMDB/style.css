@@ -11,16 +11,21 @@ body {
 
 body {
   width: 100dvw;
-  min-height: 100dvh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
-#movie {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+div {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+#poster {
+    background-position: center;
+    background-repeat: no-repeat;
   }
