@@ -54,6 +54,7 @@
     <?php require_once "aside.template.php" ?>
 
     <script src="read.js"></script>
+    <script src="gweetPost.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,68 @@
+/* gweet posting fomr styling */
+#overlay {
+    position: fixed;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    z-index: 101;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#gweetPost {
+    position: relative;
+    padding: 1rem 2rem;
+    background-color: var(--primaryColor);
+    border-radius: 1rem;
+    filter: drop-shadow(0 0 5px black);
+}
+
+#gweetPost span {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+#gweetPost textarea {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 1rem;
+    outline: none;
+    resize: vertical;
+}
+
+#gweetPost textarea::-webkit-resizer {
+    border-radius: 1rem;
+    background-color: white;
+}
+
+#gweetPost textarea:focus {
+    border-color: var(--accentColor);
+}
+
+#gweetPost textarea:focus::-webkit-resizer {
+    background-color: var(--accentColor);
+}
+
+#gweetPost input[type="submit"] {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 9999px;
+}
+
+#gweetPost input[type="submit"]:hover {
+    color: var(--primaryColor);
+    background-color: white;
+}

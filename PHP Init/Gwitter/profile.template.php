@@ -109,6 +109,7 @@
 
     <script src="read.js"></script>
     <script src="top.js"></script>
+    <script src="gweetPost.js"></script>
 </body>
 
 </html>

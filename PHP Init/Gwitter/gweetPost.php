@@ -1,17 +1,17 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'gweet') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'gweetPost') {
     require_once "database.php";
     session_start();
 
     if (isset($_SESSION['userId']) && isset($_SESSION['userPassword'])) {
         $data = [
-            'authorId' => $_SESSION['userId'],
+            'gweetAuthor' => $_SESSION['userId'],
             'gweetContent' => $_POST['content']
         ];
 
-        $query = $database->prepare("INSERT INTO gweets (authorId, gweetContent) VALUES (:authorId, :gweetContent)");
+        $query = $database->prepare("INSERT INTO gweets (gweetAuthor, gweetContent) VALUES (:gweetAuthor, :gweetContent)");
         $query->execute($data);
-
-        header("location: home.php");
     };
 };
+
+header("Location: {$_SERVER['HTTP_REFERER']}");

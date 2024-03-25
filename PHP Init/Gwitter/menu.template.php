@@ -26,7 +26,7 @@
                 <span class="material-symbols-rounded">logout</span>Logout
             </a>
 
-            <a href="" id="gweet" class="navLink" title="Post a new gweet">
+            <a id="gweet" class="navLink" title="Post a new gweet">
                 <span class="material-symbols-rounded">send</span>Gweet
             </a>
         </div>
