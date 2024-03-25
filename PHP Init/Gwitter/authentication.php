@@ -58,7 +58,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'signup') {
 
     // if the operation fails, a message will be shown
     if ($query->execute($data)) {
-        header("location: authentication.php?response=4");
+        echo $data['username'];
+        $query = $database->prepare("SELECT userId FROM users WHERE userName = '" . $data['username'] . "'");
+        $query->execute();
+        $response = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $userId = $response[0]['userId'];
+
+        $query = $database->prepare("CREATE TABLE `" . $userId . "_follows` (`followId` INT NOT NULL COMMENT 'Following user identifier' , `followStatus` INT NOT NULL COMMENT 'Follow status (\r\n0: following id,\r\n1: followed by id,\r\n2: both)' ) ENGINE = InnoDB");
+        $query->execute();
+
+        $query = $database->prepare("CREATE TABLE `" . $userId . "_likes` (`likeId` INT NOT NULL COMMENT 'Liked gweet identifier ' ) ENGINE = InnoDB;");
+        $query->execute();
+
+        header("location: authentication.php?auth=login&response=4");
     } else {
         header("location: authentication.php?response=5");
     };
