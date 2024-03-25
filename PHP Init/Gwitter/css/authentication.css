@@ -1,0 +1,18 @@
+/* authentucation page styling */
+input {
+    width: 90%;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 9999px;
+}
+
+input[type="submit"] {
+    width: fit-content;
+}
+
+input[type="submit"]:hover {
+    color: var(--primaryColor);
+    background-color: white;
+}

@@ -36,26 +36,18 @@
 
         <div id="navLinks">
             <a href="home.php?read=feed" id="home" class="navLink" title="Read the most recent gweets">
-                <span class="material-symbols-rounded">home</span>Home
+                <span class="material-symbols-rounded">home</span>Feed
             </a>
 
             </a>
 
-            <a href="logout.php" id="logout" class="navLink" title="Log out of your accout">
-                <span class="material-symbols-rounded">logout</span>Logout
+            <a href="authentication.php" id="login" class="navLink" title="Log into your accout">
+                <span class="material-symbols-rounded">login</span>Login
             </a>
 
-            <a href="" id="gweet" class="navLink" title="Post a new gweet">
-                <span class="material-symbols-rounded">send</span>Gweet
+            <a href="authentication.php" id="signup" class="navLink" title="Create a new Gwitter account">
+                <span class="material-symbols-rounded">assignment_ind</span>Signup
             </a>
         </div>
-
-        <ul>
-            <li id="home" title="Read the most recent gweets">
-                <span class="material-symbols-rounded">home </span><a href="home.php?read=feed" class="navLink">Home</a>
-            </li>
-            <li><a href="" class="navLink">Signup</a></li>
-            <li><a href="" class="navLink">Feed</a></li>
-        </ul>
     <?php endif; ?>
 </nav>

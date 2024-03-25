@@ -70,9 +70,10 @@ header {
     text-align: center;
 }
 
-h2 {
+header h2 {
     margin: 0;
     padding: 1rem 0;
+    white-space: nowrap;
 }
 
 a,

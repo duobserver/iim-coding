@@ -101,7 +101,6 @@
         
         <article class="gweets">
             <?php $gweets = gweetFetch($_GET['read'], $_GET['userId']); ?>
-            <?php echo var_dump($gweets); ?>
             <?php require_once "gweetShow.php" ?>
         </article>
     </main>

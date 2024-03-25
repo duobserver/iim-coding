@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require_once "presets/reels.php" ?>
-    
+    <link rel="stylesheet" href="css/authentication.css">
+
     <title>Authentication | Gwitter</title>
 </head>
 
@@ -13,14 +14,6 @@
     <?php require_once "presets/components.php" ?>
 
     <main>
-        <header>
-            <h2>Authentication</h2>
-            <div class="headerRow">
-                <div class="feed">Login</div>
-                <div class="following">Signup</div>
-            </div>
-        </header>
-
         <?php if (isset($_GET['response'])) : ?>
             <?php
             /* authentication response codes
@@ -49,6 +42,9 @@
 
         <?php if (isset($_SESSION['userId']) && isset($_SESSION['userPassword'])) : ?>
             <!-- if a user is logged in -->
+            <header id="ribbonHeader">
+                <h2>Authentication</h2>
+            </header>
 
             <?php $data = ['userId' => $_SESSION['userId']]; ?>
             <?php $query = $database->prepare("SELECT userName FROM users WHERE userId=:userId"); ?>
@@ -56,18 +52,21 @@
             <?php $name = $query->fetchAll(PDO::FETCH_ASSOC); ?>
 
             <p>You are currently logged in as @<?php echo $name[0]['userName']; ?></p>
-            <form action="authentication.php" method="POST">
-                <input type="hidden" name="form" value="logout">
-                <input type="submit" value="Logout">
-            </form>
 
-            <pre>
+            <!-- <pre>
                 <?php var_dump($_SESSION); ?>
-            </pre>
+            </pre> -->
 
         <?php else : ?>
             <!-- if no one is logged in -->
 
+            <header id="ribbonHeader">
+                <h2>Authentication</h2>
+                <div class="headerRow">
+                    <a href="" class="feed">Login</a>
+                    <a href="" class="following">Signup</a>
+                </div>
+            </header>
             <form action="authentication.php" method="POST">
                 <input type="hidden" name="form" value="login">
                 <input type="text" name="username" placeholder="Username" required>
@@ -80,18 +79,14 @@
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
-                <input type="password" name="passwordCheck" placeholder="Rewrite password">
+                <!-- <input type="password" name="passwordCheck" placeholder="Rewrite password"> -->
                 <input type="submit" value="Sign up">
             </form>
 
         <?php endif; ?>
     </main>
 
-    <aside>
-        <h2>New to Gwitter ?</h2>
-        <p>You can create a Gwitter account and join the Gwitverse today!</p>
-        <a href="authentication.php">Sign up</a>
-    </aside>
+    <?php require_once "aside.template.php"; ?>
 </body>
 
 </html>
