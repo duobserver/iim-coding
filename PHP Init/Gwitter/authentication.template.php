@@ -86,8 +86,7 @@
         <?php endif; ?>
     </main>
 
-    <?php require_once "aside.template.php"; ?>
-    <script src="authentication.js"></script>
+    <script src="javascript/authentication.js"></script>
 </body>
 
 </html>

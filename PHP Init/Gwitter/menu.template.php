@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
 <?php require_once "database.php" ?>
 
 <nav id="sidebar">
@@ -18,7 +23,7 @@
                 <span class="material-symbols-rounded">account_circle</span>Profile
             </a>
 
-            <a href="settings.php?userId=<?php echo $_SESSION['userId']; ?>" id="settings" class="navLink" title="Change your account settings">
+            <a href="settings.php" id="settings" class="navLink" title="Change your account settings">
                 <span class="material-symbols-rounded">settings</span>Settings
             </a>
 

@@ -67,7 +67,7 @@
                     <div class="gweetText">
                         <!-- text column -->
                         <h3 class="gweetTitle">
-                            <a href="profile.php?userId=<?php echo $gweet['userId']; ?>&read=author" class="gweetAuthor" style="color: <?php echo $gweet['userColor']; ?>;">
+                            <a href="profile.php?userId=<?php echo $gweet['userId']; ?>&read=author" class="gweetAuthor">
                                 <?php echo $gweet['userName']; ?>
                             </a>
 
@@ -91,7 +91,7 @@
                     <div class="gweetText">
                         <!-- text column -->
                         <h3 class="gweetTitle">
-                            <a href="profile.php?userId=<?php echo $gweet['userId']; ?>&read=author" class="gweetAuthor" style="color: <?php echo $gweet['userColor']; ?>;">
+                            <a href="profile.php?userId=<?php echo $gweet['userId']; ?>&read=author" class="gweetAuthor">
                                 <?php echo $gweet['userName']; ?>
                             </a>
 

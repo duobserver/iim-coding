@@ -51,10 +51,8 @@
         <?php endif; ?>
     </main>
 
-    <?php require_once "aside.template.php" ?>
-
-    <script src="read.js"></script>
-    <script src="gweetPost.js"></script>
+    <script src="javascript/read.js"></script>
+    <script src="javascript/gweetPost.js"></script>
 </body>
 
 </html>

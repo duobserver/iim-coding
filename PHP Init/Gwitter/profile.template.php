@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/gweets.css">
     <link rel="stylesheet" href="css/profile.css">
 
-    <title>Document</title>
+    <title><?php echo $_GET['userId']?> | Gwitter</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                 $query->execute();
                 $user = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                echo "<h2 style='color: " . $profile[0]['userColor'] . ";'>" . $user[0]['userName'] . "</h2>";
+                echo "<h2>" . $user[0]['userName'] . "</h2>";
                 ?>
             </div>
 
@@ -77,7 +77,7 @@
         </header>
 
         <header id="infoHeader">
-            <p id="userBio"><?php echo $profile[0]['userBio']; ?></p>
+            <p id="userBio"><?php echo $profile[0]['userBio']; ?></p><br>
             <p id="userJoined"><span class="material-symbols-rounded">
                     calendar_month
                 </span>
@@ -105,11 +105,9 @@
         </article>
     </main>
 
-    <?php require_once "aside.template.php" ?>
-
-    <script src="read.js"></script>
-    <script src="top.js"></script>
-    <script src="gweetPost.js"></script>
+    <script src="javascript/read.js"></script>
+    <script src="javascript/top.js"></script>
+    <script src="javascript/gweetPost.js"></script>
 </body>
 
 </html>
