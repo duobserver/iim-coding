@@ -1,0 +1,30 @@
+/* sidebar styling */
+nav h2 {
+    color: var(--accentColor);
+}
+
+nav a {
+    width: 100%;
+    font-size: 1.5rem;
+    border-radius: 9999px;
+}
+
+nav a:hover {
+    background-color: rgba(0, 255, 255, 0.25);
+}
+
+.navLink {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+nav #gweet, nav #gweet * {
+    color: var(--accentColor);
+}
+
+nav #logout:hover {
+    background-color: rgba(255, 0, 0, 0.25);
+}

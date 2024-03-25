@@ -1,0 +1,89 @@
+/* global css sheet */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Noto Sans';
+    transition: all 0.25s;
+}
+
+:root {
+    font-size: 16px;
+    --primaryColor: #1b1b1b;
+    --secondaryColor: grey;
+    --accentColor: cyan;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100dvh;
+    padding: 0 15dvw;
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    background-color: #1b1b1b;
+}
+
+.material-symbols-rounded {
+    font-size: 1.5rem;
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+main {
+    width: 100%;
+    overflow-y: scroll;
+    scrollbar-width: 0;
+    -ms-overflow-style: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
+}
+
+/* header styling */
+header {
+    padding: 1rem 0;
+    background-color: var(--primaryColor);
+}
+
+#ribbonHeader {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#ribbonHeader div {
+    display: flex;
+    width: 100%;
+}
+
+#ribbonHeader a {
+    width: 100%;
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+    padding: 1rem 0;
+}
+
+a,
+a:link,
+a:visited,
+a:active {
+    text-decoration: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

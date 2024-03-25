@@ -1,0 +1,64 @@
+/* gwitter profile page styling */
+/* profile header */
+#profileHeader {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#profileTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profilePfp {
+    font-size: 3rem;
+}
+
+.settingsButton, .followButton {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+.settingsButton:hover, .followButton:hover {
+    color: #1b1b1b;
+    background-color: white;
+}
+
+.followButton.following {
+    color: #1b1b1b;
+    background-color: white;
+}
+
+.followButton.following:hover {
+    color: white;
+    background-color: transparent;
+}
+
+/* info header */
+#infoHeader {
+    position: unset;
+}
+
+#infoHeader #userJoined {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#infoHeader .detail {
+    color: grey;
+}
+

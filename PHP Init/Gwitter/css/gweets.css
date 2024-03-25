@@ -1,0 +1,88 @@
+.gweets {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gweet {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    overflow: hidden;
+    cursor: default;
+}
+
+.gweetPfp {
+    font-size: 2rem;
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.gweetText {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.gweetTitle,
+.gweetContent {
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.gweetAuthor {
+    font-weight: 800;
+}
+
+.gweetDate {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.gweetInteractions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gweet form {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.likeButton,
+.deleteButton {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.like,
+.delete {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+}
+
+.like:hover,
+.delete:hover {
+    color: red;
+}
+
+.like.true {
+    color: red;
+    font-variation-settings: "FILL" 1;
+}
+
+.like.true:hover {
+    color: rgba(255, 255, 255, 0.5);
+}
