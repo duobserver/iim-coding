@@ -18,7 +18,7 @@
         </header>
 
         <p>You can create a Gwitter account and join the Gwitverse today!</p>
-        <a href="authentication.php">Sign up</a>
+        <a href="authentication.php?auth=signup">Sign up</a>
     </aside>
 
 <?php endif; ?>

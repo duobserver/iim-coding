@@ -63,18 +63,18 @@
             <header id="ribbonHeader">
                 <h2>Authentication</h2>
                 <div class="headerRow">
-                    <a href="" class="feed">Login</a>
-                    <a href="" class="following">Signup</a>
+                    <a href="?auth=login" id="loginLink">Login</a>
+                    <a href="?auth=signup" id="signupLink">Signup</a>
                 </div>
             </header>
-            <form action="authentication.php" method="POST">
+            <form action="authentication.php" method="POST" id="loginForm">
                 <input type="hidden" name="form" value="login">
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="submit" value="Login">
             </form>
 
-            <form action="authentication.php" method="POST">
+            <form action="authentication.php" method="POST" id="signupForm">
                 <input type="hidden" name="form" value="signup">
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="email" name="email" placeholder="Email" required>
@@ -87,6 +87,7 @@
     </main>
 
     <?php require_once "aside.template.php"; ?>
+    <script src="authentication.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,16 @@
 /* authentucation page styling */
+a.activeAuth {
+    border-bottom: 2px solid var(--accentColor);
+}
+
+form.activeAuth {
+    display: block;
+}
+
+form:not(.activeAuth) {
+    display: none;
+}
+
 input {
     width: 90%;
     padding: 0.5rem 1rem;

@@ -41,11 +41,11 @@
 
             </a>
 
-            <a href="authentication.php" id="login" class="navLink" title="Log into your accout">
+            <a href="authentication.php?auth=login" id="login" class="navLink" title="Log into your accout">
                 <span class="material-symbols-rounded">login</span>Login
             </a>
 
-            <a href="authentication.php" id="signup" class="navLink" title="Create a new Gwitter account">
+            <a href="authentication.php?auth=signup" id="signup" class="navLink" title="Create a new Gwitter account">
                 <span class="material-symbols-rounded">assignment_ind</span>Signup
             </a>
         </div>
