@@ -6,22 +6,26 @@ session_start();
 if (isset($_SESSION['userId'])) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'settings') {
         if ($_POST['userPassword'] == $_SESSION['userPassword']) {
-            $_SESSION['userPassword'] = $_POST['newPassword'];
-
+            
             $data = [
                 'userName' => $_POST['userName'],
                 'userEmail' => $_POST['userEmail'],
-                'newPassword' => $_POST['newPassword'],
+                'newPassword' => $_SESSION['userPassword'],
                 'userBio' => $_POST['userBio'],
                 'userColor' => $_POST['userColor'],
             ];
 
+            if ($_POST['newPassword'] != '') {
+                $data['newPassword'] = $_POST['newPassword'];
+                $_SESSION['userPassword'] = $_POST['newPassword'];
+            };
+
             $query = $database->prepare('UPDATE users SET userName = :userName, userEmail = :userEmail, userPassword = :newPassword, userBio = :userBio, userColor = :userColor WHERE userId = '. $_SESSION['userId']);
             $query->execute($data);
-            
-            header("location: settings.php");
+
+            header("location: settings.php?response=Settings updated successfully");
         } else {
-            header("location: settings.php?response=1");
+            header("location: settings.php?response=Could not update settings");
         };
     };
 
@@ -31,5 +35,5 @@ if (isset($_SESSION['userId'])) {
 
     require_once "settings.template.php";
 } else {
-    header("Location: " . $_SERVER['HTTP_REFERER']);
+    header("Location: authentication.php?auth=login&response=Please log into an account to change its settings");
 };

@@ -50,7 +50,7 @@ function gweetFetch($mode, $author)
     } elseif ($mode == 'following') {
         // show all gweets from followed users
 
-        if (isset($_SESSION['userId']) && isset($_SESSION['userPassword'])) {
+        if (isset($_SESSION['userId'])) {
             // if an user is connected
             // fetch all gweets from followed users and mark liked ones or followed users
 
@@ -72,7 +72,7 @@ function gweetFetch($mode, $author)
     } elseif ($mode == 'author') {
         // show all gweets from specific user
 
-        if (isset($_SESSION['userId']) && isset($_SESSION['userPassword'])) {
+        if (isset($_SESSION['userId'])) {
             // if an user is connected
             // fetch all gweets from specific user and mark liked ones or followed users
 
@@ -87,14 +87,28 @@ function gweetFetch($mode, $author)
             $query->execute();
             $gweets = $query->fetchAll(PDO::FETCH_ASSOC);
             return ageRedux($gweets);
+        } else {
+            // if no one is connected
+            // fetch all gweets from specific user
+
+            $query = $database->prepare("
+            SELECT gweetId, gweetContent, userId, userName, userColor, gweetDate, TIMESTAMPDIFF(SECOND, gweetDate, NOW()) AS gweetAge 
+            FROM gweets 
+            INNER JOIN users ON gweets.gweetAuthor = users.userId 
+            WHERE gweets.gweetAuthor = " . $author . " 
+            ORDER BY gweets.gweetId DESC");
+            $query->execute();
+            $gweets = $query->fetchAll(PDO::FETCH_ASSOC);
+            return ageRedux($gweets);
         };
 
     } elseif ($mode == 'likes') {
         // show all likes gweets from specific user
 
-        if (isset($_SESSION['userId']) && isset($_SESSION['userPassword'])) {
+        if (isset($_SESSION['userId'])) {
             // if an user is connected
             // fetch all liked gweets from specific user and mark gweets that are liked by connected user
+
             $query = $database->prepare("
             SELECT gweetId, gweetContent, userId, userName, userColor, gweetDate, TIMESTAMPDIFF(SECOND, gweetDate, NOW()) AS gweetAge,
             CASE WHEN a.likeId IS NULL THEN 'FALSE' ELSE 'TRUE' END AS liked 
@@ -107,7 +121,21 @@ function gweetFetch($mode, $author)
             $query->execute();
             $gweets = $query->fetchAll(PDO::FETCH_ASSOC);
             return ageRedux($gweets);
-        };
+        } else {
+            // if no one is connected
+            // fetch all liked gweets from specific user
+
+            $query = $database->prepare("
+            SELECT gweetId, gweetContent, userId, userName, userColor, gweetDate, TIMESTAMPDIFF(SECOND, gweetDate, NOW()) AS gweetAge
+            FROM gweets 
+            INNER JOIN users ON gweets.gweetAuthor = users.userId 
+            INNER JOIN " . $author . "_likes b ON gweets.gweetId = b.likeId 
+            WHERE gweets.gweetId = b.likeId 
+            ORDER BY gweets.gweetId DESC");
+            $query->execute();
+            $gweets = $query->fetchAll(PDO::FETCH_ASSOC);
+            return ageRedux($gweets);
+        }
 
     } elseif ($mode == 'followers') {
         // show all followers of a specific user

@@ -35,9 +35,8 @@
             </div>
 
             <!-- profile interaction manager -->
-            <?php if (isset($_SESSION)) : // if an user is connected 
+            <?php if (isset($_SESSION['userId'])) : // if an user is connected 
             ?>
-
                 <?php if ($_SESSION['userId'] == $_GET['userId']) : // if the viewed profile is the user's profile 
                 ?>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 25, 2024 at 03:52 AM
+-- Generation Time: Mar 25, 2024 at 10:15 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -24,74 +24,188 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `6_follows`
+-- Table structure for table `21_follows`
 --
 
-CREATE TABLE `6_follows` (
+CREATE TABLE `21_follows` (
   `followId` int NOT NULL COMMENT 'Following user identifier',
   `followStatus` int NOT NULL COMMENT 'Follow status (\r\n0: following id,\r\n1: followed by id,\r\n2: both)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `6_follows`
+-- Dumping data for table `21_follows`
 --
 
-INSERT INTO `6_follows` (`followId`, `followStatus`) VALUES
-(9, 0),
-(7, 2);
+INSERT INTO `21_follows` (`followId`, `followStatus`) VALUES
+(22, 1),
+(24, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `6_likes`
+-- Table structure for table `21_likes`
 --
 
-CREATE TABLE `6_likes` (
-  `likeId` int NOT NULL COMMENT 'Liked gweet identifier'
+CREATE TABLE `21_likes` (
+  `likeId` int NOT NULL COMMENT 'Liked gweet identifier '
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `6_likes`
+-- Dumping data for table `21_likes`
 --
 
-INSERT INTO `6_likes` (`likeId`) VALUES
-(2),
-(3);
+INSERT INTO `21_likes` (`likeId`) VALUES
+(19),
+(11);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `7_follows`
+-- Table structure for table `22_follows`
 --
 
-CREATE TABLE `7_follows` (
-  `followId` int NOT NULL,
-  `followStatus` int NOT NULL
+CREATE TABLE `22_follows` (
+  `followId` int NOT NULL COMMENT 'Following user identifier',
+  `followStatus` int NOT NULL COMMENT 'Follow status (\r\n0: following id,\r\n1: followed by id,\r\n2: both)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `7_follows`
+-- Dumping data for table `22_follows`
 --
 
-INSERT INTO `7_follows` (`followId`, `followStatus`) VALUES
-(6, 2);
+INSERT INTO `22_follows` (`followId`, `followStatus`) VALUES
+(21, 0),
+(24, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `7_likes`
+-- Table structure for table `22_likes`
 --
 
-CREATE TABLE `7_likes` (
-  `likeId` int NOT NULL
+CREATE TABLE `22_likes` (
+  `likeId` int NOT NULL COMMENT 'Liked gweet identifier '
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `7_likes`
+-- Dumping data for table `22_likes`
 --
 
-INSERT INTO `7_likes` (`likeId`) VALUES
-(3);
+INSERT INTO `22_likes` (`likeId`) VALUES
+(11),
+(17),
+(24);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `23_follows`
+--
+
+CREATE TABLE `23_follows` (
+  `followId` int NOT NULL COMMENT 'Following user identifier',
+  `followStatus` int NOT NULL COMMENT 'Follow status (\r\n0: following id,\r\n1: followed by id,\r\n2: both)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `23_follows`
+--
+
+INSERT INTO `23_follows` (`followId`, `followStatus`) VALUES
+(24, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `23_likes`
+--
+
+CREATE TABLE `23_likes` (
+  `likeId` int NOT NULL COMMENT 'Liked gweet identifier '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `23_likes`
+--
+
+INSERT INTO `23_likes` (`likeId`) VALUES
+(13),
+(14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `24_follows`
+--
+
+CREATE TABLE `24_follows` (
+  `followId` int NOT NULL COMMENT 'Following user identifier',
+  `followStatus` int NOT NULL COMMENT 'Follow status (\r\n0: following id,\r\n1: followed by id,\r\n2: both)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `24_follows`
+--
+
+INSERT INTO `24_follows` (`followId`, `followStatus`) VALUES
+(21, 2),
+(22, 1),
+(25, 0),
+(23, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `24_likes`
+--
+
+CREATE TABLE `24_likes` (
+  `likeId` int NOT NULL COMMENT 'Liked gweet identifier '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `24_likes`
+--
+
+INSERT INTO `24_likes` (`likeId`) VALUES
+(12),
+(15),
+(26);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `25_follows`
+--
+
+CREATE TABLE `25_follows` (
+  `followId` int NOT NULL COMMENT 'Following user identifier',
+  `followStatus` int NOT NULL COMMENT 'Follow status (\r\n0: following id,\r\n1: followed by id,\r\n2: both)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `25_follows`
+--
+
+INSERT INTO `25_follows` (`followId`, `followStatus`) VALUES
+(24, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `25_likes`
+--
+
+CREATE TABLE `25_likes` (
+  `likeId` int NOT NULL COMMENT 'Liked gweet identifier '
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `25_likes`
+--
+
+INSERT INTO `25_likes` (`likeId`) VALUES
+(15);
 
 -- --------------------------------------------------------
 
@@ -111,13 +225,24 @@ CREATE TABLE `gweets` (
 --
 
 INSERT INTO `gweets` (`gweetId`, `gweetAuthor`, `gweetContent`, `gweetDate`) VALUES
-(1, 6, 'hello world', '2024-03-23 12:08:50'),
-(2, 7, 'nice to meet you', '2024-03-23 12:20:52'),
-(3, 9, 'time runs', '2024-03-23 15:49:11'),
-(4, 9, 'like i said', '2024-03-23 15:50:32'),
-(5, 6, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum dicta necessitatibus, numquam quis facere, tempora natus iusto praesentium vero ab, saepe impedit tenetur. Eaque officia, enim beatae culpa quam harum repudiandae at ex porro in id, nulla totam quibusdam suscipi', '2024-03-23 22:41:49'),
-(6, 6, 'lol', '2024-03-24 00:18:20'),
-(8, 6, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit harum dicta necessitatibus, numquam quis facere, tempora natus iusto praesentium vero ab, saepe impedit tenetur. Eaque officia, enim beatae culpa quam harum repudiandae at ex porro in id, nulla totam quibusdam suscipi', '2024-03-24 00:51:34');
+(11, 21, 'Hello World - 1972', '2024-03-25 21:21:52'),
+(12, 21, 'Guys please follow the Gwitter guidelines', '2024-03-25 21:25:20'),
+(13, 23, 'wassup guys get ready to be r3kt !!1!1', '2024-03-25 21:33:09'),
+(14, 24, 'hi guys ~', '2024-03-25 21:42:43'),
+(15, 24, 'Gwitter looks amazing !', '2024-03-25 21:42:53'),
+(16, 23, 'heyyy girl (*￣3￣)╭', '2024-03-25 21:51:13'),
+(17, 24, 'Eww.. stay away from me', '2024-03-25 21:53:27'),
+(18, 21, 'hello miss', '2024-03-25 21:54:25'),
+(19, 21, 'augh this community  will become like the others :(', '2024-03-25 21:55:10'),
+(20, 23, 'HEY! don\'t criticize my W rizz   ￣へ￣', '2024-03-25 21:56:39'),
+(21, 22, 'Hello everyone, I just want to say that my new restaurant opens tomorrow. Freddy and his gang are waiting for you at the pizza party, so come and join us !', '2024-03-25 21:59:40'),
+(22, 24, 'PIZZA ?? yay I\'m in !', '2024-03-25 22:03:27'),
+(23, 23, 'FOOD ?22?? bouta bring the bois w me !', '2024-03-25 22:04:33'),
+(24, 21, 'I don\'t trust you.', '2024-03-25 22:05:43'),
+(25, 22, 'Why are you saying that ? Friend ?', '2024-03-25 22:06:25'),
+(26, 25, 'meow ?', '2024-03-25 22:06:57'),
+(27, 24, 'awwwwwwwwwwwwwwwwwwwwwwwwwwww~ there\'s a kitty cat =￣ω￣=', '2024-03-25 22:08:08'),
+(28, 23, 'it\'s not nyancat tho :\'\'(', '2024-03-25 22:10:54');
 
 -- --------------------------------------------------------
 
@@ -140,9 +265,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `userName`, `userEmail`, `userPassword`, `userJoined`, `userBio`, `userColor`) VALUES
-(6, 'aa', 'a@a', 'aa', '2024-03-22 17:08:26', 'Hello, I\'m using Gwitter', '#007fff'),
-(7, 'bb', 'b@b', 'bb', '2024-03-22 17:12:02', 'Hello, I\'m using Gwitter', '#ff0000'),
-(9, 'cc', 'c@c', 'cc', '2024-03-22 18:39:47', 'Hello, I\'m using Gwitter', '#adff2f');
+(21, 'thatannoyingadmin', 'taa@gmail.com', 'd0ty0ud4r3', '2024-03-25 21:19:01', 'Hello, I\'m using Gwitter', '#ff0000'),
+(22, 'williamafton', 'william.afton@fazbear.com', '6ur6l39u1', '2024-03-25 21:27:00', 'Hi kids, I\'m a senior manager with a brilliant career in fast-food restauration', '#a000ff'),
+(23, 'supernoob2005', 'noob2005@hotmail.com', 'pleasedontbemeany', '2024-03-25 21:30:36', 'please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean please don\'t be mean', '#00ffc8'),
+(24, 'sleepybeauty', 'sl33py@outlook.com', 'sl339ym3', '2024-03-25 21:39:45', 'Hi ~ I like pancakes and I\'m sleepy (✿◠‿◠)', '#ffbeff'),
+(25, 'pussinboots', 'therealpuss@gmaim.com', 'm3ow', '2024-03-25 21:44:30', 'Hello, I\'m using Gwitter', '#1eff00');
 
 --
 -- Indexes for dumped tables
@@ -168,13 +295,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `gweets`
 --
 ALTER TABLE `gweets`
-  MODIFY `gweetId` int NOT NULL AUTO_INCREMENT COMMENT 'unique gweet identifier', AUTO_INCREMENT=10;
+  MODIFY `gweetId` int NOT NULL AUTO_INCREMENT COMMENT 'unique gweet identifier', AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int NOT NULL AUTO_INCREMENT COMMENT 'Unique user identifier', AUTO_INCREMENT=10;
+  MODIFY `userId` int NOT NULL AUTO_INCREMENT COMMENT 'Unique user identifier', AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -29,8 +29,12 @@
 
             <?php if ($_GET['read'] == 'following') : // if the user is only reading gweets from followed users 
             ?>
-                <?php $gweets = gweetFetch('following', 0); ?>
-                <?php require_once "gweetShow.php" ?>
+                <?php if (isset($_SESSION['userId'])) : ?>
+                    <?php $gweets = gweetFetch('following', 0); ?>
+                    <?php require_once "gweetShow.php" ?>
+                <?php else : ?>
+                    <?php header("location: authentication.php?auth=login&response=Please log into an account to view followed gweets") ?>
+                <?php endif; ?>
 
             <?php else : // if the user is reading all gweets 
             ?>

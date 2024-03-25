@@ -1,6 +1,7 @@
 <?php
 
 require_once "database.php";
+session_start();
 
 $query = $database->prepare('SELECT * FROM users WHERE userId = ' . $_GET['userId']);
 $query->execute();

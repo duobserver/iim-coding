@@ -8,4 +8,4 @@ session_unset();
 // terminate session
 session_destroy();
 
-header("location: authentication.php?auth=login&response=3");
+header("location: authentication.php?auth=login&response=Successfully logged out");

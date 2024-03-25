@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'login') {
             $_SESSION['userId'] = $response[0]['userId'];
             $_SESSION['userPassword'] = $response[0]['userPassword'];
 
-            header("location: authentication.php?response=1");
+            header("location: authentication.php?auth=login&response=Successfully logged in");
         } else {
             // if the user isn't recognized
-            header("location: authentication.php?response=2");
+            header("location: authentication.php?auth=login&response=Invalid credentials");
         };
     };
 };
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'logout') {
     // terminate session
     session_destroy();
 
-    header("location: authentication.php?response=3");
+    header("location: authentication.php?auth=login&response=Successfully logged out");
 };
 
 // signup operation
@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'signup') {
         $query = $database->prepare("CREATE TABLE `" . $userId . "_likes` (`likeId` INT NOT NULL COMMENT 'Liked gweet identifier ' ) ENGINE = InnoDB;");
         $query->execute();
 
-        header("location: authentication.php?auth=login&response=4");
+        header("location: authentication.php?auth=signup&response=Successfully created new account, login required");
     } else {
-        header("location: authentication.php?response=5");
+        header("location: authentication.php?auth=signup&response=Could not create new account");
     };
 };
 
