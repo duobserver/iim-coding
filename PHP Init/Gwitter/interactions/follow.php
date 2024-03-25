@@ -54,4 +54,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['form'] == 'follow') {
     };
 };
 
-header('location: ../home.php?read=feed');
+header("Location: {$_SERVER['HTTP_REFERER']}");

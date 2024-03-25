@@ -17,7 +17,8 @@
     <?php require_once "presets/components.php" ?>
 
     <main>
-        <?php if (isset($_GET['read']) && $_GET['read'] == 'following') : ?>
+        <?php if (isset($_SESSION['userId'])) : // header ribbon manager 
+        ?>
             <header id="ribbonHeader">
                 <h2>Home</h2>
                 <div>
@@ -26,24 +27,20 @@
                 </div>
             </header>
 
-            <!-- if the user is only reading gweets from followed users -->
-            <?php $gweets = gweetFetch('following', 0); ?>
-            <?php require_once "gweetShow.php" ?>
+            <?php if ($_GET['read'] == 'following') : // if the user is only reading gweets from followed users 
+            ?>
+                <?php $gweets = gweetFetch('following', 0); ?>
+                <?php require_once "gweetShow.php" ?>
 
-        <?php elseif(isset($_GET['read'])) : ?>
-            <header id="ribbonHeader">
-                <h2>Home</h2>
-                <div>
-                    <a href="home.php?read=feed" class="feed">Feed</a>
-                    <a href="home.php?read=following" class="following">Following</a>
-                </div>
-            </header>
+            <?php else : // if the user is reading all gweets 
+            ?>
+                <?php $gweets = gweetFetch('all', 0); ?>
+                <?php require_once "gweetShow.php" ?>
 
-            <!-- if the user is only reading gweets from followed users -->
-            <?php $gweets = gweetFetch('all', 0); ?>
-            <?php require_once "gweetShow.php" ?>
+            <?php endif; ?>
 
-        <?php else : ?>
+        <?php else : // if no one is connected 
+        ?>
             <header id="ribbonHeader">
                 <h2>Feed</h2>
             </header>

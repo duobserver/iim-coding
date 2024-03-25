@@ -1,13 +1,14 @@
 /* authentucation page styling */
-a.activeAuth {
+main a.activeAuth {
     border-bottom: 2px solid var(--accentColor);
 }
 
-form.activeAuth {
-    display: block;
+main form.activeAuth {
+    display: flex;
+    flex-direction: column;
 }
 
-form:not(.activeAuth) {
+main form:not(.activeAuth) {
     display: none;
 }
 
