@@ -1,4 +1,5 @@
 <?php
+    // VERY USEFUL LINE PLEASE REUSE EVERYWHERE
     if(!isset($_SESSION)) 
     { 
         session_start(); 
