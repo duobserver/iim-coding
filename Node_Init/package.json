@@ -4,7 +4,10 @@
   "description": "my first node.js package",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "_comment": "start = auto-start index, dev = auto-restart index.js when changes",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
   },
   "author": "duobserver",
   "license": "ISC",
