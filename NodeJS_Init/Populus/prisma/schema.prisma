@@ -1,0 +1,25 @@
+// PRISMA DATABASE MODEL
+
+// DO NOT FORGET to run prisma MIGRATION after every change with "npx prisma migrate dev --name init"
+// DO NOT DELETE migration files
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+// define database tables and columns
+model User {
+    id        Int      @id @default(autoincrement())
+    name      String
+    email     String   @unique
+    password  String
+    bio       String?  @default("Hello, I'm on Populus!")
+    color     String?  @default("#000000")
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
