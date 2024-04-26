@@ -1,0 +1,106 @@
+// PRISMA DATABASE MODEL
+
+// run prisma MIGRATION after every change with "npx prisma migrate dev --name init"
+// DO NOT DELETE migration files
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+// define database tables and columns
+
+model User {
+    id            Int      @id @default(autoincrement()) // unique user ID
+    email         String   @unique // unique user email address
+    password      String
+    lastConnected DateTime @default(now())
+
+    // updatedAt DateTime @updatedAt
+
+    profile   Profile @relation(fields: [profileId], references: [id]) // automatically create/associate new profile to user
+    profileId Int     @unique
+
+    friends Friend[] @relation(name: "Friends")
+    cards   Card[]   @relation(name: "Cards")
+}
+
+model Profile {
+    id               Int      @id @default(autoincrement())
+    name             String   @unique
+    age              Int
+    gender           Genders
+    biography        String   @default("Hello, I like Hogwarts Club!")
+    icon             String   @default("happy")
+    color            String   @default("#ffffff")
+    joinedOn         DateTime @default(now()) @db.Date
+    boosterLast      DateTime @default(now())
+    boosterAvailable Boolean  @default(true)
+
+    user User?
+}
+
+enum Genders {
+    MALE
+    FEMALE
+    NONBINARY
+}
+
+model Friend {
+    id       Int              @id @default(autoincrement())
+    status   FriendshipStatus
+    userId   Int
+    friendId Int
+    user     User             @relation("Friends", fields: [userId], references: [id]) // verify if sending user exists
+
+    @@unique([userId, friendId])
+}
+
+enum FriendshipStatus {
+    PENDING
+    RECEIVED
+    ACCEPTED
+}
+
+model Card {
+    cardId   Int
+    userId   Int
+    quantity Int  @default(0)
+    user     User @relation("Cards", fields: [userId], references: [id]) // verify if sending user exists
+
+    @@unique([cardId, userId])
+}
+
+model Trade {
+    id              Int    @id @default(autoincrement())
+    userId          Int
+    traderId        Int
+    cardInId        Int
+    cardInQuantity  Int
+    cardOutId       Int
+    cardOutQuantity Int
+    message         String @db.VarChar(128)
+}
+
+model Settings {
+    id     Int @id @default(autoincrement())
+    userId Int
+}
+
+model Log {
+    id      Int      @id @default(autoincrement())
+    userId  Int
+    type    logTypes
+    content String
+    notify  Boolean
+    read    Boolean
+}
+
+enum logTypes {
+    LOGIN
+    LOGOUT
+}

@@ -1,0 +1,21 @@
+// PRISMA DATABASE MODELs
+
+// run prisma MIGRATION after every change with "npx prisma migrate dev --name init"
+// DO NOT DELETE migration files
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+// define database tables and columns
+
+model Last {
+    id        Int    @id @default(1)
+    lastHouse String @default("Gryffindor")
+}
+

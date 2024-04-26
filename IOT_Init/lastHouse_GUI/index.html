@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <h1>Pick a character</h1>
+            <p>Character house color DEMO</p>
+        </header>
+
+        <section></section>
+        
+        <script>
+            // collecting data of specific pokemon from API
+            function fetchCharacters() {
+                return fetch("https://hp-api.lainocs.fr/characters/").then((response) => response.json());
+            }
+
+            // requesting data of random pokemon and showing its name and sprite
+            async function displayCharacters() {
+                const data = await fetchCharacters();
+
+                console.log(data);
+
+                data.forEach((element) => {
+                    let card = document.createElement("a");
+                    card.setAttribute("href", `card.html?slug=${element["slug"]}`);
+                    card.style.backgroundImage = `url(${element["image"]})`;
+                    if (!element["house"] == "") {
+                        card.classList.add(element["house"]);
+                        card.title = `${element["name"]} - ${element["house"]}`;
+                    } else {
+                        card.classList.add("unclassed");
+                        card.title = `${element["name"]} - Unclassed`;
+                    }
+                    document.querySelector("section").append(card);
+                });
+            }
+
+            // showing a first pokemon when the page is loaded
+            displayCharacters();
+        </script>
+    </body>
+</html>

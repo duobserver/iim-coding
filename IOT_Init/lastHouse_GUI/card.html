@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <h1></h1>
+            <p>Character house color DEMO</p>
+        </header>
+
+        <section>
+            <img src="" alt="" />
+            <ul>
+                <li id="house"><strong>House:</strong></li>
+                <li id="blood"><strong>Blood:</strong></li>
+                <li id="patronus"><strong>Patronus:</strong></li>
+                <br />
+                <li id="actor"><strong>Actor:</strong></li>
+                <li id="eyes"><strong>Eyes:</strong></li>
+                <li id="hairs"><strong>Hairs:</strong></li>
+            </ul>
+        </section>
+
+        <footer>
+            <h2>Custom light</h2>
+            <button id="Gryffindor">Gryffindor</button>
+            <button id="Slytherin">Slytherin</button>
+            <button id="Hufflepuff">Hufflepuff</button>
+            <button id="Ravenclaw">Ravenclaw</button>
+            <button id="none">None</button>
+        </footer>
+
+        <script>
+            // collecting data of specific character
+            function fetchCharacter(slug) {
+                return fetch("https://hp-api.lainocs.fr/characters/" + slug).then((response) => response.json());
+            }
+
+            function setColor(house) {
+                console.log("setting");
+                console.log(house);
+                // paste the given API IP address here
+                return fetch("http://xxx.xxx.xxx.xxx:xxxx/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ lastHouse: house }),
+                }).then((response) => response.json());
+            }
+
+            async function displayCharacter(slug) {
+                const data = await fetchCharacter(slug);
+                let set = await setColor(data["house"]);
+
+                document.querySelector("h1").innerHTML = data["name"];
+                document.querySelector("img").src = data["image"];
+
+                document.querySelectorAll("li").forEach((element) => {
+                    if (element.id == "house") {
+                        if (!data["house"] == "") {
+                            element.innerHTML += ` <span class="${data["house"]}Text"><strong>${data["house"]}</strong></span>`;
+                        } else {
+                            element.innerHTML += ` <span class="UnclassedText"><strong>Unclassed</strong></span>`;
+                        }
+                    } else {
+                        element.innerHTML += ` ${data[element.id]}`;
+                    }
+                });
+            }
+
+            document.querySelectorAll("button").forEach((element) => {
+                element.addEventListener("click", async function () {
+                    let query = await setColor(element.id);
+                    console.log(query);
+                });
+            });
+
+            // get slug value from URL
+            let queryString = window.location.search;
+            let urlParams = new URLSearchParams(queryString);
+            let slug = urlParams.get("slug");
+
+            console.log(slug);
+
+            // update lastHouse value according to slug
+            displayCharacter(slug);
+        </script>
+    </body>
+</html>
