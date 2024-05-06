@@ -1,15 +1,17 @@
+// User authentication module
+
 import prisma from "../config/prisma.js"; // import prisma functions
 
-import { generateAccessToken } from "../tools/jwt.js"; // import token generator
+import generateAccessToken from "../tools/jwt.js"; // import token generator
 
 import bCrypt from "../tools/bcrypt.js"; // import encryption tool
+const bcrypt = new bCrypt(); // create bCrypt class
 
 class AuthController {
     async login(req, res) {
         // log into user account
         try {
-            // get user credentials from body
-            const body = req.body;
+            const body = req.body; // get user credentials from body
 
             // check if user exists
             const user = await prisma.user.findUnique({
@@ -23,22 +25,19 @@ class AuthController {
 
             // if user does exist
 
-            // check if inserted password is same as user password
-            const isSamePassword = await bCrypt.comparePassword(body.password, user.password);
+            // check if received password is same as user password
+            const isSamePassword = await bcrypt.comparePassword(body.password, user.password);
 
             // if password is not valid
             if (!isSamePassword) return res.status(401).json({ message: "Invalid password" });
 
             // if password is valid
-            // grant access to account
-            const token = generateAccessToken(body.email);
-
-            // 200: ok/successful login
-            return res.status(200).json({ token });
+            const token = generateAccessToken(body.email); // generate new token
+            
+            return res.status(200).json({ token }); // send new token to user
         } catch (e) {
-            // if command fails
-            // 500: internal server error
-            return res.status(500).json({ message: e.message });
+            // if function fails
+            return res.status(500).json({ message: e.message }); // send internal server error message
         }
     }
 

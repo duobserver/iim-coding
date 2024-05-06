@@ -1,4 +1,4 @@
-// Passwrod encryption tool
+// Password encryption tool
 
 import bcrypt from "bcrypt"; // import bcrypt
 
@@ -10,7 +10,6 @@ class bCrypt {
     }
 
     async comparePassword(password, hash) {
-        // console.log("Comparing", password, hash);
         return await bcrypt.compare(password, hash);
     }
 }

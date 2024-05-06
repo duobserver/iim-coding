@@ -1,4 +1,4 @@
-// Hogwarts Club API routing file
+// Hogwarts Club API routing
 
 import express from "express";
 
