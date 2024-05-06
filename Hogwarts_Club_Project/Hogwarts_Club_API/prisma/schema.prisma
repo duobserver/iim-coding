@@ -80,9 +80,7 @@ model Trade {
     userId          Int
     traderId        Int
     cardInId        Int
-    cardInQuantity  Int
     cardOutId       Int
-    cardOutQuantity Int
     message         String @db.VarChar(128)
 }
 
@@ -91,16 +89,3 @@ model Settings {
     userId Int
 }
 
-model Log {
-    id      Int      @id @default(autoincrement())
-    userId  Int
-    type    logTypes
-    content String
-    notify  Boolean
-    read    Boolean
-}
-
-enum logTypes {
-    LOGIN
-    LOGOUT
-}

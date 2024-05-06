@@ -1,12 +1,8 @@
-// authentication system
-const prisma = require("../config/prisma");
+import prisma from "../config/prisma.js"; // import prisma functions
 
-// REMEBER to call the JWT generator
-const { generateAccessToken } = require("../utils/jwt");
+import { generateAccessToken } from "../tools/jwt.js"; // import token generator
 
-// call encrypting functions
-// const { hashPassword, comparePassword } = require("../utils/bcrypt");
-const bCrypt = require("../utils/bcrypt");
+import bCrypt from "../tools/bcrypt.js"; // import encryption tool
 
 class AuthController {
     async login(req, res) {
@@ -50,7 +46,7 @@ class AuthController {
         try {
             // if the user is authenticated
             // 200: authenticated successfully
-            return res.status(200).json( req.user );
+            return res.status(200).json(req.user);
         } catch (e) {
             return res.status(500).json({ message: e.message });
         }
@@ -58,4 +54,6 @@ class AuthController {
 }
 
 // use NEW to export a whole class with its functions
-module.exports = new AuthController();
+// module.exports = new AuthController();
+
+export default AuthController;

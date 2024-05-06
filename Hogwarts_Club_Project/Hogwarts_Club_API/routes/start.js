@@ -1,34 +1,38 @@
-// PROJECT ROUTING
-// express router = URL dictionary
-// REMEMBER to call dedicated modules
-const express = require("express");
+// Hogwarts Club API routing file
 
-// load controller classes
-const UserController = require("../controllers/UsersController");
-const AuthController = require("../controllers/AuthController");
-const { authenticateToken } = require("../middlewares/auth");
+import express from "express";
+
+// import controllers
+import UserController from "../controllers/UsersController.js";
+import AuthController from "../controllers/AuthController.js";
+
+// create controller classes
+const user = new UserController();
+const auth = new AuthController();
+
+import authenticateToken from "../middlewares/auth.js"; // import authentication middleware
 
 const router = express.Router();
 
 // POST log into user account with credentials (email, password)
-router.post("/login", AuthController.login);
+router.post("/login", auth.login);
 
 // GET show authenticated user informations (login required)
-router.get("/activeUser", authenticateToken, AuthController.myProfile);
+router.get("/activeUser", authenticateToken, auth.myProfile);
 
 // GET display all user (login not required)
-router.get("/people", UserController.index);
+router.get("/people", user.index);
 
 // POST create new user (login not required)
-router.post("/user", UserController.create);
+router.post("/user", user.create);
 
 // GET display specific user (login not required)
-router.get("/user/:id", UserController.read);
+router.get("/user/:id", user.read);
 
 // PUT update authenticated user informations (login required)
-router.put("/user", authenticateToken, UserController.update);
+router.put("/user", authenticateToken, user.update);
 
 // DELETE delete authenticated user (login required)
-router.delete("/user", authenticateToken, UserController.delete);
+router.delete("/user", authenticateToken, user.delete);
 
-module.exports = router;
+export default router;

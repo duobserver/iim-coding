@@ -1,13 +1,10 @@
-// BASIC USER API functions
+// Hogwarts Club API user funtions
 
-// REMEMBER the CRUD principle for fundamental API functions: Create, Read, Update and Delete
+import prisma from "../config/prisma.js"; // connect to database through prisma
 
-// connect to database through prisma
-const prisma = require("../config/prisma");
+import bCrypt from "../tools/bcrypt.js"; // import encryption module
 
-// call encrypting functions
-// const { hashPassword, comparePassword } = require("../utils/bcrypt"); COMMAND for single functions
-const bCrypt = require("../utils/bcrypt");
+const bcrypt = new bCrypt(); // create encryption class
 
 // declare API functions
 class UserController {
@@ -236,4 +233,5 @@ class UserController {
     }
 }
 
-module.exports = new UserController();
+// module.exports = new UserController();
+export default UserController;

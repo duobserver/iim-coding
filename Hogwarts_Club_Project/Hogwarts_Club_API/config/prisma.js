@@ -1,4 +1,6 @@
-// initialize prisma ORM connection
-const { PrismaClient } = require("@prisma/client");
+// PRISMA ORM INITIALIZATION
 
-module.exports = new PrismaClient();
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+export default prisma
