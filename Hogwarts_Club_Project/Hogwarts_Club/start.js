@@ -3,14 +3,14 @@
 import express from "express";
 
 // import controllers
-import UserController from "../controllers/UsersController.js";
-import AuthController from "../controllers/AuthController.js";
+import UserController from "./controllers/UsersController.js";
+import AuthController from "./controllers/AuthController.js";
 
 // create controller classes
 const user = new UserController();
 const auth = new AuthController();
 
-import authenticateToken from "../middlewares/auth.js"; // import authentication middleware
+import authenticateToken from "./middlewares/auth.js"; // import authentication middleware
 
 const router = express.Router();
 
@@ -20,8 +20,8 @@ router.post("/login", auth.login);
 // GET show authenticated user informations (login required)
 router.get("/activeUser", authenticateToken, auth.myProfile);
 
-// GET display all user (login not required)
-router.get("/people", user.index);
+// GET display all users (login not required)
+router.get("/members", user.index);
 
 // POST create new user (login not required)
 router.post("/user", user.create);

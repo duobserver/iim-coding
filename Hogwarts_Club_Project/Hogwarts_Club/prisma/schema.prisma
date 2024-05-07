@@ -1,4 +1,4 @@
-// PRISMA DATABASE MODEL
+// Prisma database model
 
 // run prisma MIGRATION after every change with "npx prisma migrate dev --name init"
 // DO NOT DELETE migration files
@@ -15,77 +15,95 @@ datasource db {
 // define database tables and columns
 
 model User {
-    id            Int      @id @default(autoincrement()) // unique user ID
-    email         String   @unique // unique user email address
-    password      String
+    id       Int    @id @default(autoincrement()) // unique user ID
+    email    String @unique // unique user email address
+    password String
+
     lastConnected DateTime @default(now())
 
-    // updatedAt DateTime @updatedAt
-
-    profile   Profile @relation(fields: [profileId], references: [id]) // automatically create/associate new profile to user
+    // automatically create user profile
+    profile   Profile @relation(fields: [profileId], references: [id])
     profileId Int     @unique
 
-    friends Friend[] @relation(name: "Friends")
-    cards   Card[]   @relation(name: "Cards")
+    // automatically create user booster timer
+    booster   Booster @relation(fields: [boosterId], references: [id])
+    boosterId Int     @unique
+
+    // friends Friend[] @relation(name: "Friends")
+    cards Card[]
 }
 
 model Profile {
-    id               Int      @id @default(autoincrement())
-    name             String   @unique
-    age              Int
-    gender           Genders
-    biography        String   @default("Hello, I like Hogwarts Club!")
-    icon             String   @default("happy")
-    color            String   @default("#ffffff")
-    joinedOn         DateTime @default(now()) @db.Date
-    boosterLast      DateTime @default(now())
-    boosterAvailable Boolean  @default(true)
+    id        Int      @id @default(autoincrement())
+    name      String   @unique
+    age       Int
+    gender    Genders  @default(UNKNOWN)
+    biography String   @default("Hello, I like Hogwarts Club!")
+    icon      String   @default("happy")
+    color     String   @default("#ffffff")
+    joinedOn  DateTime @default(now()) @db.Date
 
     user User?
 }
 
 enum Genders {
+    UNKNOWN
     MALE
     FEMALE
     NONBINARY
 }
 
-model Friend {
-    id       Int              @id @default(autoincrement())
-    status   FriendshipStatus
-    userId   Int
-    friendId Int
-    user     User             @relation("Friends", fields: [userId], references: [id]) // verify if sending user exists
+// model Friend {
+//     id       Int              @id @default(autoincrement())
+//     status   FriendshipStatus
+//     userId   Int
+//     friendId Int
+//     user     User             @relation("Friends", fields: [userId], references: [id]) // verify if sending user exists
 
-    @@unique([userId, friendId])
+//     @@unique([userId, friendId])
+// }
+
+model Card {
+    id         Int
+    quantity   Int     @default(1)
+    isFavorite Boolean @default(false)
+
+    // define owner of card
+    owner   User @relation(fields: [ownerId], references: [id])
+    ownerId Int
+
+    // define unique card - owner relationship
+    // there can only be one record about this card owned by this user
+    @@id([id, ownerId])
 }
 
-enum FriendshipStatus {
+model Booster {
+    id          Int      @id @default(autoincrement())
+
+    // automatically give free booster to user
+    lastTaken   DateTime @default("1970-01-01T00:00:00Z")
+    isAvailable Boolean  @default(false)
+    cardId      Int?
+
+    User User?
+}
+
+model Trade {
+    id          Int    @id @default(autoincrement())
+    userId      Int
+    traderId    Int
+    cardInId    Int
+    cardOutId   Int
+    tradeStatus Status
+}
+
+enum Status {
     PENDING
     RECEIVED
     ACCEPTED
 }
 
-model Card {
-    cardId   Int
-    userId   Int
-    quantity Int  @default(0)
-    user     User @relation("Cards", fields: [userId], references: [id]) // verify if sending user exists
-
-    @@unique([cardId, userId])
-}
-
-model Trade {
-    id              Int    @id @default(autoincrement())
-    userId          Int
-    traderId        Int
-    cardInId        Int
-    cardOutId       Int
-    message         String @db.VarChar(128)
-}
-
-model Settings {
-    id     Int @id @default(autoincrement())
-    userId Int
-}
-
+// model Settings {
+//     id     Int @id @default(autoincrement())
+//     userId Int
+// }

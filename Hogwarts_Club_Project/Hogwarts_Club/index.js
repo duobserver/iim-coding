@@ -5,8 +5,7 @@ import express from "express";
 import cors from "cors";
 import ip from "ip";
 
-import apiRoutes from "./routes/api.js"; // import API routes
-import publicRoutes from "./routes/public.js"; // import public routes
+import routes from "./start.js"; // import API routes
 
 const app = express(); // create new express app
 const ipAddress = ip.address(); // save current app IP address
@@ -14,10 +13,10 @@ const port = 3000; // set custom app port
 
 app.use(cors()); // allow interactions with other servers
 
-app.use(express.json()); // use express built in json tool
+app.use(express.json()); // use express.json to process json objects
+app.use(express.static('./public')) // use express.static to serve static files for frontend
 
-app.use("/", publicRoutes); // use imported app public routes for "/" path
-app.use("/api/", apiRoutes); // use imported app api routes for "/api/" path
+app.use("/api", routes); // use imported app api routes for "/api/" path
 
 // launch app
 app.listen(port, () => {

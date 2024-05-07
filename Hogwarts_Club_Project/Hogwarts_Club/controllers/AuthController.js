@@ -1,6 +1,6 @@
 // User authentication module
 
-import prisma from "../config/prisma.js"; // import prisma functions
+import prisma from "../config/prisma.js"; // connect to database through prisma
 
 import generateAccessToken from "../tools/jwt.js"; // import token generator
 

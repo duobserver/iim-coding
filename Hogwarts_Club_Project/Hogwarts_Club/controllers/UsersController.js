@@ -61,7 +61,7 @@ class UserController {
             }
 
             // hash new password
-            const hashedPassword = await bCrypt.hashPassword(body.password);
+            const hashedPassword = await bcrypt.hashPassword(body.password);
 
             // add new user to database
             const user = await prisma.user.create({
