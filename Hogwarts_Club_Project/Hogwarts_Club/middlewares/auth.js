@@ -47,4 +47,5 @@ function authenticateToken(req, res, next) {
         next(); // go to next middleware
     });
 }
+
 export default authenticateToken;

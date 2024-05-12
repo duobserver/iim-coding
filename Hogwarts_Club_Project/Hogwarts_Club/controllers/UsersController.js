@@ -16,7 +16,7 @@ class UserController {
         // display all user (login not required)
         try {
             // fetch all users from database
-            const users = await prisma.user.findMany();
+            const users = await prisma.user.findMany({ include: { profile: true, booster: true } });
 
             // 200: request succeeded
             return res.status(200).json(users);
@@ -30,12 +30,7 @@ class UserController {
     async create(req, res) {
         // create new user (login not required)
         try {
-            // get new user credentials from body
-            const body = req.body;
-
-            if (body.name == "") {
-                return res.status(422).json({ message: "Please insert a name" });
-            }
+            const body = req.body; // get new user credentials from body
 
             if (body.email == "") {
                 return res.status(422).json({ message: "Please insert an email address" });
@@ -48,10 +43,8 @@ class UserController {
 
             // if email is already used
             // terminate user creation
-
-            // 409: conflict
             if (email) {
-                return res.status(409).json({ message: "Email already used" });
+                return res.status(409).json({ message: "Email already used by another account" }); // 409: conflict
             }
 
             // if email is not already used
@@ -69,15 +62,25 @@ class UserController {
                     // expand all properties of body into data (as separate properties)
                     ...body,
                     password: hashedPassword,
+                    profile: {
+                        create: {
+                            name: "player",
+                            age: 18,
+                        },
+                    },
+                    booster: {
+                        create: {},
+                    },
+                    settings: {
+                        create: {},
+                    },
                 },
             });
 
-            // 201: created successfully
-            return res.status(201).json({ message: "User created successfully" });
+            return res.status(201).json({ message: "User created successfully" }); // 201: created successfully
         } catch (e) {
             // if command fails
-            // 500: internal server error
-            return res.status(500).json({ message: e.message });
+            return res.status(500).json({ message: e.message }); // 500: internal server error
         }
     }
 
@@ -230,6 +233,59 @@ class UserController {
             // 500: internal server error
             return res.status(500).json({ message: e.message });
         }
+    }
+
+    async newBooster() {
+        const newCardId = Math.floor(Math.random() * (Math.floor(30) - Math.ceil(1) + 1) + Math.ceil(1));
+
+        const newBooster = await prisma.user.update({
+            where: {
+                id: Number(id),
+            },
+            data: {
+                booster: {
+                    firstBooster: false,
+                    isAvailable: true,
+                    cardId: newCardId,
+                },
+            },
+        });
+    }
+
+    async boosterStatus(req, res) {
+        try {
+            const id = req.user.id;
+
+            let booster = await prisma.user.findUnique({ where: { id: Number(id) }, include: { booster: true } });
+            booster = exclude(booster, ["password"]);
+
+            if (booster.firstBooster == true) {
+                console.log("first booster !");
+                newBooster();
+            }
+
+            if (booster.isAvailable == false) {
+                const last = new Date(booster.lastTaken); // get datetime when user grabbed last booster
+                const now = Date.now();
+
+                const duration = now - last.getTime(); // calculate time (in milliseconds) elapsed since user grabbed last booster
+                const hourDuration = duration / 1000 / 60 / 60; // calculate time (in hours) elapsed since user grabbed last booster
+
+                if (hourDuration >= 24) {
+                    newBooster();
+                }
+
+                // Convert milliseconds to seconds
+                const seconds = Math.floor(absoluteDifference / 1000);
+
+                // Calculate hours, minutes, and remaining seconds
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const remainingSeconds = seconds % 60;
+            }
+
+            return res.status(200).json(booster);
+        } catch (error) {}
     }
 }
 

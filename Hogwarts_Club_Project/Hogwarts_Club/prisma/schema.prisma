@@ -31,22 +31,25 @@ model User {
 
     // friends Friend[] @relation(name: "Friends")
     cards Card[]
+
+    settings   Settings @relation(fields: [settingsId], references: [id])
+    settingsId Int      @unique
 }
 
 model Profile {
     id        Int      @id @default(autoincrement())
     name      String   @unique
     age       Int
-    gender    Genders  @default(UNKNOWN)
+    gender    Gender   @default(UNKNOWN)
     biography String   @default("Hello, I like Hogwarts Club!")
     icon      String   @default("happy")
     color     String   @default("#ffffff")
-    joinedOn  DateTime @default(now()) @db.Date
+    joinedOn  DateTime @default(now())
 
     user User?
 }
 
-enum Genders {
+enum Gender {
     UNKNOWN
     MALE
     FEMALE
@@ -64,7 +67,7 @@ enum Genders {
 // }
 
 model Card {
-    id         Int
+    id         Int // this id does not identify the entry itself but identifies a card in the lainocs API
     quantity   Int     @default(1)
     isFavorite Boolean @default(false)
 
@@ -72,18 +75,19 @@ model Card {
     owner   User @relation(fields: [ownerId], references: [id])
     ownerId Int
 
-    // define unique card - owner relationship
+    // define unique card-owner relationship
     // there can only be one record about this card owned by this user
     @@id([id, ownerId])
 }
 
 model Booster {
-    id          Int      @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
     // automatically give free booster to user
-    lastTaken   DateTime @default("1970-01-01T00:00:00Z")
-    isAvailable Boolean  @default(false)
-    cardId      Int?
+    firstBooster Boolean  @default(true)
+    lastTaken    DateTime @updatedAt @db.DateTime(0)
+    isAvailable  Boolean  @default(false)
+    cardId       Int      @default(1)
 
     User User?
 }
@@ -103,7 +107,10 @@ enum Status {
     ACCEPTED
 }
 
-// model Settings {
-//     id     Int @id @default(autoincrement())
-//     userId Int
-// }
+model Settings {
+    id Int @id @default(autoincrement())
+
+    showCollection Boolean @default(true)
+
+    User User?
+}

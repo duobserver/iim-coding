@@ -29,6 +29,8 @@ router.post("/user", user.create);
 // GET display specific user (login not required)
 router.get("/user/:id", user.read);
 
+router.get("/booster", authenticateToken, user.boosterStatus);
+
 // PUT update authenticated user informations (login required)
 router.put("/user", authenticateToken, user.update);
 
