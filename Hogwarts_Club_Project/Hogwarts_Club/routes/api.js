@@ -1,16 +1,18 @@
-// Hogwarts Club API routing
+// Hogwarts Club API routes
 
 import express from "express";
 
 // import controllers
-import UserController from "./controllers/UsersController.js";
-import AuthController from "./controllers/AuthController.js";
+import UserController from "../controllers/UsersController.js";
+import AuthController from "../controllers/AuthController.js";
+import CardController from "../controllers/CardsController.js";
 
 // create controller classes
 const user = new UserController();
 const auth = new AuthController();
+const card = new CardController();
 
-import authenticateToken from "./middlewares/auth.js"; // import authentication middleware
+import authenticateToken from "../middlewares/auth.js"; // import authentication middleware
 
 const router = express.Router();
 
@@ -29,16 +31,12 @@ router.post("/user", user.create);
 // GET display specific user (login not required)
 router.get("/user/:id", user.read);
 
-// GET check card booster status (login required)
-router.get("/booster", authenticateToken, user.booster);
-
-// POST add card booster to collection (logi required)
-router.post("/grab", authenticateToken, user.grabBooster);
-
 // PUT update authenticated user informations (login required)
 router.put("/user", authenticateToken, user.update);
 
 // DELETE delete authenticated user (login required)
 router.delete("/user", authenticateToken, user.delete);
+
+router.get("/collection", authenticateToken, card.collection);
 
 export default router;

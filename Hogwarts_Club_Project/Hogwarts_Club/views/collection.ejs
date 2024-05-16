@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+    </head>
+    <body>
+        <%- include('./partials/sidebar.ejs') %>
+
+        <main>
+            <h1>Cards Collection</h1>
+            <p>Here you can view your cards and set them as your favorites</p>
+            <%- include('./partials/filters.ejs') %>
+
+            <div id="cards"></div>
+        </main>
+
+        <script src="/javascript/script.js"></script>
+        <script src="/javascript/characters.js"></script>
+        <script src="/javascript/collection.js"></script>
+    </body>
+</html>

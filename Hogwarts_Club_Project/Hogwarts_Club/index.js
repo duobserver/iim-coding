@@ -5,18 +5,26 @@ import express from "express";
 import cors from "cors";
 import ip from "ip";
 
-import routes from "./start.js"; // import API routes
+// import API routes
+import apiRoutes from "./routes/api.js";
+import publicRoutes from "./routes/public.js";
 
 const app = express(); // create new express app
 const ipAddress = ip.address(); // save current app IP address
 const port = 3000; // set custom app port
 
-app.use(cors()); // allow interactions with other servers
+// allow interactions with other servers
+app.use(cors());
+
+// set view/templating engine
+app.set("view engine", "ejs");
 
 app.use(express.json()); // use express.json to process json objects
-app.use(express.static('./public')) // use express.static to serve static files for frontend
+app.use(express.static("./public")); // use express.static to serve static files for frontend
 
-app.use("/api", routes); // use imported app api routes for "/api/" path
+// set routes for frontend and backend
+app.use("/", publicRoutes);
+app.use("/api", apiRoutes); // use imported app api routes for "/api" path
 
 // launch app
 app.listen(port, () => {
