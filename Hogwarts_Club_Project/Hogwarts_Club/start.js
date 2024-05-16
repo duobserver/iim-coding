@@ -29,7 +29,11 @@ router.post("/user", user.create);
 // GET display specific user (login not required)
 router.get("/user/:id", user.read);
 
-router.get("/booster", authenticateToken, user.boosterStatus);
+// GET check card booster status (login required)
+router.get("/booster", authenticateToken, user.booster);
+
+// POST add card booster to collection (logi required)
+router.post("/grab", authenticateToken, user.grabBooster);
 
 // PUT update authenticated user informations (login required)
 router.put("/user", authenticateToken, user.update);

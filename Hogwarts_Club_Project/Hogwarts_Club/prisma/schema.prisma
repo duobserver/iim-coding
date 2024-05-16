@@ -84,10 +84,9 @@ model Booster {
     id Int @id @default(autoincrement())
 
     // automatically give free booster to user
-    firstBooster Boolean  @default(true)
-    lastTaken    DateTime @updatedAt @db.DateTime(0)
-    isAvailable  Boolean  @default(false)
-    cardId       Int      @default(1)
+    nextBooster String  @default("0") // date (in milliseconds) of next booster / automatically give free booster on signup
+    isAvailable Boolean @default(false)
+    cardId      Int     @default(1)
 
     User User?
 }

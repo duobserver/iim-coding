@@ -190,7 +190,6 @@ class UserController {
             return res.status(200).json({ message: "User informations have been saved successfully" });
         } catch (e) {
             // if command fails
-
             // 500: internal server error
             return res.status(500).json({ message: e.message });
         }
@@ -235,57 +234,61 @@ class UserController {
         }
     }
 
-    async newBooster() {
-        const newCardId = Math.floor(Math.random() * (Math.floor(30) - Math.ceil(1) + 1) + Math.ceil(1));
+    async grabBooster() {
+        const user = await prisma.user.findUnique({ where: { id: Number(id) }, include: { booster: true } });
 
-        const newBooster = await prisma.user.update({
-            where: {
-                id: Number(id),
-            },
-            data: {
-                booster: {
-                    firstBooster: false,
-                    isAvailable: true,
-                    cardId: newCardId,
+        if (user.booster.isAvailable == true) {
+            const grabBooster = await prisma.user.update({
+                where: {
+                    id: Number(id),
                 },
-            },
-        });
+            });
+        }
     }
 
-    async boosterStatus(req, res) {
+    async booster(req, res) {
         try {
             const id = req.user.id;
+            let user = await prisma.user.findUnique({ where: { id: Number(id) }, include: { booster: true } }); // get booster status
 
-            let booster = await prisma.user.findUnique({ where: { id: Number(id) }, include: { booster: true } });
-            booster = exclude(booster, ["password"]);
+            // if user cannot grab a booster
+            if (user.booster.isAvailable == false) {
+                // if user has waited more than 24 hours
+                const nextBooster = Number(user.booster.nextBooster);
+                if (nextBooster <= Date.now()) {
+                    const newCardId = Math.floor(Math.random() * (Math.floor(30) - Math.ceil(1) + 1) + Math.ceil(1)); // choose random card as booster
 
-            if (booster.firstBooster == true) {
-                console.log("first booster !");
-                newBooster();
-            }
+                    const updateBooster = await prisma.user.update({
+                        where: {
+                            id: Number(id),
+                        },
+                        data: {
+                            booster: {
+                                update: {
+                                    isAvailable: true,
+                                    cardId: newCardId,
+                                },
+                            },
+                        },
+                    });
+                } else {
+                    // calculate time left before next booster
+                    const timeLeft = new Date(nextBooster - Date.now());
+                    const hour = timeLeft.getUTCHours();
+                    const min = timeLeft.getUTCMinutes();
+                    const seconds = timeLeft.getUTCSeconds();
 
-            if (booster.isAvailable == false) {
-                const last = new Date(booster.lastTaken); // get datetime when user grabbed last booster
-                const now = Date.now();
-
-                const duration = now - last.getTime(); // calculate time (in milliseconds) elapsed since user grabbed last booster
-                const hourDuration = duration / 1000 / 60 / 60; // calculate time (in hours) elapsed since user grabbed last booster
-
-                if (hourDuration >= 24) {
-                    newBooster();
+                    console.log(hour, min, seconds);
+                    return res.status(200).json({ timeLeft: `${hour}:${min}:${seconds}` });
                 }
-
-                // Convert milliseconds to seconds
-                const seconds = Math.floor(absoluteDifference / 1000);
-
-                // Calculate hours, minutes, and remaining seconds
-                const hours = Math.floor(seconds / 3600);
-                const minutes = Math.floor((seconds % 3600) / 60);
-                const remainingSeconds = seconds % 60;
             }
 
-            return res.status(200).json(booster);
-        } catch (error) {}
+            return res.status(200).json({ ...user.booster });
+        } catch (e) {
+            // if command fails
+            // 500: internal server error
+            return res.status(500).json({ message: e.message });
+        }
     }
 }
 
