@@ -60,12 +60,12 @@ class UserController {
             const user = await prisma.user.create({
                 data: {
                     // expand all properties of body into data (as separate properties)
-                    ...body,
+                    email: body.email,
                     password: hashedPassword,
                     profile: {
                         create: {
-                            name: "player",
-                            age: 18,
+                            ...body.profile,
+                            age: Number(body.profile.age),
                         },
                     },
                     booster: {
@@ -80,7 +80,8 @@ class UserController {
             return res.status(201).json({ message: "User created successfully" }); // 201: created successfully
         } catch (e) {
             // if command fails
-            return res.status(500).json({ message: e.message }); // 500: internal server error
+            // 500: internal server error
+            return res.status(500).json({ message: e.message });
         }
     }
 

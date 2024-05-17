@@ -18,6 +18,7 @@
     font-family: Arial, Helvetica, sans-serif;
     color: inherit;
     transition: all 0.2s;
+    user-select: none;
 }
 
 html,
@@ -49,25 +50,17 @@ a:visited {
 
 /* sidebar styling */
 #sidebar {
-    width: max-content;
     height: 100%;
     background-color: var(--dark-color);
     border-right: 2px solid var(--accent-color);
-    overflow-y: scroll;
     padding-bottom: 2rem;
+    /* overflow-y: scroll; */
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 #sidebar::-webkit-scrollbar {
     display: none;
-}
-
-#sidebar p,
-#sidebar a {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    white-space: nowrap;
 }
 
 #sidebar ul {
@@ -79,6 +72,15 @@ a:visited {
     padding: 0.5rem;
 }
 
+#sidebar p,
+#sidebar a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    gap: 0.5rem;
+}
+
 #sidebar a:hover {
     background-color: var(--hover-color);
 }
@@ -86,8 +88,14 @@ a:visited {
 /* main styling */
 main {
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 2rem;
     overflow-y: scroll;
+    padding-bottom: 2rem;
+}
+
+main img {
+    width: 80%;
+    filter: invert(100);
 }
 
 /* filters styling */
@@ -164,8 +172,8 @@ main {
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-    backdrop-filter: blur(5.1px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) brightness(250%);
+    -webkit-backdrop-filter: blur(10px) brightness(250%);
 }
 
 .cardStats {
@@ -176,7 +184,8 @@ main {
     background-color: var(--dark-color);
 }
 
-.cardName, .cardStats {
+.cardName,
+.cardStats {
     padding: 0.5rem 1rem;
 }
 
@@ -184,7 +193,7 @@ main {
     margin: 0;
 }
 
-.cardStats .faved {
+.cardStats .Favorite {
     color: #ff0000;
 }
 

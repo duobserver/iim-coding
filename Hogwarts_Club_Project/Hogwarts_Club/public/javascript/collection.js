@@ -4,8 +4,8 @@ async function fetchCollection() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        localStorage.setItem("notice", `0-Token not found. Please login to access your profile page`);
-        window.location.href = "../html/login.html";
+        localStorage.setItem("notification", `Token not found. Please login to access your profile page`);
+        window.location.href = "login";
     }
 
     const res = await fetch(`http://192.168.1.147:3000/api/collection`, {
@@ -28,7 +28,7 @@ async function fetchCollection() {
 
         let card = document.createElement("div");
         card.innerHTML = `
-        <p class="cardName"></p>
+        <a class="cardName"></a>
         <div class="cardImage"></div>
         <div class="cardStats">
         <p class="quantity"></p>
@@ -37,17 +37,22 @@ async function fetchCollection() {
         `;
 
         card.querySelector(".cardName").innerHTML = character.name;
+        card.querySelector(".cardName").href = `card&id=${character.id}`;
+
         card.querySelector(".cardImage").style.backgroundImage = `url(${character.image})`;
         card.querySelector(".quantity").innerHTML = element.quantity;
 
         let favorite = card.querySelector("span");
 
         if (element.isFavorite == true) {
-            favorite.classList.add("faved");
-            card.classList.add("faved");
+            favorite.classList.add("Favorite");
+            card.classList.add("Favorite");
         }
-        
-        card.classList.add("card", character.house);
+
+        card.classList.add("card");
+        if (!character.house == "") {
+            card.classList.add(character.house);
+        }
 
         collectionDiv.appendChild(card);
     });

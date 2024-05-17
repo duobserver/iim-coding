@@ -37,23 +37,36 @@ model User {
 }
 
 model Profile {
-    id        Int      @id @default(autoincrement())
-    name      String   @unique
+    id        Int       @id @default(autoincrement())
+    name      String    @unique
     age       Int
-    gender    Gender   @default(UNKNOWN)
-    biography String   @default("Hello, I like Hogwarts Club!")
-    icon      String   @default("happy")
-    color     String   @default("#ffffff")
-    joinedOn  DateTime @default(now())
+    gender    Gender    @default(Unknown)
+    biography String    @default("Hello, I like Hogwarts Club!")
+    icon      Sentiment @default(Satisfied)
+    color     String    @default("#ffffff")
+    joinedOn  DateTime  @default(now())
 
     user User?
 }
 
 enum Gender {
-    UNKNOWN
-    MALE
-    FEMALE
-    NONBINARY
+    Unknown
+    Male
+    Female
+    NonBinary
+}
+
+enum Sentiment {
+    Satisfied
+    Dissatisfied
+    Neutral
+    Sad
+    Excited
+    Calm
+    Stressed
+    Frustrated
+    Content
+    Worried
 }
 
 // model Friend {

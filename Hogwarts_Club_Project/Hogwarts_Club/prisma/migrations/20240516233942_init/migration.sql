@@ -20,9 +20,9 @@ CREATE TABLE `Profile` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `age` INTEGER NOT NULL,
-    `gender` ENUM('UNKNOWN', 'MALE', 'FEMALE', 'NONBINARY') NOT NULL DEFAULT 'UNKNOWN',
+    `gender` ENUM('Unknown', 'Male', 'Female', 'NonBinary') NOT NULL DEFAULT 'Unknown',
     `biography` VARCHAR(191) NOT NULL DEFAULT 'Hello, I like Hogwarts Club!',
-    `icon` VARCHAR(191) NOT NULL DEFAULT 'happy',
+    `icon` ENUM('Satisfied', 'Dissatisfied', 'Neutral', 'Sad', 'Excited', 'Calm', 'Stressed', 'Frustrated', 'Content', 'Worried') NOT NULL DEFAULT 'Satisfied',
     `color` VARCHAR(191) NOT NULL DEFAULT '#ffffff',
     `joinedOn` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -43,9 +43,9 @@ CREATE TABLE `Card` (
 -- CreateTable
 CREATE TABLE `Booster` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `lastTaken` DATETIME(3) NOT NULL,
+    `nextBooster` VARCHAR(191) NOT NULL DEFAULT '0',
     `isAvailable` BOOLEAN NOT NULL DEFAULT false,
-    `cardId` INTEGER NULL,
+    `cardId` INTEGER NOT NULL DEFAULT 1,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

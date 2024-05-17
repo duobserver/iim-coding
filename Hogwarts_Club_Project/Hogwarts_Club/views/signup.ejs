@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/stylesheets/form.css" />
+    </head>
+    <body>
+        <%- include('./partials/sidebar.ejs') %>
+
+        <main>
+            <h1>Signup</h1>
+            <p>Become a Hogwarts Club Member and start your collection.</p>
+            <form action="" id="signupForm">
+                <div class="formComponent">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="email" required />
+                </div>
+
+                <div class="formComponent"><label for="signupPassword">Password</label> <input type="password" id="signupPassword" name="password" required /></div>
+
+                <div class="formComponent"><label for="signupNickname">Nickname</label> <input type="text" id="signupNickname" name="Nickname" required /></div>
+
+                <div class="formComponent"><label for="signupAge">Age</label> <input type="number" id="signupAge" name="age" required /></div>
+                <div class="formComponent">
+                    <label for="signupGender">Gender</label>
+                    <select name="gender" id="signupGender" required>
+                        <option value="">Please select</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="NonBinary">Non-Binary</option>
+                    </select>
+                </div>
+
+                <input type="submit" />
+            </form>
+        </main>
+
+        <%- include('./partials/scripts.ejs') %>
+
+        <script src="/javascript/signup.js"></script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--dark-color);
+    border-radius: 16px;
+}
+
+.formComponent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+form input, form select {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: transparent;
+    border: 2px solid var(--hover-color);
+    font-size: 1rem;
+}
+
+form option {
+    color: var(--dark-color);
+}
+
+form input:hover {
+    background-color: var(--hover-color);
+}
+
+form input:focus {
+    border-color: var(--accent-color);
+}
+
+form input[type=submit] {
+    color: var(--dark-color);
+    border-color: var(--accent-color);
+    background-color: var(--accent-color);
+}
