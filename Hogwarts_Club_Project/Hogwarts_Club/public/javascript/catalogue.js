@@ -7,11 +7,13 @@ async function fetchCatalogue() {
     characters.forEach((element) => {
         let card = document.createElement("div");
         card.innerHTML = `
-        <p class="cardName"></p>
+        <a class="cardName"></a>
         <div class="cardImage"></div>
         `;
 
         card.querySelector(".cardName").innerHTML = element.name;
+        card.querySelector(".cardName").href = `card?id=${element.id}`;
+
         card.querySelector(".cardImage").style.backgroundImage = `url(${element.image})`;
 
         card.classList.add("card");

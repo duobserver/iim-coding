@@ -19,15 +19,12 @@ model User {
     email    String @unique // unique user email address
     password String
 
-    lastConnected DateTime @default(now())
+    // automatically give free booster to user
+    nextBooster String @default("0") // date (in milliseconds) of next booster / automatically give free booster on signup
 
     // automatically create user profile
     profile   Profile @relation(fields: [profileId], references: [id])
     profileId Int     @unique
-
-    // automatically create user booster timer
-    booster   Booster @relation(fields: [boosterId], references: [id])
-    boosterId Int     @unique
 
     // friends Friend[] @relation(name: "Friends")
     cards Card[]
@@ -91,17 +88,6 @@ model Card {
     // define unique card-owner relationship
     // there can only be one record about this card owned by this user
     @@id([id, ownerId])
-}
-
-model Booster {
-    id Int @id @default(autoincrement())
-
-    // automatically give free booster to user
-    nextBooster String  @default("0") // date (in milliseconds) of next booster / automatically give free booster on signup
-    isAvailable Boolean @default(false)
-    cardId      Int     @default(1)
-
-    User User?
 }
 
 model Trade {

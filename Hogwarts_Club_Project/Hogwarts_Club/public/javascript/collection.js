@@ -37,7 +37,7 @@ async function fetchCollection() {
         `;
 
         card.querySelector(".cardName").innerHTML = character.name;
-        card.querySelector(".cardName").href = `card&id=${character.id}`;
+        card.querySelector(".cardName").href = `card?id=${character.id}`;
 
         card.querySelector(".cardImage").style.backgroundImage = `url(${character.image})`;
         card.querySelector(".quantity").innerHTML = element.quantity;

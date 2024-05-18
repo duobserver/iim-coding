@@ -8,6 +8,10 @@ router.get("/", (req, res) => {
     res.render("index", { title: "Home" });
 });
 
+router.get("/booster", (req, res) => {
+    res.render("booster", { title: "Booster" });
+});
+
 router.get("/collection", (req, res) => {
     res.render("collection", { title: "Collection" });
 });
@@ -24,7 +28,7 @@ router.get("/signup", (req, res) => {
     res.render("signup", { title: "Signup" });
 });
 
-router.get("/card&:id", (req, res) => {
+router.get("/card?:id", (req, res) => {
     res.render("card", { title: "Card" });
 });
 

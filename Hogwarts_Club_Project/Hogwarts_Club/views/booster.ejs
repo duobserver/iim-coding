@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+    </head>
+    <body>
+        <%- include('./partials/sidebar.ejs') %>
+
+        <main>
+            <h1>Daily Booster</h1>
+            <p>Grab your daily booster and expand your collection</p>
+            <div id="booster">
+                <p>Your next booster will arrive in <span id="hours"></span> hours <span id="minutes"></span> minute(s) and<span id="seconds"></span> seconds</p>
+            </div>
+        </main>
+
+        <%- include('./partials/scripts.ejs') %>
+        <script src="/javascript/booster.js"></script>
+    </body>
+</html>

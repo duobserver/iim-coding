@@ -15,7 +15,7 @@ form {
 
 form input, form select {
     padding: 0.5rem 1rem;
-    border-radius: 9999px;
+    border-radius: 16px;
     background-color: transparent;
     border: 2px solid var(--hover-color);
     font-size: 1rem;

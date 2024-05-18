@@ -3,7 +3,7 @@
     <head>
         <%- include('./partials/head.ejs') %>
 
-        <link rel="stylesheet" href="/stylesheets/form.css">
+        <link rel="stylesheet" href="/stylesheets/form.css" />
     </head>
     <body>
         <%- include('./partials/sidebar.ejs') %>
@@ -12,11 +12,10 @@
             <h1>Login</h1>
             <p>Log into an exisiting account and check your inventory.</p>
             <form action="" id="loginForm">
-                <label for="loginEmail">Email</label>
-                <input type="email" id="loginEmail" name="email">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" name="password">
-                <input type="submit" value="Login">
+                <div class="formComponent"><label for="loginEmail">Email</label> <input type="email" id="loginEmail" name="email" /></div>
+                <div class="formComponent"><label for="loginPassword">Password</label> <input type="password" id="loginPassword" name="password" /></div>
+
+                <input type="submit" value="Login" />
             </form>
         </main>
 

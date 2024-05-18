@@ -15,7 +15,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Averia Serif Libre", Arial, Helvetica, sans-serif;
     color: inherit;
     transition: all 0.2s;
     user-select: none;
@@ -29,10 +29,11 @@ body {
 
 body {
     height: 100dvh;
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
 
     color: var(--light-color);
+    overflow: hidden;
 
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1583997052103-b4a1cb974ce5);
     background-repeat: no-repeat;
@@ -48,49 +49,13 @@ a:visited {
     text-decoration: none;
 }
 
-/* sidebar styling */
-#sidebar {
-    height: 100%;
-    background-color: var(--dark-color);
-    border-right: 2px solid var(--accent-color);
-    padding-bottom: 2rem;
-    /* overflow-y: scroll; */
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-#sidebar::-webkit-scrollbar {
-    display: none;
-}
-
-#sidebar ul {
-    list-style: none;
-    padding-left: 1rem;
-}
-
-#sidebar a {
-    padding: 0.5rem;
-}
-
-#sidebar p,
-#sidebar a {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    white-space: nowrap;
-    gap: 0.5rem;
-}
-
-#sidebar a:hover {
-    background-color: var(--hover-color);
-}
-
 /* main styling */
 main {
     width: 100%;
+    height: 100%;
     padding: 0 2rem;
-    overflow-y: scroll;
     padding-bottom: 2rem;
+    overflow-y: scroll;
 }
 
 main img {

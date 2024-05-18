@@ -2,14 +2,31 @@
 <html lang="en">
     <head>
         <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/stylesheets/card.css">
     </head>
     <body>
         <%- include('./partials/sidebar.ejs') %>
 
         <main>
-            
+            <h1 id="cardName"></h1>
+            <div id="card">
+                <div id="cardImage"></div>
+                <div id="cardSpecs">
+                    <ul>
+                        <li id="cardRole"><strong>Role:</strong> </li>
+                        <li id="cardHouse"><strong>House:</strong> </li>
+                        <li id="cardBlood"><strong>Blood:</strong> </li>
+                        <li></li>
+                        <li id="cardActor"><strong>Actor:</strong> </li>
+                        <li id="cardEyes"><strong>Eyes:</strong> </li>
+                        <li id="cardHairs"><strong>Hairs:</strong> </li>
+                    </ul>
+                </div>
+            </div>
         </main>
 
         <%- include('./partials/scripts.ejs') %>
+        <script src="/javascript/characters.js"></script>
+        <script src="/javascript/card.js"></script>
     </body>
 </html>
