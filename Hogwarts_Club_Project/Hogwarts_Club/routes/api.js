@@ -3,14 +3,12 @@
 import express from "express";
 
 // import controllers
-import UserController from "../controllers/UsersController.js";
+import * as user from "../controllers/UsersController.js";
 import AuthController from "../controllers/AuthController.js";
 import * as card from "../controllers/CardsController.js";
 
 // create controller classes
-const user = new UserController();
 const auth = new AuthController();
-// const card = new CardController();
 
 import authenticateToken from "../middlewares/auth.js"; // import authentication middleware
 
@@ -35,18 +33,22 @@ router.get("/user/:id", user.read);
 router.put("/user", authenticateToken, user.update);
 
 // DELETE delete authenticated user (login required)
-router.delete("/user", authenticateToken, user.delete);
+router.delete("/user", authenticateToken, user.terminate);
 
 // GET user cards collection (login required)
 router.get("/collection", authenticateToken, card.collection);
 
-// GET if user owns specific card (login required)
-router.get("/card/:id", card.owned);
+// GET check if user has specific card in collection (login required)
+router.get("/card/:id", card.check);
 
-//
+// GET check booster status
 router.get("/booster", authenticateToken, card.booster);
 
-// TEMPORARY UPDATE quantity of specific card
-router.put("/getcard/:cardId", authenticateToken, card.addCard);
+// PUT check booster status
+router.put("/favorite/:id", authenticateToken, card.favorite);
+
+// POST remove card from user collection
+// router.post("/remove/:id", authenticateToken, card.remove);
+
 
 export default router;

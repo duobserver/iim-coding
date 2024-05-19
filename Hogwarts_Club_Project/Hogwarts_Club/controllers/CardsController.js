@@ -2,14 +2,13 @@
 
 import prisma from "../config/prisma.js"; // connect to database through prisma
 
-export async function addCard(userId, cardId) {
+export async function check(req, res) {
+    // check if user has card
     try {
-        // const id = req.user.id;
+        const userId = Number(req.user.id);
+        const cardId = Number(req.params.id);
 
-        // const cardId = Number(req.params.cardId);
-
-        // get for existing card in user collection
-        let card = await prisma.user.findUnique({
+        const data = await prisma.user.findUnique({
             where: {
                 id: userId,
             },
@@ -22,15 +21,67 @@ export async function addCard(userId, cardId) {
             },
         });
 
-        console.log(card);
+        console.log(data);
 
-        card = card.cards;
+        if (data.cards.length == 0) {
+            // if user does not have card in collection
+            // 404: not found
+            return res.status(404).json({ message: "You do not have this card in your collection" });
+        } else {
+            // if user does have card in collection
+            // 302: found
+            return res.status(302).json(data.cards[0]);
+            return data.cards[0];
+        }
+    } catch (error) {
+        // if command fails
+        // 500: internal server error
+        return res.status(500).json({ message: error.message });
+    }
+}
 
-        console.log(card);
+async function checkInternal(userId, cardId) {
+    // check if user has card
+    // this function is intended for internal use only
+    console.log(userId, cardId);
+    try {
+        const data = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            select: {
+                cards: {
+                    where: {
+                        id: cardId,
+                    },
+                },
+            },
+        });
 
-        // if user does not have this card, add a new record
-        if (card.length == 0) {
-            console.log("User does not have card");
+        console.log(data);
+
+        if (data.cards.length == 0) {
+            return false;
+        } else {
+            return data.cards[0];
+        }
+    } catch (error) {
+        // if function fails
+        throw new Error(error);
+    }
+}
+
+async function add(userId, cardId) {
+    // add card to user collection
+    // this function is intended for internal use only
+    try {
+        // look for existing card in user collection
+        const card = await checkInternal(userId, cardId);
+
+        // process data
+        if (card == false) {
+            // if user does not have this card
+            // add card to user collection
             const updateCard = await prisma.user.update({
                 where: { id: userId },
                 data: {
@@ -42,11 +93,11 @@ export async function addCard(userId, cardId) {
                     cards: true,
                 },
             });
-            // if user already have this card, increase quantity
         } else {
-            card = card[0];
-            console.log("increasing quantity");
-            const updateCard = await prisma.user.update({
+            // if user already has this card
+            // card = data.cards[0]; // save card stats
+            // increase card copies quantity in user collection
+            const updatedCard = await prisma.user.update({
                 where: {
                     id: userId,
                 },
@@ -71,22 +122,161 @@ export async function addCard(userId, cardId) {
             });
         }
 
-        return;
-    } catch (e) {
-        // if command fails
-        // function error
-        throw new Error(e);
+        return true;
+    } catch (error) {
+        // if function fails
+        throw new Error(error);
+    }
+}
+
+async function remove(userId, cardId) {
+    // const userId = Number(req.user.id);
+    // const cardId = Number(req.params.id);
+    // remove card from user collection
+    // this function is intended for internal use only
+    try {
+        // look for existing card in user collection
+        const card = await checkInternal(userId, cardId);
+
+        // process data
+        if (card == false) {
+            // if user does not have this card
+            console.log("no card");
+            return res.status(403).json({ message: "no card" });
+            throw new Error("User does not have this card");
+        } else {
+            // if user already has one or more copies of card
+            if (card.quantity == 1) {
+                // if user only has one copy of card
+                // delete card from user collection
+                const updateCard = await prisma.user.update({
+                    where: {
+                        id: userId,
+                    },
+                    data: {
+                        cards: {
+                            deleteMany: {
+                                id: cardId,
+                            },
+                        },
+                    },
+                    include: {
+                        cards: true,
+                    },
+                });
+            } else {
+                // if user has more than one copy of card
+                // decrease card copies quantity in user collection
+                const updateCard = await prisma.user.update({
+                    where: { id: userId },
+                    data: {
+                        cards: {
+                            update: {
+                                where: {
+                                    id_ownerId: {
+                                        id: cardId,
+                                        ownerId: userId,
+                                    },
+                                },
+                                data: {
+                                    quantity: card.quantity - 1,
+                                },
+                            },
+                        },
+                    },
+                    include: { cards: true },
+                });
+            }
+        }
+
+        return res.status(200).json({ message: "removed" });
+    } catch (error) {
+        // if function fails
+        throw new Error(error);
+    }
+}
+
+export async function favorite(req, res) {
+    // set card as favorite in user collection
+    try {
+        const userId = Number(req.user.id);
+        const cardId = Number(req.params.id);
+
+        // look for existing card in user collection
+        const card = await checkInternal(userId, cardId);
+
+        if (card == false) {
+            // if user does not have card in collection
+            return res.status(403).json({ message: "You do not have this card in your collection." });
+        } else {
+            // if user does have card in collection
+            if (card.isFavorite == false) {
+                // if card is not set as favorite
+                const updateCard = await prisma.user.update({
+                    where: {
+                        id: userId,
+                    },
+                    data: {
+                        cards: {
+                            update: {
+                                where: {
+                                    id_ownerId: {
+                                        id: cardId,
+                                        ownerId: userId,
+                                    },
+                                },
+                                data: {
+                                    isFavorite: true,
+                                },
+                            },
+                        },
+                    },
+                    include: {
+                        cards: true,
+                    },
+                });
+                return res.status(200).json({ message: "Successfully added to favorites" });
+            } else {
+                // if card is set as favorite
+                const updateCard = await prisma.user.update({
+                    where: {
+                        id: userId,
+                    },
+                    data: {
+                        cards: {
+                            where: {
+                                id_ownerId: {
+                                    id: cardId,
+                                    ownerId: userId,
+                                },
+                            },
+                            data: {
+                                isFavorite: false,
+                            },
+                        },
+                    },
+                    include: {
+                        cards: true,
+                    },
+                });
+                return res.status(200).json({ message: "Successfully removed from favorites" });
+            }
+        }
+    } catch (error) {
+        // if function fails
+        // 500: internal server error
+        return res.status(500).json({ message: error.message });
     }
 }
 
 export async function collection(req, res) {
-    // show the user cards collection
+    // show user card collection
     try {
-        const id = req.user.id;
+        const userId = Number(req.user.id);
 
         const user = await prisma.user.findUnique({
             where: {
-                id: Number(id),
+                id: userId,
             },
             include: {
                 cards: true,
@@ -94,33 +284,10 @@ export async function collection(req, res) {
         });
 
         res.status(200).json(user.cards);
-    } catch (e) {
-        // if command fails
-        // 500: internal server error
-        return res.status(500).json({ message: e.message });
-    }
-}
-
-export async function owned(req, res) {
-    try {
-        const id = req.user.id;
-        const cardId = req.params.id;
     } catch (error) {
         // if command fails
         // 500: internal server error
-        return res.status(500).json({ message: e.message });
-    }
-}
-
-export async function grabBooster() {
-    const user = await prisma.user.findUnique({ where: { id: Number(id) }, include: { booster: true } });
-
-    if (user.booster.isAvailable == true) {
-        const grabBooster = await prisma.user.update({
-            where: {
-                id: Number(id),
-            },
-        });
+        return res.status(500).json({ message: error.message });
     }
 }
 
@@ -147,7 +314,7 @@ export async function booster(req, res) {
 
             // ADDING CARDS
             for (const element of boosterCards) {
-                await addCard(id, element);
+                await add(id, element);
             }
 
             const updateBooster = await prisma.user.update({
