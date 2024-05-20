@@ -35,7 +35,7 @@ model Profile {
     age       Int
     gender    Gender    @default(Unknown)
     biography String    @default("Hello, I like Hogwarts Club!")
-    icon      Sentiment @default(Satisfied)
+    icon      Sentiment @default(satisfied)
     color     String    @default("#ffffff")
     joinedOn  DateTime  @default(now())
 
@@ -51,16 +51,16 @@ enum Gender {
 }
 
 enum Sentiment {
-    Satisfied
-    Dissatisfied
-    Neutral
-    Sad
-    Excited
-    Calm
-    Stressed
-    Frustrated
-    Content
-    Worried
+    satisfied
+    dissatisfied
+    neutral
+    sad
+    excited
+    calm
+    stressed
+    frustrated
+    content
+    worried
 }
 
 // model Friend {

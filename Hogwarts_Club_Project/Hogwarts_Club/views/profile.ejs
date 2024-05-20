@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/stylesheets/profile.css" />
+    </head>
+    <body>
+        <%- include('./partials/sidebar.ejs') %>
+
+        <main>
+            <div id="profile">
+                <h1 id="memberTitle"><span class="material-symbols-rounded" id="memberIcon"></span><span id="memberName"></span></h1>
+                <p id="memberBio"></p>
+                <ul id="memberDesc">
+                    <li>ID:</li>
+                    <li>Age:</li>
+                    <li>Gender:</li>
+                    <li>Member since</li>
+                    <li>Color:</li>
+                </ul>
+            </div>
+        </main>
+
+        <%- include('./partials/scripts.ejs') %>
+        <script src="/javascript/profile.js"></script>
+    </body>
+</html>

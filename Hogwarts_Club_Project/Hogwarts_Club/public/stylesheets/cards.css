@@ -1,0 +1,80 @@
+/* card grid styling */
+#cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.card {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 4px solid var(--dark-color);
+}
+
+.cardCharacter:hover > .cardName {
+    background-color: var(--hover-color);
+}
+
+.Gryffindor {
+    border-color: var(--gryffindor);
+}
+
+.Slytherin {
+    border-color: var(--slytherin);
+}
+
+.Ravenclaw {
+    border-color: var(--ravenclaw);
+}
+
+.Hufflepuff {
+    border-color: var(--hufflepuff);
+}
+
+.cardName {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    background-color: var(--dark-color);
+}
+
+.cardImage {
+    aspect-ratio: 1/1;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    backdrop-filter: blur(10px) brightness(250%);
+    -webkit-backdrop-filter: blur(10px) brightness(250%);
+}
+
+.cardStats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--dark-color);
+}
+
+.cardStats > * {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.cardName,
+.cardStats > * {
+    padding: 0.5rem 1rem;
+}
+
+.cardStats .Favorite {
+    color: #ff0000;
+}
+
+.card span:hover {
+    cursor: pointer;
+}

@@ -28,8 +28,16 @@ router.get("/signup", (req, res) => {
     res.render("signup", { title: "Signup" });
 });
 
-router.get("/card?:id", (req, res) => {
+router.get("/card", (req, res) => {
     res.render("card", { title: "Card" });
+});
+
+router.get("/members", (req, res) => {
+    res.render("members", { title: "Members" });
+});
+
+router.get("/profile", (req, res) => {
+    res.render("profile", { title: "Profile" });
 });
 
 export default router;

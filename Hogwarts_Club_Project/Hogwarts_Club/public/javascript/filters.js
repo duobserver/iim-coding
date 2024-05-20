@@ -1,7 +1,4 @@
 let houseFilters = document.querySelectorAll(".houseFilter");
-let cards = document.querySelectorAll(".card");
-
-console.log(houseFilters);
 
 function filter() {
     let activeFilters = [];
@@ -12,7 +9,6 @@ function filter() {
     });
 
     let cards = document.querySelectorAll(".card");
-    console.log(cards);
 
     if (activeFilters.length == 0) {
         cards.forEach((element) => {
@@ -26,7 +22,6 @@ function filter() {
                 element.style.display = "none";
             }
         });
-        console.log(activeFilters);
     }
 }
 

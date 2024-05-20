@@ -215,6 +215,9 @@ export async function favorite(req, res) {
             // if user does have card in collection
             if (card.isFavorite == false) {
                 // if card is not set as favorite
+
+                // REMEMBER you can always access cards or other models directly with prisma.card, going through user ensures data consistency but is more complex
+
                 const updateCard = await prisma.user.update({
                     where: {
                         id: userId,
@@ -247,14 +250,16 @@ export async function favorite(req, res) {
                     },
                     data: {
                         cards: {
-                            where: {
-                                id_ownerId: {
-                                    id: cardId,
-                                    ownerId: userId,
+                            update: {
+                                where: {
+                                    id_ownerId: {
+                                        id: cardId,
+                                        ownerId: userId,
+                                    },
                                 },
-                            },
-                            data: {
-                                isFavorite: false,
+                                data: {
+                                    isFavorite: false,
+                                },
                             },
                         },
                     },
@@ -268,6 +273,7 @@ export async function favorite(req, res) {
     } catch (error) {
         // if function fails
         // 500: internal server error
+        console.log(error);
         return res.status(500).json({ message: error.message });
     }
 }
@@ -301,7 +307,6 @@ export async function booster(req, res) {
 
         // get next booster drop date (in milliseceonds)
         const nextBooster = Number(booster.nextBooster);
-        console.log(nextBooster);
 
         // if user has waited enough time
         if (nextBooster <= Date.now()) {
@@ -312,8 +317,6 @@ export async function booster(req, res) {
                 const card = Math.floor(Math.random() * (Math.floor(30) - Math.ceil(1) + 1) + Math.ceil(1));
                 boosterCards.push(card);
             }
-
-            console.log(boosterCards);
 
             // ADDING CARDS
             for (const element of boosterCards) {
@@ -337,11 +340,8 @@ export async function booster(req, res) {
             const min = timeLeft.getUTCMinutes();
             const seconds = timeLeft.getUTCSeconds();
 
-            console.log(hour, min, seconds);
             return res.status(200).json({ hours: hour, minutes: min, seconds: seconds });
         }
-
-        return res.status(200).json({ ...user.booster });
     } catch (error) {
         // if command fails
         return res.status(500).json({ message: error.message }); // 500: internal server error

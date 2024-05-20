@@ -12,18 +12,40 @@ const bcrypt = new bCrypt(); // create encryption class
 // REMEMBER req = request and res = response
 // WARNING always hash passwords before saving them in the database ALWAYS
 
+// display all user (login not required)
 export async function index(req, res) {
-    // display all user (login not required)
     try {
         // fetch all users from database
-        const users = await prisma.user.findMany({ include: { profile: true, booster: true } });
+        const users = await prisma.profile.findMany();
 
         // 200: request succeeded
         return res.status(200).json(users);
     } catch (e) {
         // if the command fails
-        // 500: internal server error
         return res.status(500).json({ message: e.message }); // 500: internal error
+    }
+}
+
+// search user by name
+export async function searchUser(req, res) {
+    try {
+        const name = req.params.name;
+        console.log(typeof name);
+
+        const users = await prisma.profile.findMany({
+            where: {
+                pseudo: {
+                    contains: name,
+                },
+            },
+        });
+
+        console.log(users);
+
+        res.status(200).json(users);
+    } catch (error) {
+        // if the command fails
+        return res.status(500).json({ message: error.message }); // 500: internal error
     }
 }
 
@@ -89,7 +111,7 @@ export async function read(req, res) {
         const id = req.params.id;
 
         // look for existing user
-        const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+        const user = await prisma.user.findUnique({ where: { id: Number(id) }, select: { profile: true } });
 
         if (!user) {
             // if user does not exist
@@ -97,12 +119,10 @@ export async function read(req, res) {
         }
 
         //if user exists
-        return res.status(302).json(user); // 302: found
+        return res.status(302).json(user.profile); // 302: found
     } catch (error) {
         // if command fails
-
-        // 500: internal server error
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message }); // 500: internal server error
     }
 }
 

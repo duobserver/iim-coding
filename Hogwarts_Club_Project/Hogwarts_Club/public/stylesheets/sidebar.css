@@ -16,15 +16,6 @@ main {
     padding-bottom: calc(var(--sidebar-button-height) + 2rem);
 }
 
-#showSidebar:checked ~ main {
-    padding-left: calc(var(--sidebar-width) + 2rem);
-}
-
-#showSidebar:checked ~ #sidebarButton {
-    width: var(--sidebar-width);
-    background-color: transparent;
-}
-
 #showSidebar:checked ~ #sidebarButton .sidebarIconBar:nth-child(1) {
     background-color: var(--accent-color);
     transform: translateY(calc(0.2rem + 5px)) rotate(45deg);
@@ -42,12 +33,14 @@ main {
 
 #sidebarButton {
     position: fixed;
+    z-index: 99;
     bottom: 0;
     left: 0;
     padding: 1rem;
     display: flex;
     justify-content: center;
     background-color: var(--dark-color);
+    width: 100%;
 }
 
 .sidebarIconBar {
@@ -61,10 +54,12 @@ main {
 
 #sidebar {
     position: absolute;
+    z-index: 89;
 
     top: 0;
     left: 0;
 
+    width: 100%;
     height: 100%;
     padding-bottom: var(--sidebar-button-height);
     margin-left: calc(var(--sidebar-width) * -1);
@@ -104,4 +99,23 @@ main {
 
 #sidebar a:hover {
     background-color: var(--hover-color);
+}
+
+@media screen and (min-width: 425px) {
+    #sidebarButton {
+        width: initial;
+    }
+
+    #showSidebar:checked ~ main {
+        padding-left: calc(var(--sidebar-width) + 2rem);
+    }
+
+    #showSidebar:checked ~ #sidebarButton {
+        width: var(--sidebar-width);
+        background-color: transparent;
+    }
+
+    #sidebar {
+        width: initial;
+    }
 }

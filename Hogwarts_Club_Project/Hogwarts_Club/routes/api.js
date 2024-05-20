@@ -22,6 +22,9 @@ router.get("/activeUser", authenticateToken, auth.myProfile);
 // display all users (login not required)
 router.get("/members", user.index);
 
+// search for user profile
+router.get("/members/:name", user.searchUser);
+
 // POST create new user (login not required)
 router.post("/user", user.create);
 

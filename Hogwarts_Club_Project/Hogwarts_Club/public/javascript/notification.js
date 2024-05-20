@@ -7,4 +7,9 @@ function notification() {
     }
 }
 
-notification();
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        notification();
+    }, 1000);
+    
+});

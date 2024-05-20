@@ -1,6 +1,4 @@
-let hours = document.querySelector("#hours");
-let minutes = document.querySelector("#minutes");
-let seconds = document.querySelector("#seconds");
+let cards = document.querySelector("#cards");
 
 async function fetchBooster() {
     const token = localStorage.getItem("token");
@@ -18,40 +16,23 @@ async function fetchBooster() {
     });
 
     let booster = await res.json();
+    const boosterPack = booster.boosterPack;
 
-    console.log(booster);
-
-    hours.innerHTML = booster.hours;
-    minutes.innerHTML = booster.minutes;
-    seconds.innerHTML = booster.seconds;
-
-    // while (!booster.hours == 0 && !booster.minutes == 0 && !booster.seconds == 0) {
-    //     setTimeout(function () {
-    //         hours.innerHTML = booster.hours;
-    //         minutes.innerHTML = booster.minutes;
-    //         seconds.innerHTML = booster.seconds;
-    //     }, 1000);
-    // }
-
-    // characters.forEach((element) => {
-    //     let card = document.createElement("div");
-    //     card.innerHTML = `
-    //     <a class="cardName"></a>
-    //     <div class="cardImage"></div>
-    //     `;
-
-    //     card.querySelector(".cardName").innerHTML = element.name;
-    //     card.querySelector(".cardName").href = `card?id=${element.id}`;
-
-    //     card.querySelector(".cardImage").style.backgroundImage = `url(${element.image})`;
-
-    //     card.classList.add("card");
-    //     if (!element.house == "") {
-    //         card.classList.add(element.house);
-    //     }
-
-    //     cardsDiv.appendChild(card);
-    // });
+    if (res.status === 200) {
+        if (boosterPack) {
+            for (const key of boosterPack) {
+                let card = document.createElement("a");
+                card.id = key;
+                cards.appendChild(card);
+            }
+        } else {
+            cards.innerHTML = `<div>Your next booster will arrive in <span class="time">${booster.hours}</span> hour(s), <span class="time">${booster.minutes}</span> minute(s) and <span class="time">${booster.seconds}</span> second(s).</div>`;
+        }
+    } else {
+        localStorage.setItem("notification", res.message);
+    }
 }
 
-fetchBooster();
+window.addEventListener("load", () => {
+    fetchBooster();
+});

@@ -1,0 +1,40 @@
+/* members page styling */
+#searchMember {
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    width: 100%;
+    border: none;
+}
+
+#members {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.member {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--dark-color);
+    border-radius: 16px;
+}
+
+.member:hover {
+    background-color: var(--hover-color);
+}
+
+.memberIcon {
+    font-size: 2rem;
+}
+
+.memberName {
+    text-overflow: ellipsis;
+}
