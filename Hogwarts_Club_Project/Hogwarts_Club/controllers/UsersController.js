@@ -68,9 +68,6 @@ export async function create(req, res) {
                         age: Number(body.profile.age),
                     },
                 },
-                booster: {
-                    create: {},
-                },
                 settings: {
                     create: {},
                 },
@@ -94,20 +91,40 @@ export async function read(req, res) {
         // look for existing user
         const user = await prisma.user.findUnique({ where: { id: Number(id) } });
 
-        // if user does not exist
         if (!user) {
+            // if user does not exist
             return res.status(404).json({ message: "User not found" });
         }
 
-        //if user does exist
-
-        // 302: found
-        return res.status(302).json(user);
-    } catch (e) {
+        //if user exists
+        return res.status(302).json(user); // 302: found
+    } catch (error) {
         // if command fails
 
         // 500: internal server error
-        return res.status(500).json({ message: e.message });
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+export async function readInternal(userId) {
+    // check if user exists
+    // this function is intended for internal use only
+    try {
+        // look for existing user
+        const user = await prisma.user.findUnique({ where: { id: userId } });
+
+        console.log(user);
+
+        if (user) {
+            // if user is found
+            return true;
+        } else {
+            // if user is not found
+            return false;
+        }
+    } catch (error) {
+        // if function fails
+        throw new Error(error);
     }
 }
 
@@ -199,39 +216,30 @@ export async function update(req, res) {
 export async function terminate(req, res) {
     // delete specific user (login required)
     try {
-        const body = req.body;
-        console.log(body);
+        // const body = req.body;
+        // console.log(body);
 
-        if (body.confirm !== "DELETE") {
-            return res.status(409).json({ message: "Wrong confirmation word" });
-        }
+        // if (body.confirm !== "DELETE") {
+        //     return res.status(409).json({ message: "Wrong confirmation word" });
+        // }
 
         // get user id from url
-        const id = req.user.id;
+        const userId = Number(req.user.id);
 
-        // check if user exists
-        const user = await prisma.user.findUnique({ where: { id: Number(id) } });
-
-        // if user does not exist
-        if (!user) {
-            // 404: not found
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        // if user does exist
         // delete user
         const deleteUser = await prisma.user.delete({
             where: {
-                id: Number(id),
+                id: userId,
             },
         });
 
-        // 204: no content/deleted
-        return res.status(204).json({ message: "User deletion succeeded" });
-    } catch (e) {
-        // if command fails
-        // 500: internal server error
-        return res.status(500).json({ message: e.message });
+        // delete trade offers related to current
+        const deleteTrades = await prisma.trade.deleteMany({ where: { OR: [{ authorId: userId }, { targetId: userId }] } });
+
+        return res.status(200).json({ message: "User deleted successfully." });
+    } catch (error) {
+        // if function fails
+        return res.status(500).json({ message: error.message }); // 500: internal server error
     }
 }
 

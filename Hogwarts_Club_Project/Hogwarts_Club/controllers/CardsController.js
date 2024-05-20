@@ -1,5 +1,7 @@
 // Hogwarts Club API cards functions
 
+// REMEMBER the functions in this file should only execute the final action
+
 import prisma from "../config/prisma.js"; // connect to database through prisma
 
 export async function check(req, res) {
@@ -21,7 +23,7 @@ export async function check(req, res) {
             },
         });
 
-        console.log(data);
+        // console.log(data);
 
         if (data.cards.length == 0) {
             // if user does not have card in collection
@@ -40,10 +42,11 @@ export async function check(req, res) {
     }
 }
 
-async function checkInternal(userId, cardId) {
+export async function checkInternal(userId, cardId) {
     // check if user has card
     // this function is intended for internal use only
-    console.log(userId, cardId);
+    // no server response
+    // console.log(userId, cardId);
     try {
         const data = await prisma.user.findUnique({
             where: {
@@ -58,7 +61,7 @@ async function checkInternal(userId, cardId) {
             },
         });
 
-        console.log(data);
+        // console.log(data);
 
         if (data.cards.length == 0) {
             return false;
@@ -142,7 +145,7 @@ async function remove(userId, cardId) {
         if (card == false) {
             // if user does not have this card
             console.log("no card");
-            return res.status(403).json({ message: "no card" });
+            return false;
             throw new Error("User does not have this card");
         } else {
             // if user already has one or more copies of card
@@ -189,7 +192,7 @@ async function remove(userId, cardId) {
             }
         }
 
-        return res.status(200).json({ message: "removed" });
+        return true;
     } catch (error) {
         // if function fails
         throw new Error(error);
@@ -339,9 +342,96 @@ export async function booster(req, res) {
         }
 
         return res.status(200).json({ ...user.booster });
-    } catch (e) {
+    } catch (error) {
         // if command fails
-        // 500: internal server error
-        return res.status(500).json({ message: e.message });
+        return res.status(500).json({ message: error.message }); // 500: internal server error
+    }
+}
+
+////////////////////////////////////////////////////////////////
+// trading system
+
+// view user trade offers
+export async function viewTrades(req, res) {
+    try {
+        const userId = Number(req.user.id);
+
+        const pendingTradeOffers = await prisma.trade.findMany({
+            where: {
+                authorId: userId,
+            },
+        });
+
+        const receivedTradeOffers = await prisma.trade.findMany({
+            where: {
+                targetId: userId,
+            },
+        });
+
+        return res.status(200).json({ pendingTradeOffers, receivedTradeOffers });
+    } catch (error) {
+        // if function fails
+        return res.status(500).json({ message: error.message }); // 500: internal server error
+    }
+}
+
+// make new trade offer between users
+export async function makeTrade(req, res) {
+    try {
+        const userId = Number(req.user.id);
+        const trade = req.trade;
+
+        const newTrade = await prisma.trade.create({
+            data: {
+                authorId: userId,
+                ...req.trade,
+            },
+        });
+
+        return res.status(200).json({ message: "Trade offer successfully created" });
+    } catch (error) {
+        // if function fails
+        return res.status(500).json({ message: error.message }); // 500: internal server error
+    }
+}
+
+// accept trade offer
+export async function acceptTrade(req, res) {
+    try {
+        const trade = req.trade; // get trade offer data from middleware output
+
+        await add(Number(trade.receiverId), Number(trade.cardOutId));
+        await remove(Number(trade.receiverId), Number(trade.cardInId));
+
+        await add(Number(trade.senderId), Number(trade.cardInId));
+        await remove(Number(trade.senderId), Number(trade.cardOutId));
+
+        return res.status(200).json({ message: "Trade executed successfully." });
+    } catch (error) {
+        // if function fails
+        return res.status(500).json({ message: error.message }); // 500: internal server error
+    }
+}
+
+// delete/reject trade offer
+export async function deleteTrade(req, res) {
+    try {
+        const tradeId = req.params.id;
+        const userId = req.user.id;
+
+        const deletedTrade = await prisma.trade.delete({ where: { id: tradeId } });
+
+        if (deletedTrade.authorId == userId) {
+            // if user was author of trade offer
+            // trade offer has been aborted
+            return res.status(200).json({ message: "You successfully delete one of your trade offers." });
+        } else {
+            // if user was target of trade offer
+            // trade offer has been rejected
+            return res.status(200).json({ message: "You successfully rejected someone's trade offer." });
+        }
+    } catch (error) {
+        // if function fails
+        return res.status(500).json({ message: error.message }); // 500: internal server error
     }
 }

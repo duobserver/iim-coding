@@ -4,51 +4,61 @@ import express from "express";
 
 // import controllers
 import * as user from "../controllers/UsersController.js";
-import AuthController from "../controllers/AuthController.js";
+import * as auth from "../controllers/AuthController.js";
 import * as card from "../controllers/CardsController.js";
 
-// create controller classes
-const auth = new AuthController();
-
+import "../middlewares/trade.js"; // import trade offer checking middleware
 import authenticateToken from "../middlewares/auth.js"; // import authentication middleware
+import { authorHasCard, isNewTrade, targetExists, tradeExists, userHasCard, userIsNotTarget, userIsTarget } from "../middlewares/trade.js";
 
 const router = express.Router();
 
-// POST log into user account with credentials (email, password)
+// log into user account with credentials (email, password)
 router.post("/login", auth.login);
 
-// GET show authenticated user informations (login required)
+// show authenticated user informations (login required)
 router.get("/activeUser", authenticateToken, auth.myProfile);
 
-// GET display all users (login not required)
+// display all users (login not required)
 router.get("/members", user.index);
 
 // POST create new user (login not required)
 router.post("/user", user.create);
 
-// GET display specific user (login not required)
+// display specific user (login not required)
 router.get("/user/:id", user.read);
 
-// PUT update authenticated user informations (login required)
+// update authenticated user informations (login required)
 router.put("/user", authenticateToken, user.update);
 
-// DELETE delete authenticated user (login required)
+// delete authenticated user (login required)
 router.delete("/user", authenticateToken, user.terminate);
 
-// GET user cards collection (login required)
+// user cards collection (login required)
 router.get("/collection", authenticateToken, card.collection);
 
-// GET check if user has specific card in collection (login required)
+// check if user has specific card in collection (login required)
 router.get("/card/:id", card.check);
 
-// GET check booster status
+// check booster status
 router.get("/booster", authenticateToken, card.booster);
 
-// PUT check booster status
+// check booster status
 router.put("/favorite/:id", authenticateToken, card.favorite);
+
+//////////////////////////////////////////////////////////////
+// card trading
+
+// view user trade list
+router.get("/trade", authenticateToken, card.viewTrades);
+
+// make new trade offer
+router.post("/trade", authenticateToken, [isNewTrade, userIsNotTarget, targetExists], card.makeTrade);
+
+// accept trade offer
+router.put("/trade/:id", authenticateToken, [tradeExists, userIsTarget, userHasCard, authorHasCard], card.acceptTrade);
 
 // POST remove card from user collection
 // router.post("/remove/:id", authenticateToken, card.remove);
-
 
 export default router;

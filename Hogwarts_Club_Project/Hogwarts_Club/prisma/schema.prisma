@@ -22,20 +22,16 @@ model User {
     // automatically give free booster to user
     nextBooster String @default("0") // date (in milliseconds) of next booster / automatically give free booster on signup
 
-    // automatically create user profile
-    profile   Profile @relation(fields: [profileId], references: [id])
-    profileId Int     @unique
+    profile  Profile?
+    settings Settings?
 
     // friends Friend[] @relation(name: "Friends")
     cards Card[]
-
-    settings   Settings @relation(fields: [settingsId], references: [id])
-    settingsId Int      @unique
 }
 
 model Profile {
     id        Int       @id @default(autoincrement())
-    name      String    @unique
+    pseudo    String    @unique
     age       Int
     gender    Gender    @default(Unknown)
     biography String    @default("Hello, I like Hogwarts Club!")
@@ -43,7 +39,8 @@ model Profile {
     color     String    @default("#ffffff")
     joinedOn  DateTime  @default(now())
 
-    user User?
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId Int  @unique
 }
 
 enum Gender {
@@ -82,7 +79,7 @@ model Card {
     isFavorite Boolean @default(false)
 
     // define owner of card
-    owner   User @relation(fields: [ownerId], references: [id])
+    owner   User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     ownerId Int
 
     // define unique card-owner relationship
@@ -91,18 +88,12 @@ model Card {
 }
 
 model Trade {
-    id          Int    @id @default(autoincrement())
-    userId      Int
-    traderId    Int
-    cardInId    Int
-    cardOutId   Int
-    tradeStatus Status
-}
-
-enum Status {
-    PENDING
-    RECEIVED
-    ACCEPTED
+    id              Int     @id @default(autoincrement())
+    authorId        Int // author of trade offer
+    targetId        Int // user with whom author wants to trade
+    cardForAuthorId Int // card for author/taken from target
+    cardForTargetId Int // card for target/taken from author
+    message         String? @db.VarChar(128)
 }
 
 model Settings {
@@ -110,5 +101,6 @@ model Settings {
 
     showCollection Boolean @default(true)
 
-    User User?
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId Int  @unique
 }
