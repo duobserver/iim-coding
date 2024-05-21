@@ -287,7 +287,7 @@ export async function collection(req, res) {
             where: {
                 id: userId,
             },
-            include: {
+            select: {
                 cards: true,
             },
         });
@@ -297,6 +297,27 @@ export async function collection(req, res) {
         // if command fails
         // 500: internal server error
         return res.status(500).json({ message: error.message });
+    }
+}
+
+export async function foreignCollection(req, res) {
+    try {
+        const userId = Number(req.params.id);
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            select: {
+                cards: true,
+            },
+        });
+
+        res.status(302).json(user.cards);
+
+    } catch (error) {
+        // if function fails
+        return res.status(500).json({ message: error.message }); // 500: internal server error
     }
 }
 

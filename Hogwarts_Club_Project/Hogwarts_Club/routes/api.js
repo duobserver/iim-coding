@@ -40,6 +40,9 @@ router.delete("/user", authenticateToken, user.terminate);
 // user cards collection (login required)
 router.get("/collection", authenticateToken, card.collection);
 
+// user cards collection (login required)
+router.get("/collection/:id", card.foreignCollection);
+
 // check if user has specific card in collection (login required)
 router.get("/card/:id", card.check);
 

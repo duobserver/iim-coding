@@ -19,5 +19,8 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("resize", () => {
-    sidebarResize();
+    setTimeout(() => {
+        sidebarResize();
+    }, 1000);
+    
 });

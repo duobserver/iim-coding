@@ -1,4 +1,5 @@
 let cards = document.querySelector("#cards");
+let boosterStatus = document.querySelector("#boosterStatus");
 
 async function fetchBooster() {
     const token = localStorage.getItem("token");
@@ -20,16 +21,39 @@ async function fetchBooster() {
 
     if (res.status === 200) {
         if (boosterPack) {
+            boosterStatus.innerHTML = `Your daily booster has arrived. Check out the cards you won below.`;
+            const characters = await fetchCharacters();
+
             for (const key of boosterPack) {
-                let card = document.createElement("a");
-                card.id = key;
+                const character = characters.find((item) => item.id === key);
+
+                let card = document.createElement("div");
+
+                card.innerHTML = `
+                <a class="cardCharacter">
+                    <p class="cardName"></p>
+                    <div class="cardImage"></div>
+                </a>`;
+
+                card.classList.add("card");
+                card.title = character.name;
+                card.querySelector(".cardCharacter").href = `card?id=${character.id}`;
+                card.querySelector(".cardName").innerHTML = character.name;
+
+                card.querySelector(".cardImage").style.backgroundImage = `url(${character.image})`;
+
+                if (!character.house == "") {
+                    card.classList.add(character.house);
+                    card.querySelector(".cardName").classList.add(character.house);
+                }
                 cards.appendChild(card);
             }
         } else {
-            cards.innerHTML = `<div>Your next booster will arrive in <span class="time">${booster.hours}</span> hour(s), <span class="time">${booster.minutes}</span> minute(s) and <span class="time">${booster.seconds}</span> second(s).</div>`;
+            boosterStatus.innerHTML = `Your next booster will arrive in <span class="time">${booster.hours}</span> hour(s), <span class="time">${booster.minutes}</span> minute(s) and <span class="time">${booster.seconds}</span> second(s).`;
         }
     } else {
-        localStorage.setItem("notification", res.message);
+        localStorage.setItem("notification", booster.message);
+        window.location.href = "/login";
     }
 }
 

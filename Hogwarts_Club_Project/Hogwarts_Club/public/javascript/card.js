@@ -33,7 +33,11 @@ async function fetchCard() {
     let role = document.querySelector("#cardRole");
     let house = document.querySelector("#cardHouse");
     let blood = document.querySelector("#cardBlood");
+    let wand = document.querySelector("#cardWand");
+    let patronus = document.querySelector("#cardPatronus");
+
     let actor = document.querySelector("#cardActor");
+    let birthday = document.querySelector("#cardBirthday");
     let eyes = document.querySelector("#cardEyes");
     let hairs = document.querySelector("#cardHairs");
 
@@ -42,17 +46,39 @@ async function fetchCard() {
 
     name.innerHTML = character.name;
     image.style.backgroundImage = `url(${character.image})`;
-    role.innerHTML += character.role;
-    house.innerHTML += character.house;
+    role.innerHTML = character.role;
+
     if (!character.house == "") {
+        house.innerHTML += character.house;
+
         house.classList.add(character.house);
-        image.classList.add(character.house);
+        document.querySelector("#cardCharacter").classList.add(character.house);
+    } else {
+        house.innerHTML += "No house";
     }
 
-    blood.innerHTML += character.blood;
-    actor.innerHTML += character.actor;
-    eyes.innerHTML += character.eyes;
-    hairs.innerHTML += character.hairs;
+    blood.innerHTML = character.blood;
+
+    if (!character.wand == "") {
+        wand.innerHTML = character.wand;
+    } else {
+        wand.innerHTML = "No wand";
+    }
+
+    if (!character.patronus == "") {
+        patronus.innerHTML = character.patronus;
+    } else {
+        patronus.innerHTML = "No patronus";
+    }
+
+    actor.innerHTML = character.actor;
+
+    let date = character.birthday;
+    let day = date.split("T")[0];
+    birthday.innerHTML = day;
+
+    eyes.innerHTML = character.eyes;
+    hairs.innerHTML = character.hairs;
 }
 
 setTimeout(fetchCard(), 0);

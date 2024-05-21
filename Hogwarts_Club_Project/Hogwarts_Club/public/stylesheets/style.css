@@ -57,23 +57,60 @@ a:visited {
 main {
     width: 100%;
     height: 100%;
-    padding: 0 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem;
+
     overflow-y: scroll;
+}
+
+main section:first-child {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main section h1 {
+    text-align: center;
+    color: var(--accent-color);
+}
+
+main .descriptions {
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    gap: 2rem;
+}
+
+main .description {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main .description img {
+    max-width: 200px;
 }
 
 main img {
     width: 80%;
-    filter: invert(100);
+    /* filter: invert(100); */
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 /* filters styling */
 #houseFilters {
+    padding: 0.5rem 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    background-color: var(--dark-color);
+    border-radius: 16px;
 }
 
 .houseFilter {
@@ -83,6 +120,7 @@ main img {
 .houseFilter:checked + label {
     background-color: var(--accent-color);
     color: var(--dark-color);
+    border-color: var(--accent-color);
 }
 
 .houseFilterLabel,
@@ -90,6 +128,20 @@ main img {
     padding: 0.5rem 1rem;
     background-color: var(--dark-color);
     border-radius: 9999px;
-    border: 4px solid black;
+    border: 2px solid var(--hover-color);
     font-size: 1rem;
+}
+
+#resetFilters {
+    border-color: var(--accent-color);
+}
+
+@media screen and (min-width: 425px) {
+    main section {
+        height: 100%;
+    }
+
+    main .descriptions {
+        flex-direction: row;
+    }
 }

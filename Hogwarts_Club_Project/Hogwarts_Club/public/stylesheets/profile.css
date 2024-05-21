@@ -18,3 +18,21 @@
 #memberIcon {
     font-size: inherit;
 }
+
+#memberName {
+    text-overflow: clip;
+    word-break: break-all;
+}
+
+#memberBio {
+    text-wrap: balance;
+    word-break: break-all;
+}
+
+.memberInfo {
+    color: var(--accent-color);
+}
+
+#memberCollectionTitle {
+    word-break: keep-all;
+}

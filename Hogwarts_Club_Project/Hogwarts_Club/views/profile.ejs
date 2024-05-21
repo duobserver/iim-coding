@@ -3,6 +3,8 @@
     <head>
         <%- include('./partials/head.ejs') %>
         <link rel="stylesheet" href="/stylesheets/profile.css" />
+        <link rel="stylesheet" href="/stylesheets/cards.css" />
+
     </head>
     <body>
         <%- include('./partials/sidebar.ejs') %>
@@ -12,16 +14,21 @@
                 <h1 id="memberTitle"><span class="material-symbols-rounded" id="memberIcon"></span><span id="memberName"></span></h1>
                 <p id="memberBio"></p>
                 <ul id="memberDesc">
-                    <li>ID:</li>
-                    <li>Age:</li>
-                    <li>Gender:</li>
-                    <li>Member since</li>
-                    <li>Color:</li>
+                    <li id="memberId">ID:</li>
+                    <li id="memberAge">Age:</li>
+                    <li id="memberGender">Gender:</li>
+                    <li id="memberJoined">Member since</li>
+                    <li id="memberColor">Color:</li>
                 </ul>
+            </div>
+            <div id="memberCollection">
+                <h1 id="memberCollectionTitle"></h1>
+                <div id="cards"></div>
             </div>
         </main>
 
         <%- include('./partials/scripts.ejs') %>
+        <script src="/javascript/characters.js"></script>
         <script src="/javascript/profile.js"></script>
     </body>
 </html>

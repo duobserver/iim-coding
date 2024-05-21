@@ -1,5 +1,6 @@
 /* card grid styling */
 #cards {
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -8,12 +9,18 @@
 }
 
 .card {
+    position: relative;
     width: 250px;
+    aspect-ratio: 3/4;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     border-radius: 16px;
     border: 4px solid var(--dark-color);
+}
+
+.cardCharacter {
+    flex: 0 0 100%;
 }
 
 .cardCharacter:hover > .cardName {
@@ -44,7 +51,7 @@
 }
 
 .cardImage {
-    aspect-ratio: 1/1;
+    height: 100%;
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
@@ -53,6 +60,11 @@
 }
 
 .cardStats {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: row;
     align-items: center;

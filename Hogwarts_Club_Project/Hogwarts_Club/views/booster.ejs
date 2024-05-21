@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/stylesheets/cards.css">
+        <link rel="stylesheet" href="/stylesheets/booster.css">
     </head>
     <body>
         <%- include('./partials/sidebar.ejs') %>
@@ -9,10 +11,12 @@
         <main>
             <h1>Daily Booster</h1>
             <p>Grab your daily booster and expand your collection</p>
+            <p id="boosterStatus"></p>
             <div id="cards"></div>
         </main>
 
         <%- include('./partials/scripts.ejs') %>
+        <script src="/javascript/characters.js"></script>
         <script src="/javascript/booster.js"></script>
     </body>
 </html>

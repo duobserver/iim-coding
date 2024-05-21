@@ -16,7 +16,8 @@ function filter() {
         });
     } else {
         cards.forEach((element) => {
-            if (activeFilters.some((house) => element.classList.contains(house))) {
+            let faved = element.querySelector(".cardFavorite")
+            if (activeFilters.some((house) => element.classList.contains(house)) || activeFilters.some((house) => faved.classList.contains(house))) {
                 element.style.display = "";
             } else {
                 element.style.display = "none";

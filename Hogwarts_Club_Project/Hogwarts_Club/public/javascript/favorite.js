@@ -24,6 +24,7 @@ function favorite() {
                 link.classList.toggle("Favorite");
             } else {
                 localStorage.setItem("notification", response.message);
+                notification();
             }
         });
     });

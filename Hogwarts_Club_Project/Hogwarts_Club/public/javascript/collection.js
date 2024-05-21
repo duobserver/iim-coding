@@ -52,7 +52,6 @@ async function fetchCollection() {
             let favorite = card.querySelector(".cardFavorite");
 
             if (wizard.isFavorite == true) {
-                card.classList.add("Favorite");
                 favorite.classList.add("Favorite");
             }
 
