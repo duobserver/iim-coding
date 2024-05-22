@@ -17,9 +17,9 @@ form.addEventListener("submit", async (event) => {
             email: email.value,
             password: password.value,
             profile: {
-                name: nickname.value,
                 age: age.value,
                 gender: gender.value,
+                pseudo: nickname.value,
             },
         }),
     });
@@ -27,15 +27,12 @@ form.addEventListener("submit", async (event) => {
     const result = await response.json();
 
     if (response.status === 201) {
-        localStorage.setItem("notice", `1-Accout successfully created`);
+        localStorage.setItem("notification", `Accout successfully created`);
         window.location.href = "login";
         return;
     } else {
-        localStorage.setItem("notice", `0-${result.message}`);
-        noticeUpdate();
+        localStorage.setItem("notification", `Error. ${result.message}`);
+        notification();
         return;
     }
 });
-
-localStorage.removeItem("notice");
-noticeUpdate();

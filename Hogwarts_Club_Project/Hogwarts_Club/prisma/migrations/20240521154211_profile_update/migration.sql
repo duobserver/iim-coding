@@ -16,7 +16,7 @@ CREATE TABLE `Profile` (
     `age` INTEGER NOT NULL,
     `gender` ENUM('Unknown', 'Male', 'Female', 'NonBinary') NOT NULL DEFAULT 'Unknown',
     `biography` VARCHAR(191) NOT NULL DEFAULT 'Hello, I like Hogwarts Club!',
-    `icon` ENUM('Satisfied', 'Dissatisfied', 'Neutral', 'Sad', 'Excited', 'Calm', 'Stressed', 'Frustrated', 'Content', 'Worried') NOT NULL DEFAULT 'Satisfied',
+    `icon` ENUM('satisfied', 'dissatisfied', 'neutral', 'sad', 'excited', 'calm', 'stressed', 'frustrated', 'content', 'worried') NOT NULL DEFAULT 'satisfied',
     `color` VARCHAR(191) NOT NULL DEFAULT '#ffffff',
     `joinedOn` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `userId` INTEGER NOT NULL,

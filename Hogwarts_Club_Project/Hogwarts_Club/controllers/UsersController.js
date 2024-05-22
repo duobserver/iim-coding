@@ -30,7 +30,7 @@ export async function index(req, res) {
 export async function searchUser(req, res) {
     try {
         const name = req.params.name;
-        console.log(typeof name);
+        // console.log(typeof name);
 
         const users = await prisma.profile.findMany({
             where: {
@@ -40,7 +40,7 @@ export async function searchUser(req, res) {
             },
         });
 
-        console.log(users);
+        // console.log(users);
 
         res.status(200).json(users);
     } catch (error) {
@@ -133,7 +133,7 @@ export async function readInternal(userId) {
         // look for existing user
         const user = await prisma.user.findUnique({ where: { id: userId } });
 
-        console.log(user);
+        // console.log(user);
 
         if (user) {
             // if user is found

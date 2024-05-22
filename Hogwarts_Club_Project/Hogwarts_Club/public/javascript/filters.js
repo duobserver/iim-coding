@@ -16,11 +16,19 @@ function filter() {
         });
     } else {
         cards.forEach((element) => {
-            let faved = element.querySelector(".cardFavorite")
-            if (activeFilters.some((house) => element.classList.contains(house)) || activeFilters.some((house) => faved.classList.contains(house))) {
-                element.style.display = "";
+            let faved = element.querySelector(".cardFavorite");
+            if (faved) {
+                if (activeFilters.some((house) => element.classList.contains(house)) || activeFilters.some((house) => faved.classList.contains(house))) {
+                    element.style.display = "";
+                } else {
+                    element.style.display = "none";
+                }
             } else {
-                element.style.display = "none";
+                if (activeFilters.some((house) => element.classList.contains(house))) {
+                    element.style.display = "";
+                } else {
+                    element.style.display = "none";
+                }
             }
         });
     }

@@ -11,6 +11,7 @@
     --ravenclaw: #0e1a40;
     --border-radius: 16px;
     font-size: calc(15px + 0.390625vw);
+    color-scheme: dark;
 }
 
 * {
@@ -97,9 +98,9 @@ main img {
     /* filter: invert(100); */
 }
 
-main::-webkit-scrollbar {
+/* main::-webkit-scrollbar {
     display: none;
-}
+} */
 
 /* filters styling */
 #houseFilters {
