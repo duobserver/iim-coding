@@ -26,7 +26,16 @@
 
 #memberBio {
     text-wrap: balance;
-    word-break: break-all;
+    word-break: keep-all;
+}
+
+#memberDesc {
+    list-style: none;
+    padding: 0;
+}
+
+#memberDesc li {
+    padding: 0.5rem;
 }
 
 .memberInfo {

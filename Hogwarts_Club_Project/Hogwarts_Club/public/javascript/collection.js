@@ -8,7 +8,7 @@ async function fetchCollection() {
         window.location.href = "login";
     }
 
-    const res = await fetch(`http://192.168.1.147:3000/api/collection`, {
+    const res = await fetch(`http://10.2.163.245:3000/api/collection`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,
@@ -23,6 +23,17 @@ async function fetchCollection() {
         console.log(characters);
 
         console.log(collection);
+
+        let cardToGive = document.querySelector("#tradeCardToGive");
+        let cardToReceive = document.querySelector("#tradeCardToReceive");
+
+        for (const character of characters) {
+            let receiveCard = document.createElement("option");
+            receiveCard.value = character.name;
+            receiveCard.innerHTML = character.name;
+
+            cardToReceive.appendChild(receiveCard);
+        }
 
         for (const wizard of collection) {
             const character = characters.find((item) => item.id === wizard.id);
@@ -61,6 +72,12 @@ async function fetchCollection() {
             }
 
             collectionDiv.appendChild(card);
+
+            let giveCharacter = document.createElement("option");
+            giveCharacter.value = character.name;
+            giveCharacter.innerHTML = character.name;
+
+            cardToGive.appendChild(giveCharacter);
         }
     } else {
         localStorage.setItem("notification", `Error: ${collection.message}`);

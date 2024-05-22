@@ -5,7 +5,7 @@ const password = document.querySelector("#loginPassword");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://192.168.1.147:3000/api/login", {
+    const response = await fetch("http://10.2.163.245:3000/api/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

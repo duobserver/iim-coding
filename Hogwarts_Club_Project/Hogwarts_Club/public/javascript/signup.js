@@ -8,7 +8,7 @@ const gender = document.querySelector("#signupGender");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://192.168.1.147:3000/api/user", {
+    const response = await fetch("http://10.2.163.245:3000/api/user", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

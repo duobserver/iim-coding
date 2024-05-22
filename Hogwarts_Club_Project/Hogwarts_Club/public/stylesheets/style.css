@@ -56,6 +56,7 @@ a:visited {
 
 /* main styling */
 main {
+    position: relative;
     width: 100%;
     height: 100%;
     padding: 2rem;
@@ -137,6 +138,58 @@ main img {
     border-color: var(--accent-color);
 }
 
+/* trade offer window styling */
+#showTrade {
+    display: none;
+}
+
+#showTradeButton {
+    /* display: none; */
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: var(--dark-color);
+    border-radius: 16px 0 0 0;
+}
+
+#showTradeButton span {
+    font-size: 1.5rem;
+}
+
+#tradeOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    /* padding-left: calc(var(--sidebar-width) + 2rem); */
+    opacity: 0;
+    visibility: hidden;
+}
+
+#showTrade:checked + #tradeOverlay {
+    opacity: 100;
+    visibility: visible;
+}
+
+#hideTradeButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: var(--dark-color);
+    border-radius: 16px 0 0 0;
+}
+
+#hideTradeButton span {
+    font-size: 1.5rem;
+}
+
 @media screen and (min-width: 425px) {
     main section {
         height: 100%;
@@ -144,5 +197,13 @@ main img {
 
     main .descriptions {
         flex-direction: row;
+    }
+
+    #showTrade {
+        display: none;
+    }
+
+    #tradeOverlay {
+        padding-left: calc(var(--sidebar-width) + 2rem);
     }
 }

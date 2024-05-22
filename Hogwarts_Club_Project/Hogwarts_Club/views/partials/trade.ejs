@@ -1,0 +1,22 @@
+<label for="showTrade" id="showTradeButton"><span class="material-symbols-rounded"> email </span></label>
+<input type="checkbox" id="showTrade" />
+<div id="tradeOverlay">
+    <label for="showTrade" id="hideTradeButton"><span class="material-symbols-rounded"> close </span></label>
+    <form action="" id="tradeForm">
+        <p>Send a Card Trade Offer</p>
+        <div class="formComponent"><label for="tradeTargetId">Trade Target ID</label> <input type="number" id="tradeTargetId" placeholder="User ID" required /></div>
+        <div class="formComponent">
+            <label for="tradeCardToGive">Card to Send</label>
+            <select name="card" id="tradeCardToGive" required>
+                <option value="">Please select a card</option>
+            </select>
+        </div>
+        <div class="formComponent">
+            <label for="tradeCardToReceive">Card to Receive</label>
+            <select name="card" id="tradeCardToReceive" required>
+                <option value="">Please select a card</option>
+            </select>
+        </div>
+        <div class="formComponent"><input type="submit" value="Send Trade Offer" /></div>
+    </form>
+</div>

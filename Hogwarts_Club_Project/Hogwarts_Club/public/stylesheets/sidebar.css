@@ -12,6 +12,8 @@
     margin-left: 0;
 }
 
+#showSidebar:checked + 
+
 main {
     padding-bottom: calc(var(--sidebar-button-height) + 2rem);
 }
