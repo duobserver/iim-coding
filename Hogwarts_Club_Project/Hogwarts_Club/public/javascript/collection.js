@@ -8,7 +8,7 @@ async function fetchCollection() {
         window.location.href = "login";
     }
 
-    const res = await fetch(`http://10.2.163.245:3000/api/collection`, {
+    const res = await fetch(`http://localhost:3000/api/collection`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,

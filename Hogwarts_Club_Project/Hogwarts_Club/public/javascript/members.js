@@ -4,11 +4,11 @@ let membersDiv = document.querySelector("#members");
 async function search() {
     console.log(searchInput.value);
     if (!searchInput.value == "") {
-        var res = await fetch(`http://10.2.163.245:3000/api/members/${searchInput.value}`, {
+        var res = await fetch(`http://localhost:3000/api/members/${searchInput.value}`, {
             method: "GET",
         });
     } else {
-        var res = await fetch(`http://10.2.163.245:3000/api/members`, {
+        var res = await fetch(`http://localhost:3000/api/members`, {
             method: "GET",
         });
     }

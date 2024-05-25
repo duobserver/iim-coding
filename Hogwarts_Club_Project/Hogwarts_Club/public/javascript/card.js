@@ -15,7 +15,7 @@ async function fetchCard() {
     //     window.location.href = "login";
     // }
 
-    // const res = await fetch(`http://10.2.163.245:3000/api/card`, {
+    // const res = await fetch(`http://localhost:3000/api/card`, {
     //     method: "GET",
     //     headers: {
     //         Authorization: `Bearer ${token}`,

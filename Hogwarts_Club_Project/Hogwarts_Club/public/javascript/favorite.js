@@ -11,7 +11,7 @@ function favorite() {
                 window.location.href = "login";
             }
 
-            const res = await fetch(`http://10.2.163.245:3000/api/favorite/${link.id}`, {
+            const res = await fetch(`http://localhost:3000/api/favorite/${link.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

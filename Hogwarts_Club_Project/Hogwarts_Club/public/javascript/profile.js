@@ -4,7 +4,7 @@ async function fetchProfile() {
 
     console.log(memberId);
 
-    var res = await fetch(`http://10.2.163.245:3000/api/user/${memberId}`, {
+    var res = await fetch(`http://localhost:3000/api/user/${memberId}`, {
         method: "GET",
     });
 
@@ -48,7 +48,7 @@ async function fetchProfileCollection() {
 
     console.log(memberId);
 
-    var res = await fetch(`http://10.2.163.245:3000/api/collection/${memberId}`, {
+    var res = await fetch(`http://localhost:3000/api/collection/${memberId}`, {
         method: "GET",
     });
 

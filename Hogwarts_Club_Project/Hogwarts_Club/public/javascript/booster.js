@@ -9,7 +9,7 @@ async function fetchBooster() {
         window.location.href = "login";
     }
 
-    const res = await fetch(`http://10.2.163.245:3000/api/booster`, {
+    const res = await fetch(`http://localhost:3000/api/booster`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,
